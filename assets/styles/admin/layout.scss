@@ -58,6 +58,12 @@ label.required:after {
   z-index: 1039;
 }
 
+#sidebarToggle, #userDropdown{
+  background: $admin_topnav_background;
+  color: $admin_topnav_color;
+  border: none;
+}
+
 
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav, .sb-nav-fixed .sb-topnav {
   position: fixed;
@@ -83,6 +89,22 @@ label.required:after {
   z-index: 1037;
   opacity: 0.5;
   transition: opacity 0.3s ease-in-out;
+}
+
+.user-dropdown .dropdown-menu {
+  margin-top: 10px;
+  min-width: 230px;
+  max-width: 90vw;
+  background-color: $admin_sidebar_background;
+}
+
+.user-dropdown .dropdown-item {
+  color: $admin_sidebar_color;
+  //color:shift-color($admin_sidebar_color, $link-shade-percentage);
+  background-color: $admin_sidebar_background;
+}
+.user-dropdown .dropdown-item:hover {
+  color:shift-color($admin_sidebar_color, $link-shade-percentage);
 }
 
 @media (min-width: 992px) {
@@ -190,50 +212,6 @@ label.required:after {
   }
 }
 
-footer{
-  display: flex;
-  justify-content: center;
-  background: $admin_footer_background ;
-  color: $admin_footer_color;
-  .sb-sidenav-footer {
-    padding: 0.75rem;
-    flex-shrink: 0;
-  }
-
-  .text-muted{
-    color:shift-color($admin_footer_color, $link-shade-percentage);
-  }
-
-}
-
-
-
-
-//.sb-sidenav .sb-sidenav-menu .sb-sidenav-menu-heading {
-//  color: $admin_sidebar_color;
-//}
-
-
-
-
-.user-dropdown .dropdown-menu {
-  margin-top: 10px;
-  min-width: 230px;
-  max-width: 90vw;
-  background-color: $admin_sidebar_background;
-}
-
-
-
-.user-dropdown .dropdown-item {
-  color: $admin_sidebar_color;
-  //color:shift-color($admin_sidebar_color, $link-shade-percentage);
-  background-color: $admin_sidebar_background;
-}
-.user-dropdown .dropdown-item:hover {
-  color:shift-color($admin_sidebar_color, $link-shade-percentage);
-}
-
 .main-breadcrumb {
   position: sticky;
   top: 56px;
@@ -251,10 +229,30 @@ footer{
 }
 
 
-#sidebarToggle, #userDropdown{
-  background: $admin_topnav_background;
-  color: $admin_topnav_color;
-  border: none;
+
+footer{
+  display: flex;
+  justify-content: center;
+  background: $admin_footer_background ;
+  color: $admin_footer_color;
+  .sb-sidenav-footer {
+    padding: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .text-muted{
+    color:shift-color($admin_footer_color, $link-shade-percentage);
+  }
+
 }
+
+.login{
+
+}
+
+
+
+
+
 
 

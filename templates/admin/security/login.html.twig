@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {{ encore_entry_link_tags('admin') }}
+
+    <title>Administration - Connexion</title>
+
+</head>
+<body>
+<main>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_content">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-12 col-md-4 mt-5 m-auto">
+                        <form method="post">
+                            {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+
+
+                            <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+                            <label for="inputEmail">Email</label>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-2"
+                                   autocomplete="email" required autofocus>
+                            <label for="inputPassword">Password</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control mb-2" autocomplete="current-password"
+                                   required>
+
+                            <input type="hidden" name="_csrf_token"
+                                   value="{{ csrf_token('authenticate') }}"
+                            >
+
+                            <div class="checkbox mb-3">
+                                <label>
+                                    <input type="checkbox" name="_remember_me"> Remember me
+                                </label>
+                            </div>
+
+
+                            <button class="btn btn-lg btn-primary my-3" type="submit">
+                                Sign in
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <footer class="py-4 mt-auto">
+                <div class="text-muted">Copyright &copy;  <span id="cDate"></span></div>
+            </footer>
+        </div>
+
+    </div>
+</main>
+
+
+</body>
+
+{{ encore_entry_script_tags('admin') }}
+

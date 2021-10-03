@@ -44,15 +44,17 @@
         <div id="layoutSidenav_content">
             <main class="main-content">
 
-                {% for label, messages in app.flashes %}
-                    <div class="container  my-2">
-                        <div class="alert alert-{{ label }} pb-0">
-                            {% for message in messages %}
-                                <p>{{ message | raw }}</p>
-                            {% endfor %}
+                {% block messages %}
+                    {% for label, messages in app.flashes %}
+                        <div class="container  my-2">
+                            <div class="alert alert-{{ label }} pb-0">
+                                {% for message in messages %}
+                                    <p>{{ message | raw }}</p>
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                {% endblock %}
 
                 {% block body %}
                 {% endblock %}

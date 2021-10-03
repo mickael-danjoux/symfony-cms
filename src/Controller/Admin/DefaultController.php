@@ -31,7 +31,6 @@ class DefaultController extends AbstractController
         $process = new Process(['php', '../bin/console', 'cache:clear']);
         try {
             $process->mustRun();
-            throw new \Exception('test');
             $this->addFlash('success', 'Le cache à été vidé.');
         } catch (\Exception $exception) {
             $this->addFlash('warning', 'Le cache n\'a pas pu être vidé.');
@@ -39,6 +38,5 @@ class DefaultController extends AbstractController
         }
         return $this->redirectToRoute('admin_index');
     }
-
 
 }

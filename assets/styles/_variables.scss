@@ -1,0 +1,14 @@
+/** Override Bootstrap  vars **/
+$primary:       #b13a13;
+$secondary:     #a38f7a;
+$success:       #3A86FF;
+$info:          #333;
+$light:         #8338EC;
+
+/** Admin vars **/
+$admin_topnav_background: $primary;
+$admin_topnav_color: white;
+$admin_sidebar_background: #333;
+$admin_sidebar_color: #a3aab0;
+$admin_footer_background: white;
+$admin_footer_color: $admin_sidebar_background;

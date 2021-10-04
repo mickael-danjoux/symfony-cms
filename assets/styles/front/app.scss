@@ -4,3 +4,8 @@
 body {
     background-color: #c2c2c2;
 }
+
+label.required:after {
+    content: " * ";
+    color: #D42124;
+}

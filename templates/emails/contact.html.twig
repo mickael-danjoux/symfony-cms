@@ -1,0 +1,18 @@
+<h1>
+    Nouveau mail issu de votre formulaire de contact.
+</h1>
+<p>
+    {% if contact.company is defined %}<b>Entreprise: </b> {{ contact.company }} <br> {% endif %}
+    {% if contact.lastName is defined %}<b>Nom: </b> {{ contact.lastName }} <br> {% endif %}
+    {% if contact.firstName is defined %}<b>Prénom: </b> {{ contact.firstName }} <br> {% endif %}
+    {% if contact.phone is defined %}<b>Téléphone: </b> {{ contact.phone }} <br> {% endif %}
+    {% if contact.email is defined %}<b>Email: </b> {{ contact.email }} <br> {% endif %}
+    {% if contact.address is defined %}<b>Adresse: </b> {{ contact.address }} <br> {% endif %}
+    {% if contact.zipCode is defined %}<b>CP: </b> {{ contact.zipCode }} <br> {% endif %}
+    {% if contact.city is defined %}<b>Ville: </b> {{ contact.city }} <br> {% endif %}
+    <br>
+    {% if contact.message is defined %}<b>Message: </b> {{ contact.message | raw }} <br> {% endif %}
+
+
+</p>
+<hr>

@@ -1,3 +1,8 @@
 framework:
     mailer:
         dsn: '%env(MAILER_DSN)%'
+
+        headers:
+            from: '%env(MAILER_FROM_NO_REPLY)%'
+            to: '%env(MAILER_FROM_TO)%'
+

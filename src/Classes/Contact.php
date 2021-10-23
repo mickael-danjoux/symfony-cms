@@ -147,7 +147,7 @@ class Contact
      */
     public function setMessage(string $message): void
     {
-        $this->message = $message;
+        $this->message = htmlspecialchars($message);
     }
 
     /**

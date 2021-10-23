@@ -13,7 +13,7 @@
     </head>
     <body>
         {% block messages %}
-            {% include('front/commun/_messages.html.twig') %}
+            {% include('app/commun/_messages.html.twig') %}
         {% endblock %}
 
     {% block body %}{% endblock %}
@@ -59,7 +59,7 @@
                 "mandatory": true, /* Show a message about mandatory cookies */
             });
 
-            tarteaucitron.user.recaptchaapi = 'XXXXX';
+            tarteaucitron.user.recaptchaapi = '{{ app.request.server.get('GOOGLE_RECAPTCHA_API') }}';
             (tarteaucitron.job = tarteaucitron.job || []).push('recaptcha');
 
 

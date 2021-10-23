@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Front;
+namespace App\Controller\App;
 
 use App\Classes\Contact;
 use App\Form\ContactType;
@@ -43,7 +43,7 @@ class ContactController extends AbstractController
             }
         }
 
-        return $this->render('front/contact/form.html.twig', [
+        return $this->render('app/contact/form.html.twig', [
             'form' => $form->createView(),
         ]);
     }

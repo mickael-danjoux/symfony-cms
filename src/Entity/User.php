@@ -43,12 +43,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     protected string $displayName;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" = 0})
      */
     protected bool $isBanned = false;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" = 0})
      */
     protected bool $isVerified = false;
 
@@ -68,6 +68,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected \DateTime $lastLoggedInAt;
+
 
 
 

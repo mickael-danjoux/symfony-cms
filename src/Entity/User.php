@@ -5,11 +5,14 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="Cet email existe déjà.")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -22,6 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(message="Cet email n'est pas valide.")
      */
     protected string $email;
 
@@ -33,12 +37,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank (message="Veuillez renseigner le mot de passe.")
+     * @Assert\Length(min=7, minMessage="Ce mot de passe est trop court.")
      */
     protected string $password;
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank (message="Veuillez renseigner le nom afficher.")
      */
     protected string $displayName;
 
@@ -171,10 +178,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @param string $displayName
+     * @return User
      */
-    public function setDisplayName(string $displayName): void
+    public function setDisplayName(string $displayName): User
     {
         $this->displayName = $displayName;
+
+        return $this;
     }
 
     /**
@@ -187,10 +197,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @param bool $isBanned
+     * @return User
      */
-    public function setIsBanned(bool $isBanned): void
+    public function setIsBanned(bool $isBanned): User
     {
         $this->isBanned = $isBanned;
+
+        return $this;
     }
 
     /**
@@ -203,10 +216,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @param bool $isVerified
+     * @return User
      */
-    public function setIsVerified(bool $isVerified): void
+    public function setIsVerified(bool $isVerified): User
     {
         $this->isVerified = $isVerified;
+
+        return $this;
     }
 
     /**
@@ -219,10 +235,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @param string $token
+     * @return User
      */
-    public function setToken(string $token): void
+    public function setToken(string $token): User
     {
         $this->token = $token;
+
+        return $this;
     }
 
     /**

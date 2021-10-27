@@ -14,9 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends AbstractController
 {
-    /**
-     * @Route("/contact", name="app_contact")
-     */
+
+    #[Route('/contact', name: 'app_contact')]
     public function index(Request $request, MailerInterface $mailer, LoggerInterface $logger): Response
     {
         $contact = new Contact();

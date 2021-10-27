@@ -14,33 +14,26 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class UserDTO
 {
-    /**
-     * @Assert\Email(message="Cet email n'est pas valide.")
-     */
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre email')]
+    #[Assert\Email(message: 'Cet email n\'est pas valide')]
     private string $email;
 
-    /**
-     * @Assert\NotBlank (message="Veuillez renseigner le mot de passe.")
-     * @Assert\Length(min=7, minMessage="Ce mot de passe est trop court.")
-     */
+
+    #[Assert\NotBlank(message: 'Veuillez renseigner le mot de passe')]
+    #[Assert\Length( min: 7, minMessage: 'Ce mot de passe est trop court')]
     private string $password;
 
 
-    /**
-     * @Assert\NotBlank (message="Veuillez repéter le mot de passe.")
-     * @Assert\EqualTo(value="password", message="Le mot de passe repété n'est pas correct")
-     */
+    #[Assert\NotBlank(message: 'Veuillez repéter le mot de passe')]
+    #[Assert\EqualTo( value: 'password' ,message: 'Veuillez repéter le mot de passe')]
     private string $repeatedPassword;
 
-    /**
-     * @var string The hashed password
-     * @Assert\NotBlank (message="Veuillez renseigner le nom afficher.")
-     */
+
+    #[Assert\NotBlank(message: 'Veuillez renseigner le nom afficher')]
     private string $displayName;
 
-    /**
-     * @Assert\NotBlank (message="Veuillez renseigner le compte est validé")
-     */
+
+    #[Assert\NotBlank(message: 'Veuillez renseigner si le compte est validé')]
     private bool $isVerified = false;
 
     private array $roles = [];
@@ -137,7 +130,7 @@ class UserDTO
     /**
      * @param array|string $roles
      */
-    public function setRoles(array|string $roles): void
+    public function setRoles(mixed $roles): void
     {
         if (is_string($roles)) {
             $this->roles[] = $roles;

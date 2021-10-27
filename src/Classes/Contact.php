@@ -9,41 +9,30 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Contact
 {
 
-    /**
-     * @var string
-     * @Assert\NotBlank(message="Veuillez renseigner votre prénom")
-     */
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre prénom')]
     private string $firstName;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(message="Veuillez renseigner votre nom")
-     */
+
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre nom')]
     private string $lastName;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(message="Veuillez renseigner votre téléphoner")
-     */
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre téléphone')]
     private string $phone;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(message="Veuillez renseigner votre email")
-     * @Assert\Email(message="Veuillez renseigner un email valide")
-     */
+
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre email')]
+    #[Assert\Email(message: 'Cet email n\'est pas valide')]
     private string $email;
 
-    /**
-     * @var bool
-     * @Assert\NotBlank(message="Veuillez cocher la case concernant vos données")
-     */
+
+    #[Assert\NotBlank(message: 'Veuillez cocher la case concernant vos données')]
     private bool $agreeTerms;
 
     /**
      * @var string
      * @Assert\NotBlank(message="Veuillez renseigner votre message")
      */
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre message')]
     private string $message;
 
     private ?string $company;

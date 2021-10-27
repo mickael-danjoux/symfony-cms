@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -10,72 +11,60 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="Cet email existe déjà.")
- */
+
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'Cet email existe déjà')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
     protected int $id;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\Email(message="Cet email n'est pas valide.")
-     */
+
+    #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre email')]
+    #[Assert\Email(message: 'Cet email n\'est pas valide')]
     protected string $email;
 
-    /**
-     * @ORM\Column(type="json")
-     */
+
+    #[ORM\Column(type: Types::JSON)]
     protected array $roles = [];
 
-    /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank (message="Veuillez renseigner le mot de passe.")
-     * @Assert\Length(min=7, minMessage="Ce mot de passe est trop court.")
-     */
+
+    #[ORM\Column(type: Types::STRING)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner le mot de passe')]
+    #[Assert\Length( min: 7, minMessage: 'Ce mot de passe est trop court')]
     protected string $password;
 
-    /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank (message="Veuillez renseigner le nom afficher.")
-     */
+
+    #[ORM\Column(type: Types::STRING)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner le nom afficher')]
     protected string $displayName;
 
-    /**
-     * @ORM\Column(type="boolean", options={"default" = 0})
-     */
+
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => 0] )]
     protected bool $isBanned = false;
 
-    /**
-     * @ORM\Column(type="boolean", options={"default" = 0})
-     */
+
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => 0] )]
     protected bool $isVerified = false;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     protected string $token;
 
+
     /**
-     *
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime")
      */
+    #[ORM\Column(type: Types::DATETIME_MUTABLE )]
     protected \DateTime $registeredAt;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    protected \DateTime $lastLoggedInAt;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE , nullable: true)]
+    protected \DateTime $lastLoggedInAt;
 
 
 

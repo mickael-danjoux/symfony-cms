@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Controller\App;
+namespace App\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DefaultController extends AbstractController
+class UserController extends AbstractController
 {
-
-    #[Route('', name: 'app_index')]
+    #[Route('/user', name: 'admin_user')]
     public function index(): Response
     {
-        return $this->render('app/default/index.html.twig', [
-            'controller_name' => 'DefaultController',
+        return $this->render('admin/user/index.html.twig', [
+            'controller_name' => 'UserController',
         ]);
     }
 }

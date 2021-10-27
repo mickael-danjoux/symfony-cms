@@ -12,9 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-    /**
-     * @Route("/admin", name="admin_index")
-     */
+
+    #[Route( '', name: 'admin_index')]
     public function index(): Response
     {
         return $this->render('admin/default/index.html.twig', [
@@ -22,21 +21,22 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/admin/clear-cache", name="admin_clear_cache")
-     * @IsGranted("ROLE_SUPER_ADMIN")
-     */
+
+    #[Route('/clear-cache', name: 'admin_clear_cache')]
+    #[IsGranted('ROLE_SUPER_ADMIN')]
     public function cacheClear(LoggerInterface $logger): RedirectResponse
     {
         $process = new Process(['php', '../bin/console', 'cache:clear']);
         try {
             $process->mustRun();
             $this->addFlash('success', 'Le cache à été vidé.');
+
         } catch (\Exception $exception) {
             $this->addFlash('warning', 'Le cache n\'a pas pu être vidé.');
             $logger->error('Cache:clear Error : ' . $exception->getMessage());
         }
         return $this->redirectToRoute('admin_index');
+
     }
 
 }

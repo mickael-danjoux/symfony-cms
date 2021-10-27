@@ -36,10 +36,10 @@ class UserInitCommand extends Command
     /**
      * UserInitCommand constructor.
      */
-    public function __construct(UserRepository $userRepo,
-                                ValidatorInterface $validator,
+    public function __construct(UserRepository              $userRepo,
+                                ValidatorInterface          $validator,
                                 UserPasswordHasherInterface $hasher,
-    EntityManagerInterface $em
+                                EntityManagerInterface      $em
     )
     {
         parent::__construct();
@@ -68,12 +68,12 @@ class UserInitCommand extends Command
             $this->getAttribute('Utilisateur vérifié', 'isVerified', false, 'boolean', 'true');
 
 
-            try{
+            try {
                 $this->em->persist($this->user->hydrate($this->hasher));
                 $this->em->flush();
-            }catch (UniqueConstraintViolationException $e){
+            } catch (UniqueConstraintViolationException $e) {
                 $this->io->error("Cet utilisateur existe déjà.");
-            }catch (\Exception $e){
+            } catch (\Exception $e) {
                 $this->io->error($e->getMessage());
                 return Command::FAILURE;
             }
@@ -121,8 +121,8 @@ class UserInitCommand extends Command
             }
 
             // patch a hidden and autocompleter bug
-            if($type != 'choice'){
-                $question->setHidden(false);
+            if ($type != 'choice') {
+                $question->setHidden($hidden);
             }
 
             /** TODO: validate role array */

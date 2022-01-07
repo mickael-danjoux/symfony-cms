@@ -14,6 +14,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'Cet email existe déjà')]
+#[ORM\InheritanceType("JOINED")]
+#[ORM\DiscriminatorColumn(name: "discr", type: Types::STRING)]
+#[ORM\DiscriminatorMap(["user" => User::class, "customer" => Customer::class])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 
@@ -40,7 +43,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     #[ORM\Column(type: Types::STRING)]
-    #[Assert\NotBlank(message: 'Veuillez renseigner le nom afficher')]
     protected string $displayName;
 
 
@@ -53,7 +55,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
-    protected string $token;
+    protected string|null $token;
+	
+	
+	#[ORM\Column(type: Types::DATETIME_MUTABLE, length: 255, nullable: true)]
+	protected \DateTime|null $tokenDisabledAt;
 
 
     /**
@@ -61,12 +67,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column(type: Types::DATETIME_MUTABLE )]
     protected \DateTime $registeredAt;
-
-
+	
     #[ORM\Column(type: Types::DATETIME_MUTABLE , nullable: true)]
     protected \DateTime $lastLoggedInAt;
-
-
 
     public function getId(): ?int
     {
@@ -217,7 +220,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return string
      */
-    public function getToken(): string
+    public function getToken(): string|null
     {
         return $this->token;
     }
@@ -226,12 +229,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @param string $token
      * @return User
      */
-    public function setToken(string $token): User
+    public function setToken(string|null $token): User
     {
         $this->token = $token;
 
         return $this;
     }
+	
+	/**
+	 * @return \DateTime|null
+	 */
+	public function getTokenDisabledAt(): ?\DateTime
+	{
+		return $this->tokenDisabledAt;
+	}
+	
+	/**
+	 * @param \DateTime|null $tokenDisabledAt
+	 */
+	public function setTokenDisabledAt(?\DateTime $tokenDisabledAt): void
+	{
+		$this->tokenDisabledAt = $tokenDisabledAt;
+	}
 
     /**
      * @return \DateTime

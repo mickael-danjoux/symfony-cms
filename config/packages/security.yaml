@@ -39,6 +39,12 @@ security:
 
 
         main:
+            lazy: true
+            custom_authenticator: App\Security\UserAuthenticator
+            user_checker: App\Security\Checker\UserChecker
+            logout:
+                path: app_logout
+                target: app_login
 
 
                 # where to redirect after logout

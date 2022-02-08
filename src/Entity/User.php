@@ -29,7 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
     #[Assert\NotBlank(message: 'Veuillez renseigner votre email')]
     #[Assert\Email(message: 'Cet email n\'est pas valide')]
-    protected string $email;
+    protected string|null $email = null;
 
 
     #[ORM\Column(type: Types::JSON)]
@@ -39,7 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING)]
     #[Assert\NotBlank(message: 'Veuillez renseigner le mot de passe')]
     #[Assert\Length( min: 7, minMessage: 'Ce mot de passe est trop court')]
-    protected string $password;
+    protected string|null $password = null;
 
 
     #[ORM\Column(type: Types::STRING)]
@@ -99,14 +99,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @deprecated since Symfony 5.3, use getUserIdentifier instead
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->email;
-    }
-
-    /**
      * @see UserInterface
      */
     public function getRoles(): array
@@ -140,16 +132,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * Returning a salt is only needed, if you are not using a modern
-     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
-     *
-     * @see UserInterface
-     */
-    public function getSalt(): ?string
-    {
-        return null;
-    }
+    
 
     /**
      * @see UserInterface

@@ -22,24 +22,10 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        admin:
-            pattern: ^/admin
+        app:
+            pattern: ^/
             lazy: true
             provider: app_user_provider
-            custom_authenticator: App\Security\AdminAuthenticator
-            logout:
-                path: admin_logout
-                target: admin_login
-            remember_me:
-                secret: '%kernel.secret%'
-                lifetime: 604800 # 1 week in seconds
-            login_throttling:
-                max_attempts: 3
-                interval: '3 minutes'
-
-
-        main:
-            lazy: true
             custom_authenticator: App\Security\UserAuthenticator
             user_checker: App\Security\Checker\UserChecker
             logout:
@@ -59,6 +45,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/admin/connexion, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/admin/connexion, roles: PUBLIC_ACCESS }
          - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

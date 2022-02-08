@@ -1,4 +1,0 @@
-artgris_maintenance:
-  enable: '%env(bool:MAINTENANCE_MODE)%'                 # Enable|Disable maintenance - default: false
-  ips: ["127.0.0.1","::1","localhost"] # IPs allow (prod) - default: []
-  response: 503                # Maintenance Page HTTP Status Code - default: 503

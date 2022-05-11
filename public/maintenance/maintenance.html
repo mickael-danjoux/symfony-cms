@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang='fr'>
+<head>
+    <meta charset='UTF-8' />
+    <meta name='robots' content='noindex, nofollow'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+          name='viewport' />
+    <title>Maintenance</title>
+
+    <style>
+        body{
+            margin: 0;
+            padding:0;
+            font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+        .page{
+            height: 100vh;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            color: #444;
+        }
+        h1{
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+        p{
+            text-align: center;
+            line-height: 20px;
+        }
+    </style>
+
+</head>
+<body>
+<div class='page'>
+    <div class='content'>
+<!--        <img src="/maintenance/logo.png" id="logo" style="max-width: 300px"  alt='Logo' />-->
+        <img src="https://fakeimg.pl/250x100/">
+        <h1>Site en maintenance</h1>
+
+        <p>
+            Votre site n’est pas accessible pour le moment <br>
+            Nous revenons bientôt !
+        </p>
+    </div>
+</div>
+<script>
+    setTimeout(()=>{
+        location.reload()
+    },5000)
+</script>
+</body>
+</html>

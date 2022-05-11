@@ -4,7 +4,7 @@
 namespace App\Classes;
 
 
-use App\Entity\User;
+use App\Entity\User\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 

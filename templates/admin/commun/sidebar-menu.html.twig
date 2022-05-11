@@ -10,17 +10,27 @@
             </div>
         </a>
         <hr>
-        <div class="sb-sidenav-menu-heading">Super Admin</div>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <div class="sb-sidenav-menu-heading">Super Admin</div>
+            <a class="nav-link no-active" href="{{ path('admin_referencing_list') }}" target="">
+                <div class="sb-nav-link-icon">
+                <span>
+                    <i class="fas fa-laptop-code"></i>
+                    Réferencement
+                </span>
+                </div>
+            </a>
 
-        <a class="nav-link no-active" href="{{ path('admin_clear_cache') }}" target="">
-            <div class="sb-nav-link-icon">
+            <a class="nav-link no-active" href="{{ path('admin_clear_cache') }}" target="">
+                <div class="sb-nav-link-icon">
                 <span>
                     <i class="fas fa-sync-alt"></i>
                     Vider le cache
                 </span>
-            </div>
-        </a>
-        <hr>
+                </div>
+            </a>
+            <hr>
+        {% endif %}
 
         <a class="nav-link no-active" href="{{ path('app_home') }}" target="_blank">
             <div class="sb-nav-link-icon">

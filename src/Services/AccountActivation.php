@@ -3,18 +3,16 @@
 	
 	namespace App\Services;
 	
-	use App\Entity\Customer;
-	use Exception;
-	use Psr\Log\LoggerInterface;
-	use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-	use Symfony\Component\DependencyInjection\ContainerInterface;
-	use Symfony\Component\Mailer\Exception\TransportException;
-	use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-	use Symfony\Component\Mailer\MailerInterface;
-	use Symfony\Component\Mime\Address;
-	use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-	
-	class AccountActivation
+	use App\Entity\User\Customer;
+    use Exception;
+    use Psr\Log\LoggerInterface;
+    use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+    use Symfony\Component\DependencyInjection\ContainerInterface;
+    use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+    use Symfony\Component\Mailer\MailerInterface;
+    use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
+    class AccountActivation
 	{
 		public function __construct(
 			private ContainerInterface $container,

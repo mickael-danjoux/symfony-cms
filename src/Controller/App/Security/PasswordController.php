@@ -2,9 +2,9 @@
 
 namespace App\Controller\App\Security;
 
-use App\Entity\User;
+use App\Entity\User\User;
 use App\Form\RepeatedPasswordType;
-use App\Repository\UserRepository;
+use App\Repository\User\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;

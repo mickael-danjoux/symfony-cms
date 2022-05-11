@@ -1,0 +1,21 @@
+.btn-add{
+  @extend .btn;
+  @extend .btn-primary;
+  &:before{
+    content: "\f067";
+    font-family: "Font Awesome 5 Free";
+    margin-right: 10px;
+    font-weight: 900
+  }
+}
+
+.btn-back{
+  @extend .btn;
+  @extend .btn-primary;
+  &:before{
+    content: "\f053";
+    font-family: "Font Awesome 5 Free";
+    margin-right: 15px;
+    font-weight: 900;
+  }
+}

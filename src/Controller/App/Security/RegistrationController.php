@@ -2,8 +2,8 @@
 
 namespace App\Controller\App\Security;
 
-use App\Entity\Customer;
-use App\Entity\User;
+use App\Entity\User\Customer;
+use App\Entity\User\User;
 use App\Form\RegistrationType;
 use App\Services\AccountActivation;
 use Doctrine\ORM\EntityManagerInterface;
@@ -53,7 +53,7 @@ class RegistrationController extends AbstractController
             }
         }
 
-        return $this->render('form.html.twig', [
+        return $this->render('app/security/registration/form.html.twig', [
             'form' => $form->createView()
         ]);
     }

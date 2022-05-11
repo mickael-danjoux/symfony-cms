@@ -13,6 +13,9 @@ class ReferencingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('pageName', TextType::class,[
+                'label' => 'Nom de la page'
+            ])
             ->add('url', TextType::class,[
                 'label' => 'Url de la page'
             ])
@@ -23,7 +26,6 @@ class ReferencingType extends AbstractType
             ->add('description', TextType::class,[
                 'label' => 'Description',
                 'required' => false
-
             ])
         ;
     }

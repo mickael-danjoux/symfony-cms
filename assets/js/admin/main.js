@@ -1,6 +1,6 @@
 import 'bootstrap';
 import "@fortawesome/fontawesome-free/js/all.js";
-
+import './datatable/datatable'
 
 const path = window.location.href;
 const links = document.querySelectorAll('#layoutSidenav_nav .sb-sidenav a.nav-link');

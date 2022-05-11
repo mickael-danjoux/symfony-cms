@@ -1,11 +1,11 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^1.0.0",
-        "core-js": "^3.0.0",
+        "@symfony/webpack-encore": "^1.8.2",
+        "core-js": "^3.22.5",
         "file-loader": "^6.2.0",
         "regenerator-runtime": "^0.13.2",
-        "sass": "^1.42.1",
-        "sass-loader": "^12.1.0",
+        "sass": "^1.51.0",
+        "sass-loader": "^12.6.0",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -21,7 +21,9 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
+        "@popperjs/core": "^2.11.5",
         "bootstrap": "^5.1.1",
-        "concurrently": "^6.3.0"
+        "concurrently": "^6.3.0",
+        "sweetalert2": "^11.4.13"
     }
 }

@@ -16,10 +16,14 @@
                         <a href="{{ path('admin_referencing_add') }}" class="btn-add">Ajouter</a>
                     </div>
                     <div class="card-body">
-
+                        <div class="dataTable">Chargement des données...</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    <script>const datatable = {{ datatable_settings(datatable) }};</script>
+    {{ parent() }}
 {% endblock %}

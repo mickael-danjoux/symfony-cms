@@ -1,0 +1,12 @@
+<div class="d-flex justify-content-around">
+    {% if value.edit is defined %}
+        <a href="{{ value.edit }}" class="btn">
+            <i class="fas fa-pen"></i>
+        </a>
+    {% endif %}
+    {% if value.remove is defined %}
+        <a class="btn btn-delete" data-href="{{ value.remove }}" href="#">
+            <i class="fas fa-trash"></i>
+        </a>
+    {% endif %}
+</div>

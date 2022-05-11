@@ -2,7 +2,10 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}{% endblock %}</title>
+
+        {{ render(controller(
+            'App\\Controller\\App\\Render\\ReferencingController::addReferencing'
+        )) }}
 
         {% block stylesheets %}
             {{ encore_entry_link_tags('style-app-main') }}

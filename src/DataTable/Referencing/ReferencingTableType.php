@@ -15,7 +15,6 @@ class ReferencingTableType implements DataTableTypeInterface
 {
     public function __construct(
         private RouterInterface       $router,
-        private ReferencingRepository $referencingRepository
     )
     {
     }
@@ -36,7 +35,7 @@ class ReferencingTableType implements DataTableTypeInterface
                     return $actions;
                 }
             ])
-            ->addOrderBy('pageName');
+            ->addOrderBy('url');
 
         $dataTable->createAdapter(ORMAdapter::class, [
             'entity' => Referencing::class,

@@ -8,7 +8,7 @@
     <title>{% block title %}Administration {% endblock %}</title>
 
     {% block stylesheets %}
-        {{ encore_entry_link_tags('admin') }}
+        {{ encore_entry_link_tags('style-admin-main') }}
     {% endblock %}
 
 </head>
@@ -29,7 +29,7 @@
                             class="fas fa-user fa-fw"></i></a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i><span
+                    <a class="dropdown-item" href="{{ path('admin_logout') }}"><i class="fas fa-sign-out-alt"></i><span
                                 class="ms-2">Déconnexion</span></a>
                 </div>
             </li>
@@ -61,20 +61,14 @@
 
             </main>
             <footer class="py-4 mt-auto">
-                <div class="text-muted">Copyright &copy;  <span id="cDate"></span></div>
+                <div class="text-muted">Copyright &copy;  {{ date() | date('Y') }}</div>
             </footer>
         </div>
     </div>
 </main>
 
-<script>
-    const date = new Date()
-    document.getElementById('cDate').innerHTML = date.getFullYear();
-</script>
-
-
 {% block javascripts %}
-    {{ encore_entry_script_tags('admin') }}
+    {{ encore_entry_script_tags('js-admin-main') }}
 {% endblock %}
 
 </body>

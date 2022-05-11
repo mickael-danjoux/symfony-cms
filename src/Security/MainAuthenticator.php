@@ -15,7 +15,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class UserAuthenticator extends AbstractLoginFormAuthenticator
+class MainAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
@@ -50,7 +50,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 		if (str_starts_with($request->getRequestUri(), "/admin"))
 			return new RedirectResponse($this->urlGenerator->generate('admin_index'));
 		
-		return new RedirectResponse($this->urlGenerator->generate('app_index'));
+		return new RedirectResponse($this->urlGenerator->generate('app_home'));
     }
 
     protected function getLoginUrl(Request $request): string

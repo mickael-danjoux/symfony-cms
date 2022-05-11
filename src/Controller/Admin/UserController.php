@@ -6,9 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/utilisateurs', name: 'admin_user_')]
 class UserController extends AbstractController
 {
-    #[Route('/user', name: 'admin_user')]
+    #[Route('', name: 'list')]
     public function index(): Response
     {
         return $this->render('admin/user/index.html.twig', [

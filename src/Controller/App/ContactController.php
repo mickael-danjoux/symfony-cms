@@ -12,10 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/contact', name: 'app_contact_')]
 class ContactController extends AbstractController
 {
-
-    #[Route('/contact', name: 'app_contact')]
+    #[Route('', name: 'form')]
     public function index(Request $request, MailerInterface $mailer, LoggerInterface $logger): Response
     {
         $contact = new Contact();
@@ -34,7 +34,7 @@ class ContactController extends AbstractController
 
                 $mailer->send($email);
                 $this->addFlash('success',"Le formulaire a bien été envoyé");
-                return $this->redirectToRoute('app_contact');
+                return $this->redirectToRoute('app_contact_form');
 
             }catch (\Exception $e){
                 $logger->error('ERREUR CONTACT : ' . $e->getMessage());

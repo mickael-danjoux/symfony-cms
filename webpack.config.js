@@ -22,11 +22,14 @@ Encore
     /*
      * ENTRY CONFIG
      *
-     * Each entry will result in one JavaScript file (e.g. app.js)
+     * Each entry will result in one JavaScript file (e.g. main.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/js/front/app.js')
-    .addEntry('admin', './assets/js/admin/layout.js')
+    .addEntry('js-app-main', './assets/js/app/main.js')
+    .addEntry('js-admin-main', './assets/js/admin/main.js')
+
+    .addStyleEntry('style-app-main', './assets/styles/app/main.scss')
+    .addStyleEntry('style-admin-main', './assets/styles/admin/main.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     // .enableStimulusBridge('./assets/controllers.json')

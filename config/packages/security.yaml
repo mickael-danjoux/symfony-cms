@@ -26,7 +26,7 @@ security:
             pattern: ^/
             lazy: true
             provider: app_user_provider
-            custom_authenticator: App\Security\UserAuthenticator
+            custom_authenticator: App\Security\MainAuthenticator
             user_checker: App\Security\Checker\UserChecker
             logout:
                 path: app_logout

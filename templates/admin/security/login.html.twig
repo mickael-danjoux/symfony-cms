@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    {{ encore_entry_link_tags('admin') }}
+    {{ encore_entry_link_tags('style-admin-main') }}
 
     <title>Administration - Connexion</title>
 
@@ -28,7 +28,7 @@
                             <label for="inputEmail">Email</label>
                             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-2"
                                    autocomplete="email" required autofocus>
-                            <label for="inputPassword">Password</label>
+                            <label for="inputPassword">Mot de passe</label>
                             <input type="password" name="password" id="inputPassword" class="form-control mb-2" autocomplete="current-password"
                                    required>
 
@@ -38,16 +38,16 @@
 
                             <div class="checkbox mb-3">
                                 <label>
-                                    <input type="checkbox" name="_remember_me"> Remember me
+                                    <input type="checkbox" name="_remember_me"> Se souvenir de moi
                                 </label>
                             </div>
 
 
-                            <button class="btn btn-lg btn-primary my-3" type="submit">
-                                Sign in
+                            <button class="btn btn-lg btn-primary my-2" type="submit">
+                                Connexion
                             </button>
                         </form>
-
+                        <a href="{{ path('app_forgot_password') }}">Mot de passe oublié ?</a>
                     </div>
                 </div>
 
@@ -61,9 +61,7 @@
 
     </div>
 </main>
-
-
 </body>
 
-{{ encore_entry_script_tags('admin') }}
+{{ encore_entry_script_tags('js-admin-main') }}
 

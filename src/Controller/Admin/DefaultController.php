@@ -10,10 +10,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route(  name: 'admin_')]
 class DefaultController extends AbstractController
 {
 
-    #[Route( '', name: 'admin_index')]
+    #[Route( '', name: 'index')]
     public function index(): Response
     {
         return $this->render('admin/default/index.html.twig', [
@@ -21,8 +22,7 @@ class DefaultController extends AbstractController
         ]);
     }
 
-
-    #[Route('/clear-cache', name: 'admin_clear_cache')]
+    #[Route('/clear-cache', name: 'clear_cache')]
     #[IsGranted('ROLE_SUPER_ADMIN')]
     public function cacheClear(LoggerInterface $logger): RedirectResponse
     {
@@ -36,7 +36,5 @@ class DefaultController extends AbstractController
             $logger->error('Cache:clear Error : ' . $exception->getMessage());
         }
         return $this->redirectToRoute('admin_index');
-
     }
-
 }

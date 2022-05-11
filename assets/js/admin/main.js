@@ -1,7 +1,5 @@
-import '../../styles/admin/layout.scss';
 import 'bootstrap';
 import "@fortawesome/fontawesome-free/js/all.js";
-import "@fortawesome/fontawesome-free/css/all.css";
 
 
 const path = window.location.href;
@@ -21,7 +19,7 @@ if(links.length > 0){
         body.classList.toggle('sb-sidenav-toggled');
     });
 
-    sidebarContent.addEventListener('click', (event) => {
+    sidebarContent.addEventListener('click', () => {
         if (window.innerWidth < 992) {
             body.classList.remove('sb-sidenav-toggled');
         }

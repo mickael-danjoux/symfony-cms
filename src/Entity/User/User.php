@@ -37,8 +37,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     #[ORM\Column(type: Types::STRING)]
-    #[Assert\NotBlank(message: 'Veuillez renseigner le mot de passe')]
-    #[Assert\Length( min: 7, minMessage: 'Ce mot de passe est trop court')]
     protected string|null $password = null;
 
 

@@ -59,10 +59,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	#[ORM\Column(type: Types::DATETIME_MUTABLE, length: 255, nullable: true)]
 	protected \DateTime|null $tokenDisabledAt;
 
-
-    /**
-     * @Gedmo\Timestampable(on="create")
-     */
+    #[Gedmo\Timestampable(on: 'create')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE )]
     protected \DateTime $registeredAt;
 	

@@ -32,7 +32,6 @@ class DefaultController extends AbstractController
         try {
             $application = new Application($kernel);
             $application->setAutoExit(false);
-            $application->setAutoExit(false);
             $input = new ArrayInput([
                 'command' => 'cache:clear',
             ]);

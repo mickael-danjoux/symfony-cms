@@ -1,56 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
 
+    {% block referencing %}
         {{ render(controller(
             'App\\Controller\\App\\Render\\ReferencingController::addReferencing'
         )) }}
+    {% endblock %}
 
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('style-app-main') }}
-        {% endblock %}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('style-app-main') }}
+    {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('js-app-main') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block messages %}
-            {% include('app/partials/_messages.html.twig') %}
-        {% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('js-app-main') }}
+    {% endblock %}
+</head>
+<body>
+{% block messages %}
+    {% include('app/partials/_messages.html.twig') %}
+{% endblock %}
 
-    {% block body %}{% endblock %}
-        <script src="//cdnjs.cloudflare.com/ajax/libs/tarteaucitronjs/1.9.4/tarteaucitron.js"></script>
-        <script>
-            tarteaucitron.init({
-                "privacyUrl": "", /* Privacy policy url */
-                "hashtag": "#cookies", /* Open the panel with this hashtag */
-                "cookieName": "cookies", /* Cookie name */
-                "orientation": "bottom", /* Banner position (top - bottom) */
-                "groupServices": false, /* Group services by category */
-                "showAlertSmall": false, /* Show the small banner on bottom right */
-                "cookieslist": false, /* Show the cookie list */
-                "closePopup": false, /* Show a close X on the banner */
-                "showIcon": false, /* Show cookie icon to manage cookies */
-                //"iconSrc": "", /* Optionnal: URL or base64 encoded image */
-                "iconPosition": "BottomRight", /* BottomRight, BottomLeft, TopRight and TopLeft */
-                "adblocker": false, /* Show a Warning if an adblocker is detected */
-                "DenyAllCta" : true, /* Show the deny all button */
-                "AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
-                "highPrivacy": true, /* HIGHLY RECOMMANDED Disable auto consent */
-                "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
-                "removeCredit": true, /* Remove credit link */
-                "moreInfoLink": false, /* Show more info link */
-                "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
-                "useExternalJs": false, /* If false, the tarteaucitron.js file will be loaded */
-                //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
-                "readmoreLink": "", /* Change the default readmore link */
-                "mandatory": true, /* Show a message about mandatory cookies */
-            });
-            tarteaucitron.user.recaptchaapi = '{{ app.request.server.get('GOOGLE_RECAPTCHA_API') }}';
-            (tarteaucitron.job = tarteaucitron.job || []).push('recaptcha');
-        </script>
+{% block body %}{% endblock %}
+{% include('app/partials/_cookies.html.twig') %}
 
-    </body>
+</body>
 </html>

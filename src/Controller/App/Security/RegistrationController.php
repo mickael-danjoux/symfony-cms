@@ -5,7 +5,7 @@ namespace App\Controller\App\Security;
 use App\Entity\User\Customer;
 use App\Entity\User\User;
 use App\Form\RegistrationType;
-use App\Services\AccountActivation;
+use App\Services\Account\AccountActivationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +23,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/inscription', name: "app_registration")]
-    public function registration(Request $request, UserPasswordHasherInterface $hasher, AccountActivation $accountActivation): RedirectResponse|Response
+    public function registration(Request $request, UserPasswordHasherInterface $hasher, AccountActivationService $accountActivation): RedirectResponse|Response
     {
         $customer = new Customer();
 

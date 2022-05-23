@@ -1,4 +1,2 @@
 parameters:
   app.site.name: 'Mon site'
-  app.site.title: 'Default Title'
-  app.site.description: 'Default Description'

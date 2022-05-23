@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
     <title>{% block title %}Administration {% endblock %}</title>
 
     {% block stylesheets %}
@@ -13,7 +14,7 @@
 
 </head>
 <body>
-<main  class="sb-nav-fixed">
+<main class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand pe-3">
         <a class="navbar-brand" href="{{ path('admin_index') }}"></a>
         <button class="btn btn-info btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i>
@@ -45,15 +46,17 @@
             <main class="main-content">
 
                 {% block messages %}
-                    {% for label, messages in app.flashes %}
-                        <div class="container  my-2">
-                            <div class="alert alert-{{ label }} pb-0">
-                                {% for message in messages %}
-                                    <p>{{ message | raw }}</p>
-                                {% endfor %}
+                    {% if app.session.flashBag.peekAll is not empty %}
+                        {% for label, messages in app.flashes %}
+                            <div class="container  my-2">
+                                <div class="alert alert-{{ label }} pb-0">
+                                    {% for message in messages %}
+                                        <p>{{ message | raw }}</p>
+                                    {% endfor %}
+                                </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% endif %}
                 {% endblock %}
 
                 {% block body %}
@@ -61,7 +64,7 @@
 
             </main>
             <footer class="py-4 mt-auto">
-                <div class="text-muted">Copyright &copy;  {{ date() | date('Y') }}</div>
+                <div class="text-muted">Copyright &copy; {{ date() | date('Y') }}</div>
             </footer>
         </div>
     </div>

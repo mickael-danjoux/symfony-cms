@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Command;
+namespace App\Command\Main;
 
 use App\Classes\UserDTO;
 use App\Repository\User\UserRepository;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,6 +17,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+#[AsCommand(
+    name: 'app:user:create',
+    description: 'Creation d’un utilisateur',
+)]
 class UserInitCommand extends Command
 {
     protected static $defaultName = 'app:user:create';

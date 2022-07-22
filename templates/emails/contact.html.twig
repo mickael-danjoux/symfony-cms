@@ -1,18 +1,54 @@
-<h1>
-    Nouveau mail issu de votre formulaire de contact.
-</h1>
-<p>
-    {% if contact.company is defined %}<b>Entreprise: </b> {{ contact.company }} <br> {% endif %}
-    {% if contact.lastName is defined %}<b>Nom: </b> {{ contact.lastName }} <br> {% endif %}
-    {% if contact.firstName is defined %}<b>Prénom: </b> {{ contact.firstName }} <br> {% endif %}
-    {% if contact.phone is defined %}<b>Téléphone: </b> {{ contact.phone }} <br> {% endif %}
-    {% if contact.email is defined %}<b>Email: </b> {{ contact.email }} <br> {% endif %}
-    {% if contact.address is defined %}<b>Adresse: </b> {{ contact.address }} <br> {% endif %}
-    {% if contact.zipCode is defined %}<b>CP: </b> {{ contact.zipCode }} <br> {% endif %}
-    {% if contact.city is defined %}<b>Ville: </b> {{ contact.city }} <br> {% endif %}
-    <br>
-    {% if contact.message is defined %}<b>Message: </b> {{ contact.message | raw }} <br> {% endif %}
+{% extends 'emails/base.html.twig' %}
 
+{% block body %}
+    <table cellpadding="0" cellspacing="0" class="es-content" align="center"
+           style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%">
+        <tr>
+            <td align="center" style="padding:0;Margin:0">
+                <table bgcolor="#ffffff" class="es-content-body" align="center" cellpadding="0" cellspacing="0"
+                       style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;width:600px">
+                    <tr>
+                        <td align="left" style="padding:20px;Margin:0">
+                            <table cellpadding="0" cellspacing="0" width="100%"
+                                   style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                                <tr>
+                                    <td align="center" valign="top" style="padding:0;Margin:0;width:560px">
+                                        <table cellpadding="0" cellspacing="0" width="100%" role="presentation"
+                                               style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                                            <tr style="border-collapse:collapse">
+                                                <td align="left" style="padding:0;Margin:0;padding-top:15px"><p
+                                                            style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#999999;font-size:14px">
+                                                        Bonjour,</p>
+                                                    <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#999999;font-size:14px">
+                                                        Vous avez reçu une nouvelle demande via votre formulaire de contact.<br>
+                                                    </p>
+                                                </td>
+                                            <tr>
+                                                <td align="left" class="es-m-p0r es-m-p0l"
+                                                    style="Margin:0;padding-top:5px;padding-bottom:15px;padding-left:40px;padding-right:40px">
+                                                    <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">
+                                                        {% if contact.company is defined %}<b>Entreprise: </b> {{ contact.company }} <br> {% endif %}
+                                                        {% if contact.lastName is defined %}<b>Nom: </b> {{ contact.lastName }} <br> {% endif %}
+                                                        {% if contact.firstName is defined %}<b>Prénom: </b> {{ contact.firstName }} <br> {% endif %}
+                                                        {% if contact.phone is defined %}<b>Téléphone: </b> {{ contact.phone }} <br> {% endif %}
+                                                        {% if contact.email is defined %}<b>Email: </b> {{ contact.email }} <br> {% endif %}
+                                                        {% if contact.address is defined %}<b>Adresse: </b> {{ contact.address }} <br> {% endif %}
+                                                        {% if contact.zipCode is defined %}<b>CP: </b> {{ contact.zipCode }} <br> {% endif %}
+                                                        {% if contact.city is defined %}<b>Ville: </b> {{ contact.city }} <br> {% endif %}
+                                                        <br>
+                                                        {% if contact.message is defined %}<b>Message: </b> <br> {{ contact.message | raw }} <br> {% endif %}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 
-</p>
-<hr>
+{% endblock %}

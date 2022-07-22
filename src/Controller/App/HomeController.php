@@ -7,12 +7,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('', name: 'app_')]
-class DefaultController extends AbstractController
+class HomeController extends AbstractController
 {
     #[Route('', name: 'home')]
     public function index(): Response
     {
-        return $this->render('app/default/index.html.twig', [
+        return $this->render('app/home/home.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
     }

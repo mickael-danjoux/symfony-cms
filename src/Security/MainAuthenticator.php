@@ -48,7 +48,7 @@ class MainAuthenticator extends AbstractLoginFormAuthenticator
         }
 	
 		if (str_starts_with($request->getRequestUri(), "/admin"))
-			return new RedirectResponse($this->urlGenerator->generate('admin_index'));
+			return new RedirectResponse($this->urlGenerator->generate('admin_dashboard'));
 		
 		return new RedirectResponse($this->urlGenerator->generate('app_home'));
     }

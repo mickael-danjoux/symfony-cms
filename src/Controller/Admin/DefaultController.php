@@ -13,21 +13,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(  name: 'admin_')]
+#[Route(name: 'admin_')]
 class DefaultController extends AbstractController
 {
 
-    #[Route( '', name: 'index')]
+    #[Route('', name: 'index')]
+    #[Route('/dashboard', name: 'dashboard')]
     public function index(): Response
     {
-        return $this->render('admin/default/index.html.twig', [
+        return $this->render('admin/dashboard/dashboard.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
     }
 
     #[Route('/clear-cache', name: 'clear_cache')]
     #[IsGranted('ROLE_SUPER_ADMIN')]
-    public function cacheClear(LoggerInterface $logger,KernelInterface $kernel): RedirectResponse
+    public function cacheClear(LoggerInterface $logger, KernelInterface $kernel): RedirectResponse
     {
         try {
             $application = new Application($kernel);
@@ -43,6 +44,6 @@ class DefaultController extends AbstractController
             $this->addFlash('warning', 'Le cache n\'a pas pu être vidé.');
             $logger->error('Cache:clear Error : ' . $exception->getMessage());
         }
-        return $this->redirectToRoute('admin_index');
+        return $this->redirectToRoute('admin_dashboard');
     }
 }

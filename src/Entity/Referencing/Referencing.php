@@ -2,7 +2,7 @@
 
 namespace App\Entity\Referencing;
 
-use App\Entity\Traits\IdTraits;
+use App\Entity\Traits\IdTrait;
 use App\Repository\Referencing\ReferencingRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity(fields: ['url'], message: 'Cette URL de page existe déjà')]
 class Referencing
 {
-    use IdTraits;
+    use IdTrait;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'Veuillez renseigner le nom de la page')]

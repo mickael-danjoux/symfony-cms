@@ -2,7 +2,7 @@
 
 namespace App\Entity\User;
 
-use App\Entity\Traits\IdTraits;
+use App\Entity\Traits\IdTrait;
 use App\Repository\User\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 
-    use IdTraits;
+    use IdTrait;
 
     #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
     #[Assert\NotBlank(message: 'Veuillez renseigner votre email')]

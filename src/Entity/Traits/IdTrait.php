@@ -4,7 +4,7 @@ namespace App\Entity\Traits;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-trait IdTraits
+trait IdTrait
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

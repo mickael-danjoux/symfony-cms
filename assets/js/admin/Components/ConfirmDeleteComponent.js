@@ -12,3 +12,17 @@ export const ConfirmDeleteComponent = Swal.mixin({
     confirmButtonText: 'Confimer',
     denyButtonText: `Annuler`,
 })
+
+export const initConfirmDeleteButtons = () => {
+    document.querySelectorAll('.js-btn-delete').forEach((item) => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault()
+            ConfirmDeleteComponent.fire({
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.href = item.getAttribute('data-href')
+                }
+            })
+        })
+    })
+}

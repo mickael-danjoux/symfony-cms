@@ -2,6 +2,7 @@
 
 namespace App\Entity\Referencing;
 
+use App\Entity\Traits\IdTraits;
 use App\Repository\Referencing\ReferencingRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -11,10 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity(fields: ['url'], message: 'Cette URL de page existe déjà')]
 class Referencing
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
+    use IdTraits;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'Veuillez renseigner le nom de la page')]
@@ -30,10 +28,6 @@ class Referencing
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $description = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     /**
      * @return string

@@ -46,17 +46,7 @@
             <main class="main-content">
 
                 {% block messages %}
-                    {% if app.session.flashBag.peekAll is not empty %}
-                        {% for label, messages in app.flashes %}
-                            <div class="container  my-2">
-                                <div class="alert alert-{{ label }} pb-0">
-                                    {% for message in messages %}
-                                        <p>{{ message | raw }}</p>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
+                    {% include 'admin/partials/_messages.html.twig' %}
                 {% endblock %}
 
                 {% block body %}

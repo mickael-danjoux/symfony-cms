@@ -1,6 +1,7 @@
 import 'bootstrap';
 import "@fortawesome/fontawesome-free/js/all.js";
 import './datatable/datatable'
+import { initConfirmDeleteButtons } from './Components/ConfirmDeleteComponent'
 
 const path = window.location.href;
 const links = document.querySelectorAll('#layoutSidenav_nav .sb-sidenav a.nav-link');
@@ -26,4 +27,6 @@ if(links.length > 0){
     });
 }
 
+// Initialisation des boutons de confirmation de suppression standard (avec data-url PHP)
+initConfirmDeleteButtons()
 

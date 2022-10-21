@@ -1,0 +1,65 @@
+{# ########### Macro recursive Category ########## #}
+{% macro recursiveCategory(category, root) %}
+
+    {% import _self as self %}
+
+    <tr xmlns:v-on="http://www.w3.org/1999/xhtml" id="item-{{ category.id }}">
+        {% if 1 %}
+            <td>
+                {% for lvl in 1..category.lvl %}
+                    {% if lvl > 1 %}
+                        <span class="d-inline-block ps-3"> - </span>
+                    {% endif %}
+                {% endfor %}
+                {{ category.title }}
+            </td>
+            <td>
+                {% for lvl in 1..category.lvl %}
+                    {% if lvl > 1 %}
+                        <span class="d-inline-block ps-3"> </span>
+                    {% endif %}
+                {% endfor %}
+                {{ category.sort }}
+            </td>
+            <td class="d-flex justify-content-around">
+                <a href="{{ path('admin_category_edit',{'parent': root.slug, 'slugChild' : category.slug}) }}"
+                   class="mr-2"> <i class="fas fa-pencil-alt"></i></a>
+                <a class="btn-delete js-btn-delete"
+                   data-href="{{ path('admin_category_delete',{'id': category.id}) }}"
+                   href="#">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </td>
+        {% endif %}
+    </tr>
+
+    {% if category.__children is defined and category.__children|length %}
+        {% for child in category.__children %}
+            {{ self.recursiveCategory(child,root) }}
+        {% endfor %}
+    {% endif %}
+
+{% endmacro %}
+
+{% from _self import recursiveCategory %}
+
+{# ########### END Macro recursive Category ########## #}
+
+<div class="table-responsive" id="table">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th>Libellé de la catégorie</th>
+            <th>
+                Ordre d'affichage
+            </th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in arrayTree %}
+            {{ recursiveCategory(category, root) }}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

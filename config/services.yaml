@@ -20,8 +20,20 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
-              
+
     Symfony\Component\DependencyInjection\ContainerInterface: '@service_container'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    gedmo.listener.tree:
+        class: Gedmo\Tree\TreeListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]
+
+    App\Routing\CmsRouteLoader:
+        tags: [ routing.loader ]
+
+

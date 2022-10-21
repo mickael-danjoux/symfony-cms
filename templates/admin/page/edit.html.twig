@@ -1,0 +1,142 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Pages{% endblock %}
+
+{% block messages %}{% endblock %}
+{#{% block stylesheets %}#}
+{#    {{ encore_entry_link_tags('style-admin-page') }}#}
+{#    {{ encore_entry_link_tags('js-admin-page-edit') }}#}
+
+{#{% endblock %}#}
+
+{% block body %}
+
+    <input type="hidden" id="pageId" value="{{ page.id }}">
+
+    <ol class="breadcrumb main-breadcrumb px-4 py-2">
+        <li class="breadcrumb-item"><a href="{{ path('admin_page_list') }}">Pages</a></li>
+        <li class="breadcrumb-item">Editer une page</li>
+    </ol>
+
+
+    <div class="container-fluid">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <div class="button-bar mb-3">
+            <div class="d-flex justify-content-end align-items-center my-2">
+                <a href="{{ path('admin_page_list') }}" class="btn btn-primary btn-back ms-1">Retour</a>
+                {% if page.id is defined and page.id is not null %}
+                    <a class="btn btn-danger js-btn-delete ms-1"
+                       data-href="{{ path('admin_page_remove', {id: page.id}) }}" href="#"><i
+                                class="fas fa-trash"></i> Supprimer</a>
+                {% endif %}
+                <button class="btn btn-success btn-validate ms-1"><i class="fas fa-save"></i> Enregistrer</button>
+                <a class="btn btn-primary ms-1 js-disabled-on-change" @click="preview" ><i class="fas fa-eye"></i>
+                    Prévisualiser</a>
+            </div>
+
+            <div class="col-12 d-flex justify-content-end mt-3" v-if="formHasChanged">
+                <span class="badge bg-warning">Veuillez enregistrer</span>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col">
+                {% include "admin/partials/_messages.html.twig" %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-xl-8 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="title"><i class="fas fa-pen"></i> Infos</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-8">
+                                {{ form_row(form.title,{'attr':{'class':'form-control-sm'}}) }}
+                            </div>
+                            <div class="col-12">
+                                {{ form_row(form.path,{'attr':{'class':'form-control-sm js-change'}}) }}
+                            </div>
+                            {% if form.type is defined %}
+                                <div class="col-12">
+                                    {{ form_row(form.type) }}
+                                </div>
+                                <div class="col-12 d-none" id="form-page-controller">
+                                    {{ form_row(form.controller) }}
+                                </div>
+                                <div class="col-12 d-none" id="form-page-route">
+                                    {{ form_row(form.routeName) }}
+                                </div>
+                            {% endif %}
+
+                            {# nécessaire pour avoir l'état du type de page (côté JS) #}
+                            <input id="pageType" type="hidden" name="pageType" value="{{ form.vars.value.type.value }}">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-xl-4 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="title"><i class="fas fa-newspaper"></i> Publication</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-6 mb-3">
+                                {{ form_row(form.published) }}
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <label class="form-label mb-0 small">Date de création
+                                    : {{ page.createdAt | date('d/m/Y') }}</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                {{ form_row(form.startPublishingAt,{'attr':{'class':'form-control-sm'}}) }}
+                                {{ form_row(form.endPublishingAt,{'attr':{'class':'form-control-sm'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12  mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="title"><i class="fas fa-pager"></i> Référencement SEO</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-4 mb-3">
+                                {{ form_row(form.seo.title) }}
+                            </div>
+                            <div class="col-12 col-md-8 mb-3">
+                                {{ form_row(form.seo.description) }}
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="d-none">
+            {{form_row(form.content)}}
+
+        </div>
+        {{ form_rest(form) }}
+        <button class="btn btn-success btn-validate mt-3"><i class="fas fa-save"></i> Enregistrer</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+{% block javascripts %}
+        {{ encore_entry_script_tags('js-admin-page-edit') }}
+{% endblock %}

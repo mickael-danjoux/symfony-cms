@@ -2,3 +2,7 @@ admin:
   resource: '../src/Controller/Admin'
   type: annotation
   prefix: '/admin'
+
+cms:
+  resource: .
+  type: cms

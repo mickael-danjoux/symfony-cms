@@ -2,7 +2,6 @@
 
 namespace App\Command\Main;
 
-use App\Services\Referencing\ReferencingFactory;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -21,7 +20,6 @@ class InitProjectCommand extends Command
 
 
     public function __construct(
-        private ReferencingFactory $referencingFactory,
         private LoggerInterface $logger
     )
     {
@@ -42,19 +40,6 @@ class InitProjectCommand extends Command
         }
 
 
-        // Référencement page d’accueil
-        try{
-            $io->title('Initialisation du référencement');
-            $this->referencingFactory->createFirstPage();
-            $io->success('');
-
-        }catch (\Exception $e){
-            $message = 'Impossible de créer la première page de référencement';
-            $io->error($message);
-            $this->logger->critical($message,[
-                'error' => $e
-            ]);
-        }
         return Command::SUCCESS;
     }
 }

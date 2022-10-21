@@ -1,7 +1,7 @@
 <div class="sb-sidenav-menu">
     <div class="nav">
         <div class="sb-sidenav-menu-heading">Tableau de bord</div>
-        <a class="nav-link" href="{{ path('admin_index') }}">
+        <a class="nav-link" href="{{ path('admin_dashboard') }}">
             <div class="sb-nav-link-icon">
                 <span>
                     <i class="fas fa-tachometer-alt"></i>
@@ -9,17 +9,41 @@
                 </span>
             </div>
         </a>
+
+        {% set displayCollapseMenu = false %}
+        {% if ('admin_category' in app.request.attributes.get('_route')   and app.request.attributes.get('_route_params')['slug'] is defined
+            and app.request.attributes.get('_route_params')['slug'] == constant('App\\Entity\\Category\\Category::MENU_SLUG') )
+            or 'admin_page_' in app.request.attributes.get('_route') %}
+            {% set displayCollapseMenu = true %}
+        {% endif %}
+
+        <a class="nav-link {% if not displayCollapseMenu %} collapsed{% endif %}" href="#"
+           data-bs-toggle="collapse" data-bs-target="#collapseMenu"
+           aria-expanded="{{ displayCollapseMenu ? 'true': 'false' }}" aria-controls="collapseMenu">
+            <div class="sb-nav-link-icon">
+                <i class="fas fa-pager"></i>
+            </div>
+            Contenus
+            <div class="sb-sidenav-collapse-arrow">
+                <i class="fas fa-angle-down"></i>
+            </div>
+        </a>
+
+        <div class="collapse {% if displayCollapseMenu %}show{% endif %}" id="collapseMenu"
+             aria-labelledby="headingOne" data-bs-parent="#collapseMenu" style="">
+            <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link"
+                   href="{{ path('admin_category_list',{'slug':constant('App\\Entity\\Category\\Category::MENU_SLUG')  }) }}">
+                    Menu du site
+                </a>
+{#                <a class="nav-link " href="{{path('admin_page_media_list')}}">Media</a>#}
+                <a class="nav-link " href="{{path('admin_page_list')}}">Pages</a>
+            </nav>
+        </div>
+
         <hr>
         {% if is_granted('ROLE_SUPER_ADMIN') %}
             <div class="sb-sidenav-menu-heading">Super Admin</div>
-            <a class="nav-link no-active" href="{{ path('admin_referencing_list') }}" target="">
-                <div class="sb-nav-link-icon">
-                <span>
-                    <i class="fas fa-laptop-code"></i>
-                    Référencement
-                </span>
-                </div>
-            </a>
             <a class="nav-link no-active" href="{{ path('admin_user_list') }}" target="">
                 <div class="sb-nav-link-icon">
                 <span>

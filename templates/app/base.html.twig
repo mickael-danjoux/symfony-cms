@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
 
-    {% block referencing %}
-        {{ render(controller(
-            'App\\Controller\\App\\Render\\ReferencingController::addReferencing'
-        )) }}
+    {% block seo %}
+        {%if page is defined%}
+            {%include 'app/partials/_seo.html.twig' with { seo: page.seo}%}
+        {%else%}
+            {%include 'app/partials/_seo.html.twig' with { seo:{title: 'Mon site'}}%}
+        {%endif%}
     {% endblock %}
+
 
     {% block stylesheets %}
         {{ encore_entry_link_tags('style-app-main') }}

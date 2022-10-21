@@ -1,0 +1,98 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Catégories{% endblock %}
+
+{% block messages %}{% endblock %}
+
+{% block body %}
+
+    <ol class="breadcrumb main-breadcrumb px-4 py-2">
+        <li class="breadcrumb-item">
+            Catégories
+        </li>
+    </ol>
+    <div class="container-fluid">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div class="button-bar mb-3">
+            <div class="d-flex justify-content-end align-items-center">
+                {% if catParent.slug == constant('App\\Entity\\Category\\Category::MENU_SLUG') %}
+                    <a href="{{ path('admin_category_list',{slug: constant('App\\Entity\\Category\\Category::MENU_SLUG')}) }}"
+                       class="btn btn-primary btn-back ms-1">Retour</a>
+                {% endif %}
+
+
+                {% if category.id is defined and category.id is not null %}
+                    <a class="btn btn-danger js-btn-delete ms-1"
+                       data-href="{{ path('admin_category_delete', {id: category.id}) }}" href="#"><i
+                                class="fas fa-trash"></i> Supprimer</a>
+                {% endif %}
+                <button class="btn btn-success btn-validate ms-1"><i class="fas fa-save"></i> Valider</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {% include "admin/partials/_messages.html.twig" %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12  mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="title"><i class="fas fa-pen"></i> Activité et thématiques</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-6 ">
+                                {{ form_row(form.title) }}
+                            </div>
+                            {% if form.sort is defined %}
+                                <div class="col-12 col-md-6 ">
+                                    {{ form_row(form.sort,{'type' : 'number'}) }}
+                                </div>
+                            {% endif %}
+
+                            {% if form.children['parent'] is defined %}
+                                <div class="col-12  ">
+                                    {{ form_row(form.parent) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% if catParent.slug == constant('App\\Entity\\Category\\Category::MENU_SLUG') %}
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    {{ form_row(form.type) }}
+                                </div>
+                            </div>
+
+                            <div class="row d-none" id="form-select-page">
+                                <div class="col-12">
+                                    {{ form_row(form.page) }}
+                                </div>
+                            </div>
+
+                            <div class="row d-none" id="form-custom-link">
+                                <div class="col-12">
+                                    {{ form_row(form.url) }}
+                                    {{ form_row(form.newTab) }}
+                                </div>
+                            </div>
+                        {% endif %}
+                        {{ form_rest(form) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button class="btn btn-success btn-validate ms-1"><i class="fas fa-save"></i> Valider</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('js-admin-category-edit') }}
+{% endblock %}

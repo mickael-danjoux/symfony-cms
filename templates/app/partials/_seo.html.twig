@@ -1,0 +1,7 @@
+{% if seo.title is defined %}
+    <title>{{ seo.title }}</title>
+{% endif %}
+
+{% if seo.description is defined %}
+    <meta name="description" content="{{ seo.description }}">
+{% endif %}

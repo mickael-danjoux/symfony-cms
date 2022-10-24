@@ -25,9 +25,9 @@
                 {% if category.id is defined and category.id is not null %}
                     <a class="btn btn-danger js-btn-delete ms-1"
                        data-href="{{ path('admin_category_delete', {id: category.id}) }}" href="#"><i
-                                class="fas fa-trash"></i> Supprimer</a>
+                                class="fas fa-trash me-2"></i>Supprimer</a>
                 {% endif %}
-                <button class="btn btn-success btn-validate ms-1"><i class="fas fa-save"></i> Valider</button>
+                <button class="btn btn-success btn-validate ms-1 me-2"><i class="fas fa-save"></i>Valider</button>
             </div>
         </div>
         <div class="row">
@@ -39,7 +39,7 @@
             <div class="col-12  mb-3">
                 <div class="card">
                     <div class="card-header">
-                        <span class="title"><i class="fas fa-pen"></i> Activité et thématiques</span>
+                        <span class="title"><i class="fas fa-pen me-2"></i>Activité et thématiques</span>
                     </div>
                     <div class="card-body">
                         <div class="row">

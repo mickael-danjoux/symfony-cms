@@ -1,0 +1,54 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Configuration{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb main-breadcrumb px-4 py-2">
+        <li class="breadcrumb-item"><a href="{{ path('app_admin_channel_index') }}">Configuration</a></li>
+    </ol>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <span class="h3 mb-0">Configuration</span>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(parametersForm) }}
+                        {{ form_errors(parametersForm) }}
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                {{ form_row(parametersForm.channel_name ) }}
+                            </div>
+                            <div class="col-12 col-md-6">
+                                {{ form_row(parametersForm.channel_color, { type: 'color'} ) }}
+                            </div>
+                            <div class="col-12 col-md-6">
+                                {{ form_row(parametersForm.channel_email_contact, {
+                                    help: '<i class="fas fa-question-circle"></i> Séparré par une virgule',
+                                    help_html: true
+                                }) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                {{ form_row(parametersForm.channel_seo_title ) }}
+                            </div>
+                            <div class="col-12 ">
+                                {{ form_row(parametersForm.channel_seo_description ) }}
+                            </div>
+                        </div>
+                        {{ form_rest(parametersForm) }}
+                        <div class="row">
+                            <div class="rol-12 d-flex justify-content-center">
+                                <button class="btn-save">Enregistrer</button>
+                            </div>
+                        </div>
+                        {{ form_end(parametersForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

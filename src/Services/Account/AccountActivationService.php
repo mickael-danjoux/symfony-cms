@@ -15,10 +15,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class AccountActivationService
 {
     public function __construct(
-        private ContainerInterface    $container,
-        private MailerInterface       $mailer,
-        private UrlGeneratorInterface $urlGenerator,
-        private LoggerInterface       $logger
+        private readonly MailerInterface       $mailer,
+        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly LoggerInterface       $logger
     )
     {
     }
@@ -43,7 +42,6 @@ class AccountActivationService
                 ->subject('Vérification email')
                 ->htmlTemplate('emails/email_verify.html.twig')
                 ->context([
-                    'site_name' => $this->container->getParameter('app.site.name'),
                     'urlValidation' => $urlValidation,
                 ]);
             $this->mailer->send($email);

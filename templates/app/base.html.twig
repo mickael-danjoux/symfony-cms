@@ -7,7 +7,7 @@
         {%if page is defined%}
             {%include 'app/partials/_seo.html.twig' with { seo: page.seo}%}
         {%else%}
-            {%include 'app/partials/_seo.html.twig' with { seo:{title: 'Mon site'}}%}
+            {%include 'app/partials/_seo.html.twig'%}
         {%endif%}
     {% endblock %}
 

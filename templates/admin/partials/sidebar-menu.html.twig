@@ -44,6 +44,16 @@
         <hr>
         {% if is_granted('ROLE_SUPER_ADMIN') %}
             <div class="sb-sidenav-menu-heading">Super Admin</div>
+
+            <a class="nav-link no-active" href="{{ path('app_admin_channel_index') }}" target="">
+                <div class="sb-nav-link-icon">
+                <span>
+                    <i class="fas fa-cog"></i>
+                    Configuration
+                </span>
+                </div>
+            </a>
+
             <a class="nav-link no-active" href="{{ path('admin_user_list') }}" target="">
                 <div class="sb-nav-link-icon">
                 <span>

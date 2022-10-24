@@ -2,11 +2,13 @@
 
 namespace App\Controller\App;
 
-use App\Classes\Contact;
+use App\DTO\Contact;
 use App\Controller\App\Router\RouterControllerTrait;
 use App\Entity\Page\Page;
 use App\Form\ContactType;
+use App\Services\MailerService;
 use Psr\Log\LoggerInterface;
+use Sherlockode\ConfigurationBundle\Manager\ParameterManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,8 +21,9 @@ class ContactController extends AbstractController
 {
     use RouterControllerTrait;
 
-    public function form(Request $request, MailerInterface $mailer, LoggerInterface $logger): Response
+    public function form(Request $request, MailerInterface $mailer, LoggerInterface $logger, MailerService $mailerService ): Response
     {
+        $page = $this->getPageOrNotFound($request);
 
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
@@ -35,6 +38,8 @@ class ContactController extends AbstractController
                         'contact' => $contact
                     ]);
 
+                $mailerService->replaceContactsWithParam($email, 'channel_email_contact');
+
                 $mailer->send($email);
                 $this->addFlash('success', "Le formulaire a bien été envoyé");
                 return $this->redirectToRoute('app_contact');
@@ -47,7 +52,7 @@ class ContactController extends AbstractController
 
         return $this->render('app/contact/form.html.twig', [
             'form' => $form->createView(),
-            'page' => $this->getPage($request)
+            'page' => $page
         ]);
     }
 }

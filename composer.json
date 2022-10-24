@@ -17,6 +17,8 @@
         "omines/datatables-bundle": "^0.7.0",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^6.1",
+        "sentry/sentry-symfony": "^4.4",
+        "sherlockode/configuration-bundle": "^0.5.1",
         "stof/doctrine-extensions-bundle": "^1.6",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "6.1.*",

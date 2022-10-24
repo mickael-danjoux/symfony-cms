@@ -9,9 +9,20 @@
   }
 }
 
+.btn-save{
+  @extend .btn;
+  @extend .btn-success;
+  &:before{
+    content: "\f0c7";
+    font-family: "Font Awesome 5 Free";
+    margin-right: 10px;
+    font-weight: 900
+  }
+}
+
 .btn-back{
   @extend .btn;
-  @extend .btn-primary;
+  @extend .btn-dark;
   &:before{
     content: "\f053";
     font-family: "Font Awesome 5 Free";

@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Classes\Contact;
+use App\DTO\Contact;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;

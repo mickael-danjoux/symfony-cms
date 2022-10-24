@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping\Column;
 class MenuCategory extends Category
 {
 
-    #[Column(type: "string", nullable: true, enumType: MenuCategoryTypeEnum::class)]
+    #[Column(type: "string", nullable: false, enumType: MenuCategoryTypeEnum::class)]
     #[Assert\NotBlank(message: 'Veuillez renseigner le type')]
     private MenuCategoryTypeEnum $type;
 

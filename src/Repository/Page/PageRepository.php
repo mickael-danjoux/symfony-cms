@@ -22,6 +22,16 @@ class PageRepository extends ServiceEntityRepository
         parent::__construct($registry, Page::class);
     }
 
+    public function findAllForRouting()
+    {
+        return $this->getEntityManager()
+            ->getConnection()
+            ->prepare('SELECT id, controller, path, route_name FROM page')
+            ->executeQuery([])
+            ->fetchAllAssociative()
+            ;
+    }
+
 
     public function save(Page $entity, bool $flush = false): void
     {

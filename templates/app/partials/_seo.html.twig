@@ -1,7 +1,15 @@
-{% if seo.title is defined %}
-    <title>{{ seo.title }}</title>
+{% if seo.title is defined and seo.title is not empty %}
+    {% set seoTitle = seo.title %}
+{% else %}
+    {% set seoTitle = configuration_parameter('channel_seo_title') %}
 {% endif %}
 
-{% if seo.description is defined %}
-    <meta name="description" content="{{ seo.description }}">
+{% if seo.description is defined and seo.description is not empty %}
+    {% set seoDescription = seo.description %}
+{% else %}
+    {% set seoDescription = configuration_parameter('channel_seo_description') %}
 {% endif %}
+
+
+<title>{{ seoTitle }}</title>
+<meta name="description" content="{{ seoDescription }}">

@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Controller\App\Router;
+namespace App\Controller\App\Legal;
 
-use App\Entity\Page\Page;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Controller\App\Router\RouterControllerTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PageController extends AbstractController
+class LegalController extends AbstractController
 {
     use RouterControllerTrait;
 
-    public function display(Request $request): Response
+    public function mentions(Request $request): Response
     {
         $page = $this->getPageOrNotFound($request);
 
-        return $this->render('app/router/display.html.twig', [
+        return $this->render('app/legal/legal.html.twig', [
             'page' => $page
         ]);
     }
+
 }

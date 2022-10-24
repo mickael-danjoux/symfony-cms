@@ -8,15 +8,24 @@ Symfony: https://symfony.com/download
 Node/Npm (LTS): https://nodejs.org/fr/
 
 ### Installation: 
-* Installer les dépandances PHP: ``` composer install ```
+* Installer les dépendances PHP: ```symfony composer install ```
 * Installer les dépendances JS: ```npm install```
 * Lancer le projet en local: ```npm start```
 
 ### Initialisation
-Il est possible de créer la BDD, un compte admin et la première page de référencement via cette commande.
- ```symfony console app:project:init```
+Il est possible d'initialiser le projet en entrant cette commande
+ ```symfony console app:project:init```  
+(Initialisation de la BDD et création des données nécessaires au fonctionnement)  
+La liste des pages par défaut se trouve dans ```src/Factories/Page/DefaultPagesArray```
 
-### Référencement
-Le référencement se fait via le module d’administration.  
-Il est possible de surcharger le bloque ```referencing``` pour mettre des balises custom.
+### Pages et Référencement
+La gestion du menu et des pages se fait via le module d’administration.  
+Il est possible de gérer le référencement de ces pages.
+
+### Logs Sentry
+Le module de gestion des logs est installé par défaut.
+Il faut changer la clé ```SENTRY_DSN``` dans le fichier .env
+Il est possible de tester la commande :
+```symfony app:sentry:test```  
+Le log apparait dans la console et dans l'interface de Sentry (https://sentry.ab6net.net)
 

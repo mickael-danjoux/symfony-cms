@@ -2,7 +2,7 @@
 
 namespace App\Command\Main;
 
-use App\Classes\UserDTO;
+use App\DTO\UserDTO;
 use App\Repository\User\UserRepository;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -56,22 +56,23 @@ class UserInitCommand extends Command
     {
         try {
             $this->io = new SymfonyStyle($input, $output);
+            $this->io->title('Création d’un utilisateur');
+
 
             $this->getAttribute('Email', 'email');
             $this->getAttribute('Mot de passe', 'password', true);
-            $this->getAttribute('Repétez le mot de passe', 'repeatedPassword', true);
             $this->getAttribute('Nom affiché', 'displayName');
             $this->getAttribute('Role', 'roles', false, 'choice', null, [
                 'ROLE_USER',
                 'ROLE_ADMIN',
                 'ROLE_SUPER_ADMIN'
             ]);
-            $this->getAttribute('Utilisateur vérifié', 'isVerified', false, 'boolean', 'true');
 
 
             try {
                 $this->em->persist($this->user->hydrate($this->hasher));
                 $this->em->flush();
+                $this->io->success('Utilisateur crée');
             } catch (UniqueConstraintViolationException $e) {
                 $this->io->error("Cet utilisateur existe déjà.");
             } catch (\Exception $e) {
@@ -79,8 +80,6 @@ class UserInitCommand extends Command
                 return Command::FAILURE;
             }
 
-
-            $this->io->success('Utilisateur crée');
 
             return Command::SUCCESS;
 
@@ -128,6 +127,7 @@ class UserInitCommand extends Command
 
             /** TODO: validate role array */
             $question->setValidator(function ($answer) {
+
                 $method = 'set' . \ucfirst($this->attribute);
                 $this->user->$method($answer);
                 $violations = $this->validator->validateProperty($this->user, $this->attribute);

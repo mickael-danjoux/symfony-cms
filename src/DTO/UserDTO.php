@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Classes;
+namespace App\DTO;
 
 
 use App\Entity\User\User;
@@ -24,17 +24,9 @@ class UserDTO
     private string $password;
 
 
-    #[Assert\NotBlank(message: 'Veuillez repéter le mot de passe')]
-    #[Assert\EqualTo( value: 'password' ,message: 'Veuillez repéter le mot de passe')]
-    private string $repeatedPassword;
-
-
     #[Assert\NotBlank(message: 'Veuillez renseigner le nom afficher')]
     private string $displayName;
 
-
-    #[Assert\NotBlank(message: 'Veuillez renseigner si le compte est validé')]
-    private bool $isVerified = false;
 
     private array $roles = [];
 
@@ -70,22 +62,6 @@ class UserDTO
         $this->password = $password;
     }
 
-    /**
-     * @return string
-     */
-    public function getRepeatedPassword(): string
-    {
-        return $this->repeatedPassword;
-    }
-
-    /**
-     * @param string $repeatedPassword
-     */
-    public function setRepeatedPassword(string $repeatedPassword): void
-    {
-        $this->repeatedPassword = $repeatedPassword;
-    }
-
 
     /**
      * @return string
@@ -101,22 +77,6 @@ class UserDTO
     public function setDisplayName(string $displayName): void
     {
         $this->displayName = $displayName;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
-
-    /**
-     * @param bool $isVerified
-     */
-    public function setIsVerified(bool $isVerified): void
-    {
-        $this->isVerified = $isVerified;
     }
 
     /**
@@ -154,7 +114,7 @@ class UserDTO
             $user->setEmail($this->email)
                 ->setPassword($this->password)
                 ->setDisplayName($this->displayName)
-                ->setIsVerified($this->isVerified())
+                ->setIsVerified(true)
                 ->setRoles($this->roles);
             return $user;
         } catch (\Exception $e) {

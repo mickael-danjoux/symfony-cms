@@ -26,14 +26,14 @@ class CmsRouteLoader extends Loader
 
         $routes = new RouteCollection();
 
-        $nodes = $this->em->getRepository(Page::class)->findAll();
+        $nodes = $this->em->getRepository(Page::class)->findAllForRouting();
         foreach ($nodes as $node) {
             $defaults = [
-                '_controller' => $node->getController(),
-                '_pageId' => $node->getId()
+                '_controller' => $node['controller'],
+                '_pageId' => $node['id']
             ];
-            $route = new Route($node->getPath(), $defaults);
-            $routes->add($node->getRouteName(), $route);
+            $route = new Route($node['path'], $defaults);
+            $routes->add($node['route_name'], $route);
         }
 
         $this->isLoaded = true;

@@ -1,0 +1,19 @@
+sherlockode_configuration:
+    entity_class:
+        parameter: App\Entity\Parameter
+    parameters:
+        channel_name:
+            label: 'Nom du site'
+            type: simple
+        channel_color:
+            label: 'Couleur primaire du site'
+            type: simple
+        channel_email_contact:
+            label: 'Emails destinataires du formulaire de contact'
+            type: simple
+        channel_seo_title:
+            label: 'Titre des pages par défaut'
+            type: simple
+        channel_seo_description:
+            label: 'Description des pages par défaut'
+            type: simple

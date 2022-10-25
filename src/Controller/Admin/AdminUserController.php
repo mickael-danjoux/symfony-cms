@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\DataTable\User\UserTableType;
 use App\Entity\User\User;
-use App\Form\User\UserType;
+use App\Form\User\AdminUserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Omines\DataTablesBundle\DataTableFactory;
 use Psr\Log\LoggerInterface;
@@ -54,7 +54,7 @@ class AdminUserController extends AbstractController
             $user = new User();
         }
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(AdminUserType::class, $user);
 
         if (in_array('ROLE_ADMIN', $user->getRoles()))
             $form->get('roles')->setData('ROLE_ADMIN');

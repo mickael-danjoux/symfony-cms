@@ -7,8 +7,10 @@ Le projet est une base Symfony 5 utilisant des librairies js et webpack
 Symfony: https://symfony.com/download  
 Node/Npm (LTS): https://nodejs.org/fr/
 
-### Installation: 
+### Installation:
 * Installer les dépendances PHP: ```symfony composer install ```
+* Installer les assets PHP: ```symfony assets:install ```
+* Créer un fichier .env.local et créer la BDD local
 * Installer les dépendances JS: ```npm install```
 * Lancer le projet en local: ```npm start```
 

@@ -48,11 +48,14 @@ class UserTableType implements DataTableTypeInterface
                 $builder->select('u')
                     ->from(User::class, 'u')
                 ;
-                if(in_array('admin',$options) ){
+                if(array_key_exists('admin',$options) ){
                     if($options['admin'] === true){
                         $builder->andWhere("JSON_EXTRACT(u.roles, '$') LIKE :roleAdmin")->setParameter('roleAdmin',"%ROLE_ADMIN%");
                         $builder->orWhere("JSON_EXTRACT(u.roles, '$') LIKE :roleSuperAdmin")->setParameter('roleSuperAdmin' , "%ROLE_SUPER_ADMIN%");
 
+                    }else{
+                        $builder->andWhere("JSON_EXTRACT(u.roles, '$') NOT LIKE :roleAdmin")->setParameter('roleAdmin',"%ROLE_ADMIN%");
+                        $builder->andWhere("JSON_EXTRACT(u.roles, '$') NOT LIKE :roleSuperAdmin")->setParameter('roleSuperAdmin' , "%ROLE_SUPER_ADMIN%");
                     }
                 }
             },

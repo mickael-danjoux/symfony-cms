@@ -16,7 +16,7 @@ use Symfony\Component\Routing\RouterInterface;
 class UserTableType implements DataTableTypeInterface
 {
     public function __construct(
-        private RouterInterface $router,
+        private readonly RouterInterface $router,
     )
     {
     }
@@ -44,10 +44,17 @@ class UserTableType implements DataTableTypeInterface
 
         $dataTable->createAdapter(ORMAdapter::class, [
             'entity' => User::class,
-            'query' => function (QueryBuilder $builder) {
+            'query' => function (QueryBuilder $builder) use ($options) {
                 $builder->select('u')
                     ->from(User::class, 'u')
                 ;
+                if(in_array('admin',$options) ){
+                    if($options['admin'] === true){
+                        $builder->andWhere("JSON_EXTRACT(u.roles, '$') LIKE :roleAdmin")->setParameter('roleAdmin',"%ROLE_ADMIN%");
+                        $builder->orWhere("JSON_EXTRACT(u.roles, '$') LIKE :roleSuperAdmin")->setParameter('roleSuperAdmin' , "%ROLE_SUPER_ADMIN%");
+
+                    }
+                }
             },
             "criteria" => function (QueryBuilder $builder, DataTableState $state) {
                 $search = $state->getGlobalSearch();

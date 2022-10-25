@@ -16,13 +16,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/utilisateurs', name: 'admin_user_')]
-class UserController extends AbstractController
+#[Route('/administrateurs', name: 'admin_user_')]
+class AdminUserController extends AbstractController
 {
 
     public function __construct(
-        private EntityManagerInterface $em,
-        private LoggerInterface        $logger
+        private readonly EntityManagerInterface $em,
+        private readonly LoggerInterface        $logger
     )
     {
     }
@@ -31,7 +31,7 @@ class UserController extends AbstractController
     public function index(DataTableFactory $dataTableFactory, Request $request): Response
     {
         $datatable = $dataTableFactory
-            ->createFromType(UserTableType::class)
+            ->createFromType(UserTableType::class,['admin' => true])
             ->handleRequest($request);
 
         if ($datatable->isCallback()) {

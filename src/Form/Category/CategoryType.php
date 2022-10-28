@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -59,9 +60,13 @@ class CategoryType extends AbstractType
         if ($category instanceof MenuCategory) {
             $addParentField = true;
             $className = MenuCategory::class;
-            $form->add('type', ChoiceType::class, [
-                'choices' => MenuCategoryTypeEnum::choicesForForm()
-            ]);
+			$form->add('type', EnumType::class, [
+				'label' => 'Type',
+				'class' => MenuCategoryTypeEnum::class,
+				'choice_label' => function (MenuCategoryTypeEnum $enum) {
+					return $enum->getLabel();
+				}
+			]);
 
             $form->add('page', EntityType::class, [
                 'label' => 'Sélectionnez une page',

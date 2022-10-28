@@ -26,7 +26,7 @@
         <div class="button-bar mb-3">
             <div class="d-flex justify-content-end align-items-center my-2">
                 <a href="{{ path('admin_page_list') }}" class="btn btn-primary btn-back ms-1">Retour</a>
-                {% if page.id is defined and page.id is not null %}
+                {% if page.id is defined and page.id is not null and (is_granted('ROLE_SUPER_ADMIN') or page.type is not constant('App\\Enum\\PageTypeEnum::INTERNAL_PAGE') ) %}
                     <a class="btn btn-danger js-btn-delete ms-1"
                        data-href="{{ path('admin_page_remove', {id: page.id}) }}" href="#"><i
                                 class="fas fa-trash me-2"></i>Supprimer</a>
@@ -128,8 +128,6 @@
                                         {{ form_row(form.seo.description, {'attr':{'class':'form-control-sm'}}) }}
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -145,7 +143,7 @@
 
         </div>
         {{ form_rest(form) }}
-        <button class="btn-save"><i class="fas fa-save"></i>Enregistrer</button>
+        <button class="btn-save">Enregistrer</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

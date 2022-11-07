@@ -6,39 +6,41 @@ const selectPageElement = document.getElementById('category_page');
 const blockCustomLinkElement = document.getElementById('form-custom-link');
 const inputUrlElement = document.getElementById('category_url');
 
+const CATEGORY_ITEM = 'ITEM';
+const CATEGORY_INTERNAL_LINK = 'INTERNAL_LINK';
+const CATEGORY_CUSTOM_LINK = 'CUSTOM_LINK';
+
 const dynamicFields = () => {
 
     // récupération de l'option sélectionnée au chargement de la page en mode edit
     const selectedOptionValue = document.querySelector('#category_type option[selected="selected"]').value
-    selectedOptionValue !== 0 ? toggleClasses(selectedOptionValue) : '';
+    selectedOptionValue !== CATEGORY_ITEM ? toggleClasses(selectedOptionValue) : '';
 
     selectTypeElement.addEventListener('change', (e) => {
-        toggleClasses(+e.target.value)
+        toggleClasses(e.target.value)
     })
 }
 
 
 /**
- * La valeur récupérée correspond à l'index de l'élément dans le tableau de choix
- * donc la valeur récupérée est nombre entier
  * Correspondance VALEUR => LABEL :
- * O => Element du menu = aucun champ n'est à afficher lorsque ce choix est sélectionné. On cache les autres blocks.
- * 1 => Lien interne = affichage du select permettant de choisir une page. On cache le block #form-custom-link.
- * 2 => Lien personnalisé = affichage du block contenant un input text et une checkbox. On cache le block #form-select-page.
+ * ITEM => Element du menu = aucun champ n'est à afficher lorsque ce choix est sélectionné. On cache les autres blocks.
+ * INTERNAL_LINK => Lien interne = affichage du select permettant de choisir une page. On cache le block #form-custom-link.
+ * CUSTOM_LINK => Lien personnalisé = affichage du block contenant un input text et une checkbox. On cache le block #form-select-page.
  */
-const toggleClasses = (index) => {
-    switch (+index) {
-        case 0:
+const toggleClasses = (categoryType) => {
+    switch (categoryType) {
+        case CATEGORY_ITEM:
             blockSelectPageElement.classList.add('d-none');
             blockCustomLinkElement.classList.add('d-none');
             toggleRequiredAttributes()
             break;
-        case 1:
+        case CATEGORY_INTERNAL_LINK:
             blockSelectPageElement.classList.remove('d-none');
             blockCustomLinkElement.classList.add('d-none');
             toggleRequiredAttributes('select')
             break;
-        case 2:
+        case CATEGORY_CUSTOM_LINK:
             blockCustomLinkElement.classList.remove('d-none');
             blockSelectPageElement.classList.add('d-none');
             toggleRequiredAttributes('input-checkbox')

@@ -58,12 +58,27 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-12 col-md-8">
-                                        {{ form_row(form.title,{'attr':{'class':'form-control-sm'}}) }}
+                                    <div class="col-12  mb-3">
+                                        {{ form_label(form.title) }}
+                                        {{ form_widget(form.title,{'attr':{'class':'form-control-sm js-change'}}) }}
+                                        <div class="block-url d-flex">
+                                            <span class="base-url">{{app.request.getSchemeAndHttpHost}}/</span>
+                                            {{ form_widget(form.path,{'attr':{'class':'form-control-sm js-change d-none' }}) }}
+
+                                            <span class="path" id="path-preview">
+                                                {{page.path}}
+                                            </span>
+                                            <button type="button" class="bg-transparent border-0 p-0 m-0" id="editPath">
+                                                <i class="fas fa-pen" ></i>
+                                            </button>
+                                            <button type="button" class="bg-transparent border-0 p-0 m-0 d-none" id="reloadPath">
+                                                <i class="fas fa-sync-alt"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="col-12">
-                                        {{ form_row(form.path,{'attr':{'class':'form-control-sm js-change'}}) }}
-                                    </div>
+{#                                    <div class="col-12 d-none" id="path-block">#}
+{#                                        {{ form_row(form.path,{'attr':{'class':'form-control-sm js-change'}}) }}#}
+{#                                    </div>#}
                                     {% if form.type is defined %}
                                         <div class="col-12">
                                             {{ form_row(form.type, {'attr':{'class':'form-control-sm'}}) }}

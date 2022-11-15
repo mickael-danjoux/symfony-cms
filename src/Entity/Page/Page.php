@@ -37,6 +37,9 @@ class Page
     #[ORM\Column(length: 255)]
     private ?string $path = null;
 
+    #[ORM\Column(length: 255, nullable: false, options: ['default' => 0])]
+    private bool $customPath = false;
+
     #[ORM\Column(length: 255)]
     private ?string $routeName = null;
 
@@ -105,6 +108,23 @@ class Page
 
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isCustomPath(): bool
+    {
+        return $this->customPath;
+    }
+
+    /**
+     * @param bool $customPath
+     */
+    public function setCustomPath(bool $customPath): void
+    {
+        $this->customPath = $customPath;
+    }
+
 
     public function getRouteName(): ?string
     {

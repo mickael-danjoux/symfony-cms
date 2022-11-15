@@ -37,6 +37,13 @@ class PageType extends AbstractType
                     'placeholder' => 'ex: nous-decouvrir',
                 ]
             ])
+            ->add('customPath', CheckboxType::class, [
+                'label' => false,
+                'row_attr' => [
+                    'class' => 'd-none'
+                ],
+                'required' => false
+            ])
             ->add('published', CheckboxType::class, [
                 'label' => 'Publier ?',
                 'required' => false,

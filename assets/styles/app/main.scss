@@ -1,18 +1,100 @@
 @import "../variables";
 @import "~bootstrap/scss/bootstrap";
 @import "@fortawesome/fontawesome-free/css/all.css";
+@import "./partials/buttons";
+@import "./partials/footer.scss";
+@import "./partials/header.scss";
 
 body {
-    background-color: #c2c2c2;
-}
+    //background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    .container{
+        label.required:after {
+            content: " * ";
+            color: #D42124;
+        }
 
-label.required:after {
-    content: " * ";
-    color: #D42124;
-}
-.container{
-    .alert{
-        p{margin-bottom: 0}
+        .alert{
+            p{margin-bottom: 0}
+        }
+    }
+
+    main{
+        h1, h1 a,
+        .h1, .h1 a{
+            font-size: 2.188rem;
+            line-height: 2.938rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: $color_2;
+            text-decoration: none;
+            &:hover, &:focus{
+                color: $color_2;
+            }
+        }
+
+        h2, h2 a,
+        .h2, .h2 a{
+            font-size: 1.563rem;
+            line-height: 2.125rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: $color_1;
+            text-decoration: none;
+            &:hover, &:focus{
+                color: $color_1;
+            }
+        }
+
+        h3, h3 a,
+        .h3, .h3 a{
+            font-size: 1.563rem;
+            line-height: 2.125rem;
+            font-weight: 700;
+            text-transform: none;
+            color: $color_2;
+            text-decoration: none;
+            &:hover, &:focus{
+                color: $color_2;
+            }
+        }
+
+        h4, h4 a,
+        .h4, .h4 a{
+            font-size: 1.25rem;
+            line-height: 1.688rem;
+            font-weight: 700;
+            text-transform: none;
+            color: $color_2;
+            text-decoration: none;
+            &:hover, &:focus{
+                color: $color_2;
+            }
+        }
+
+        h5, h5 a,
+        .h5, .h5 a{
+            font-size: 1.25rem;
+            line-height: 1.688rem;
+            font-weight: 600;
+            text-transform: none;
+            color: $color_2;
+            text-decoration: none;
+            &:hover, &:focus{
+                color: $color_2;
+            }
+        }
+
+        p{
+            line-height: 1.563rem;
+            font-weight: 400;
+            color: $color_2;
+        }
+
+        strong, b{
+            font-weight: 700;
+        }
     }
 }
+
 

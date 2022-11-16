@@ -1,4 +1,15 @@
-{% extends 'app/base.html.twig' %}
-{% block body %}
-    <h1>Legal controller</h1>
+{% extends 'app/base_innerpage.html.twig' %}
+
+{% set breadcrumb = [{'label': page.title},] %}
+
+{% block pageContent %}
+    <section id="legal" class="mb-5">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col text-center">
+                    <h1>{{ page.title }}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

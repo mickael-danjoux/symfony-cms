@@ -1,7 +1,7 @@
 @import "../variables";
 @import "~bootstrap/scss/bootstrap";
 @import "@fortawesome/fontawesome-free/css/all.css";
-@import "buttons";
+@import "partials/buttons";
 
 html,
 body {
@@ -64,6 +64,18 @@ label.required:after {
   background: $admin_topnav_background;
   color: $admin_topnav_color;
   border: none;
+}
+
+#sidebarToggle {
+  @media (min-width: 992px) {
+    margin-left: 230px;
+    transition: all 0.2s;
+
+    &.fold {
+      margin-left: 10px;
+      transition: all 0.3s;
+    }
+  }
 }
 
 
@@ -137,10 +149,6 @@ label.required:after {
   z-index: 1038;
 }
 
-.sb-nav-fixed #layoutSidenav #layoutSidenav_nav .sb-sidenav {
-  padding-top: 56px;
-}
-
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav .sb-sidenav .sb-sidenav-menu {
   overflow-y: auto;
 }
@@ -174,6 +182,18 @@ label.required:after {
   flex-wrap: nowrap;
 
   .sb-sidenav-menu {
+    #logo {
+      height: 80px;
+      margin: 5px;
+      text-align: center;
+
+      img {
+        height: 100%;
+        width: auto;
+        object-fit: contain;
+      }
+    }
+
     flex-grow: 1;
 
     .nav {
@@ -196,6 +216,20 @@ label.required:after {
       padding-bottom: 0.75rem;
       position: relative;
       font-size: 0.9rem;
+
+
+      --b: 0.1em; /* the thickness of the line */
+      --c: #686767; /* the color */
+      background: linear-gradient(var(--c) 50%, #000 0) 0% calc(100% - var(--_p,0%))/100% 200%,
+      linear-gradient(var(--c) 0 0) 0% var(--_p,0%)/var(--_p,0%) var(--b) no-repeat;
+      -webkit-background-clip: text, padding-box;
+      background-clip: text, padding-box;
+      transition: .25s var(--_s, 0s) linear, background-size .25s calc(.25s - var(--_s, 0s));
+
+      &:hover {
+        --_p: 100%;
+        --_s: .25s;
+      }
 
       .sb-sidenav-collapse-arrow {
         display: inline-block;
@@ -245,6 +279,7 @@ form {
     display: flex;
     margin-top: 5px;
     align-items: center;
+
     span {
       font-size: 12px;
 
@@ -255,14 +290,17 @@ form {
       &.path {
         color: #4a4aff;
       }
-      &.fa-pen{
+
+      &.fa-pen {
 
       }
     }
-    .fa-pen{
+
+    .fa-pen {
       font-size: 12px;
       margin-left: 5px;
-      &:hover{
+
+      &:hover {
         cursor: pointer;
       }
     }

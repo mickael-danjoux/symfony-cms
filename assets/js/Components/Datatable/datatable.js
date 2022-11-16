@@ -1,4 +1,4 @@
-import {ConfirmDeleteComponent} from "../Components/ConfirmDeleteComponent";
+import {ConfirmDeleteComponent} from "../ConfirmDeleteComponent";
 
 const options = {
     searching: true,

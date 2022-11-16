@@ -2,6 +2,7 @@
 
 namespace App\Command\Main;
 
+use App\Factories\Menu\DefaultMenuFactory;
 use App\Factories\Page\DefaultPagesFactory;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -20,7 +21,10 @@ class DatabaseCommand extends Command
 {
 
 
-    public function __construct(private readonly DefaultPagesFactory $defaultPagesFactory)
+    public function __construct(
+        private readonly DefaultPagesFactory $defaultPagesFactory,
+        private readonly DefaultMenuFactory $defaultMenuFactory
+    )
     {
         parent::__construct();
 
@@ -57,9 +61,18 @@ class DatabaseCommand extends Command
             // Création des pages de bases
             try {
                 $this->defaultPagesFactory->createAll();
-                $io->info('Pages de bases crées');
+                $io->info('Pages de bases créées');
             } catch (\Exception $e) {
                 $io->error('impossible d’initialiser les pages de base.');
+            }
+
+            // Création du menu
+            try {
+                $this->defaultMenuFactory->createAll();
+                $io->info('Menu créé');
+            } catch (\Exception $e) {
+                dump($e->getMessage());
+                $io->error('impossible d’initialiser le menu');
             }
 
             $io->success('Base de donnée initialisée.');

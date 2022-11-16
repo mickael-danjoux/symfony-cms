@@ -1,0 +1,10 @@
+#breadcrumb{
+  .breadcrumb{
+    --bs-breadcrumb-item-active-color: #{$color_2};
+
+    a{
+      color: $color_2;
+      text-decoration: none;
+    }
+  }
+}

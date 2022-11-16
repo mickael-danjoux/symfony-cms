@@ -27,11 +27,12 @@ Encore
      */
     .addEntry('js-app-main', './assets/js/app/main.js')
     .addEntry('js-admin-main', './assets/js/admin/main.js')
-    .addEntry('js-admin-category-edit', './assets/js/admin/pages/category/edit.js')
-    .addEntry('js-admin-page-edit', './assets/js/admin/pages/page/edit.js')
+    .addEntry('js-admin-category-edit', './assets/js/admin/category/edit.js')
+    .addEntry('js-admin-page-edit', './assets/js/admin/page/edit.js')
 
     .addStyleEntry('style-app-main', './assets/styles/app/main.scss')
     .addStyleEntry('style-admin-main', './assets/styles/admin/main.scss')
+    .addStyleEntry('style-admin-dashboard', './assets/styles/admin/dashboard.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     // .enableStimulusBridge('./assets/controllers.json')

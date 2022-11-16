@@ -4,7 +4,9 @@ namespace App\Repository\Category;
 
 use App\Entity\Category\MenuCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 /**
  * @extends ServiceEntityRepository<MenuCategory>
@@ -14,11 +16,11 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method MenuCategory[]    findAll()
  * @method MenuCategory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MenuCategoryRepository extends ServiceEntityRepository
+class MenuCategoryRepository extends NestedTreeRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(EntityManagerInterface $manager)
     {
-        parent::__construct($registry, MenuCategory::class);
+        parent::__construct($manager, $manager->getClassMetadata(MenuCategory::class));
     }
 
     public function save(MenuCategory $entity, bool $flush = false): void
@@ -38,29 +40,26 @@ class MenuCategoryRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function getMenu(): array
+    {
+        try {
+            $query = $this->createQueryBuilder('node')
+                ->addSelect('page')
+                ->leftJoin('node.page', 'page')
+                ->orderBy('node.root, node.lft', 'ASC')
+                ->getQuery()
+            ;
 
-//    /**
-//     * @return MenuCategory[] Returns an array of MenuCategory objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('m.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+            $options = ['decorate' => false];
+            $tree = $this->buildTree($query->getArrayResult(), $options);
 
-//    public function findOneBySomeField($value): ?MenuCategory
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+            if(!empty($tree) && isset(reset($tree)['__children'])) {
+                return reset($tree)['__children'];
+            }
+        } catch (\Exception $e) {
+            throw $e;
+        }
+
+        return [];
+    }
 }

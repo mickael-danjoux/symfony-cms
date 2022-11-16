@@ -1,0 +1,16 @@
+{% extends 'app/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('style-app-innerpage') }}
+{% endblock %}
+
+{% block body %}
+
+    {% if breadcrumb is defined %}
+        <section id="breadcrumb">
+            {% include "app/partials/_breadcrumb.html.twig" with {'breadcrumb' : breadcrumb} only %}
+        </section>
+    {% endif %}
+
+    {% block pageContent %}{% endblock %}
+{% endblock %}

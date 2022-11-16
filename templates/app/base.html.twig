@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="h-100">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
 
     {% block seo %}
-        {%if page is defined%}
-            {%include 'app/partials/_seo.html.twig' with { seo: page.seo}%}
-        {%else%}
-            {%include 'app/partials/_seo.html.twig'%}
-        {%endif%}
+        {% if page is defined %}
+            {% include 'app/partials/_seo.html.twig' with { seo: page.seo} only %}
+        {% else %}
+            {% include 'app/partials/_seo.html.twig' %}
+        {% endif %}
     {% endblock %}
 
 
@@ -20,12 +23,27 @@
         {{ encore_entry_script_tags('js-app-main') }}
     {% endblock %}
 </head>
-<body>
-{% block messages %}
-    {% include('app/partials/_messages.html.twig') %}
-{% endblock %}
+<body class="d-flex flex-column align-items-stretch h-100">
+<section id="header" class="flex-shrink-0">
+    {% block header %}
+        {% include 'app/partials/_header.html.twig' %}
+    {% endblock %}
+</section>
 
-{% block body %}{% endblock %}
+<main class="flex-grow-1 flex-shrink-0">
+    {% block messages %}
+        {% include('app/partials/_messages.html.twig') %}
+    {% endblock %}
+
+    {% block body %}{% endblock %}
+</main>
+
+<section id="footer" class="flex-shrink-0">
+    {% block footer %}
+        {% include('app/partials/_footer.html.twig') %}
+    {% endblock %}
+</section>
+
 {% include('app/partials/_cookies.html.twig') %}
 
 </body>

@@ -1,0 +1,23 @@
+footer {
+  .container::before {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 100%;
+    background: $color_2;
+    margin-bottom: 2rem;
+    opacity: .3;
+  }
+
+  a {
+    color: $color_2;
+    text-decoration: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .footer-links-legal-mentions a:not(:last-child):after {
+    content: '-';
+    padding: 0 .3rem;
+  }
+}

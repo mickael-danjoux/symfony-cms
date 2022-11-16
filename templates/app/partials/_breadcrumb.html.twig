@@ -1,0 +1,22 @@
+<div class="container py-5">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '|';">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('app_home') }}">Accueil</a>
+                    </li>
+                    {% for item in breadcrumb %}
+                        <li class="breadcrumb-item {{ loop.last ? 'active' : '' }}" {{ loop.last ? 'aria-current="page"' : '' }}>
+                            {% if loop.last %}
+                                {{ item.label }}
+                            {% else %}
+                                <a href="{{ item.link is defined ? item.link : '#' }}">{{ item.label }}</a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>

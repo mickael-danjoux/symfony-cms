@@ -1,0 +1,23 @@
+<footer>
+    <div class="container text-center">
+        <div class="row mb-3">
+            <div class="col">
+                <img src="https://fakeimg.pl/200x80/?text=Logo">
+            </div>
+        </div>
+        <div id="footer-contact-information" class="row mb-3">
+            <div class="col">
+                <span class="copyright">&copy;Copyright {{ "now"|date("Y") }} {{  configuration_parameter('channel_name') }} | Tous droits réservés</span>
+            </div>
+        </div>
+        <div id="footer-legal-mentions" class="row mb-3">
+            <div class="col">
+                <div class="footer-links-legal-mentions d-flex flex-column flex-lg-row justify-content-center">
+                    <a href="{{ path('app_legal_mentions') }}">Crédits et mentions légales</a>
+                    <a href="#cookies">Gestion des cookies</a>
+                    <a href="https://www.ab6net.net/" target="_blank" rel="noopener noreferrer">Conception &amp; Réalisation AB6NET</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

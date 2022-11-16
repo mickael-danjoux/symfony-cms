@@ -29,7 +29,7 @@ class DefaultPagesFactory
             $entity->setPublished(true);
 
             $this->em->persist($entity);
-            $this->em->flush();
         }
+        $this->em->flush();
     }
 }

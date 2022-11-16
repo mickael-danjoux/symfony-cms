@@ -1,7 +1,7 @@
 import 'bootstrap';
 import "@fortawesome/fontawesome-free/js/all.js";
-import './datatable/datatable'
-import { initConfirmDeleteButtons } from './Components/ConfirmDeleteComponent'
+import '../Components/Datatable/datatable'
+import { initConfirmDeleteButtons } from '../Components/ConfirmDeleteComponent'
 
 const path = window.location.href;
 const links = document.querySelectorAll('#layoutSidenav_nav .sb-sidenav a.nav-link');
@@ -18,6 +18,7 @@ if(links.length > 0){
     sidebarToggler.addEventListener('click', (event) => {
         event.preventDefault();
         body.classList.toggle('sb-sidenav-toggled');
+        sidebarToggler.classList.toggle('fold')
     });
 
     sidebarContent.addEventListener('click', () => {

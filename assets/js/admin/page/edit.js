@@ -1,4 +1,4 @@
-import '../../main'
+import '../main'
 import {createApp, ref, onMounted} from "vue";
 import {initConfirmDeleteButtons} from "../../Components/ConfirmDeleteComponent";
 import slugger from 'slugger'

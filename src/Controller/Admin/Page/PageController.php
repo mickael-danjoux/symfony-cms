@@ -6,6 +6,7 @@ use App\DataTable\Page\PageTableType;
 use App\Entity\Page\Page;
 use App\Enum\PageTypeEnum;
 use App\Form\Page\PageType;
+use App\Services\RouterCacheService;
 use Doctrine\ORM\EntityManagerInterface;
 use Omines\DataTablesBundle\DataTableFactory;
 use Psr\Log\LoggerInterface;
@@ -45,7 +46,7 @@ class PageController extends AbstractController
 
     #[Route('/ajouter', name: 'add')]
     #[Route('/editer/{id}', name: 'edit')]
-    public function edit(?Page $page, Request $request, PageFactory $pageFactory): Response
+    public function edit(?Page $page, Request $request, PageFactory $pageFactory,  RouterCacheService $routerCacheService): Response
     {
 
         if ($request->attributes->get("_route") === 'admin_page_edit' && !$page instanceof Page) {
@@ -73,6 +74,8 @@ class PageController extends AbstractController
                 $this->em->flush();
 
                 $this->addFlash('success', 'La page a bien été éditée.');
+                $routerCacheService->removeCache();
+
                 return $this->redirectToRoute('admin_page_edit', ['id' => $page->getId()]);
 
             } catch (\Exception $e) {

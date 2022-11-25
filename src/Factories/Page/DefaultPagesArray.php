@@ -42,6 +42,17 @@ class DefaultPagesArray
                     'description' => ''
                 ]
             ],
+            [
+                'title' => 'Story Book',
+                'path' => 'story-book',
+                'type' => PageTypeEnum::INTERNAL_PAGE,
+                'controller' => 'App\Controller\App\StoryBookController::index',
+                'routeName' => 'app_storybook_index',
+                'seo' => [
+                    'title' => 'Story Book',
+                    'description' => ''
+                ]
+            ],
         ];
     }
 }

@@ -19,9 +19,23 @@ body {
         }
     }
 
+    .icon{
+        font-weight: 900;
+        font-family: "Font Awesome 5 Free";
+    }
+    .icon-after{
+        @extend .icon;
+        margin-right: 5px;
+        padding-left: .5rem;
+    }
+    .icon-before{
+        @extend .icon;
+        margin-right: 5px;
+        padding-right: .5rem;
+    }
+
     main{
-        h1, h1 a,
-        .h1, .h1 a{
+        h1, h1 a{
             font-size: 2.188rem;
             line-height: 2.938rem;
             font-weight: 700;
@@ -33,8 +47,7 @@ body {
             }
         }
 
-        h2, h2 a,
-        .h2, .h2 a{
+        h2, h2 a{
             font-size: 1.563rem;
             line-height: 2.125rem;
             font-weight: 700;
@@ -46,8 +59,7 @@ body {
             }
         }
 
-        h3, h3 a,
-        .h3, .h3 a{
+        h3, h3 a,{
             font-size: 1.563rem;
             line-height: 2.125rem;
             font-weight: 700;
@@ -59,8 +71,7 @@ body {
             }
         }
 
-        h4, h4 a,
-        .h4, .h4 a{
+        h4, h4 a{
             font-size: 1.25rem;
             line-height: 1.688rem;
             font-weight: 700;
@@ -71,9 +82,7 @@ body {
                 color: $color_2;
             }
         }
-
-        h5, h5 a,
-        .h5, .h5 a{
+        h5, h5 a{
             font-size: 1.25rem;
             line-height: 1.688rem;
             font-weight: 600;

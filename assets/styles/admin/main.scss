@@ -197,6 +197,7 @@ label.required:after {
     flex-grow: 1;
 
     .nav {
+      padding: 5px;
       flex-direction: column;
       flex-wrap: nowrap;
 
@@ -216,20 +217,26 @@ label.required:after {
       padding-bottom: 0.75rem;
       position: relative;
       font-size: 0.9rem;
+      transition: .25s linear;
 
 
-      --b: 0.1em; /* the thickness of the line */
-      --c: #686767; /* the color */
-      background: linear-gradient(var(--c) 50%, #000 0) 0% calc(100% - var(--_p,0%))/100% 200%,
-      linear-gradient(var(--c) 0 0) 0% var(--_p,0%)/var(--_p,0%) var(--b) no-repeat;
-      -webkit-background-clip: text, padding-box;
-      background-clip: text, padding-box;
-      transition: .25s var(--_s, 0s) linear, background-size .25s calc(.25s - var(--_s, 0s));
-
-      &:hover {
-        --_p: 100%;
-        --_s: .25s;
+      &:hover{
+        background: $admin_sidebar_background_hover;
+        border-radius: 10px;
       }
+
+      //--b: 0.1em; /* the thickness of the line */
+      //--c: #686767; /* the color */
+      //background: linear-gradient(var(--c) 50%, #000 0) 0% calc(100% - var(--_p,0%))/100% 200%,
+      //linear-gradient(var(--c) 0 0) 0% var(--_p,0%)/var(--_p,0%) var(--b) no-repeat;
+      //-webkit-background-clip: text, padding-box;
+      //background-clip: text, padding-box;
+      //transition: .25s var(--_s, 0s) linear, background-size .25s calc(.25s - var(--_s, 0s));
+      //
+      //&:hover {
+      //  --_p: 100%;
+      //  --_s: .25s;
+      //}
 
       .sb-sidenav-collapse-arrow {
         display: inline-block;

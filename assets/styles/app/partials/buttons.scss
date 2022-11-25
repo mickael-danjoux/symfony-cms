@@ -5,27 +5,19 @@ main{
     min-width: 250px;
     padding: .5rem 0;
 
-
-    &.btn-primary,
-    &.btn-secondary,
-    &.btn-success,
-    &.btn-danger,
-    &.btn-warning {
-    }
-
     &.btn-add:after {
-      content: '+';
-      padding-left: .5rem;
+      @extend .icon-after;
+      content: "\f067";
     }
 
     &.btn-previous:before {
-      content: '‹';
-      padding-right: .5rem;
+      @extend .icon-before;
+      content: "\f053";
     }
 
     &.btn-next:after {
-      content: '›';
-      padding-left: .5rem;
+      @extend .icon-after;
+      content: '\f054';
     }
 
     &.btn-more:after {

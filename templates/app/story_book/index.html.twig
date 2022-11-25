@@ -1,0 +1,26 @@
+{% extends 'app/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('style-app-storybook') }}
+{% endblock %}
+
+ {% block javascripts %}
+     {{ encore_entry_script_tags('js-app-storybook') }}
+ {% endblock %}
+
+{% block body %}
+    <section id="storybook">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-12 d-flex justify-content-center">
+                    <h1>{{ page.title }}</h1>
+                </div>
+            </div>
+            <div class="accordion" id="accordionStoryBook">
+                {%include 'app/story_book/_buttons.html.twig'%}
+                {%include 'app/story_book/_fonts.html.twig'%}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

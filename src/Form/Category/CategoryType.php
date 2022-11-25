@@ -93,6 +93,15 @@ class CategoryType extends AbstractType
                     'class' => 'checkbox-switch'
                 ],
             ]);
+
+            $form->add('itemId', TextType::class, [
+                'label' => 'Id de l’élément de menu',
+                'required' => false,
+            ]);
+            $form->add('itemClasses', TextType::class, [
+                'label' => 'Classes de l’élément de menu',
+                'required' => false,
+            ]);
         }
 
 

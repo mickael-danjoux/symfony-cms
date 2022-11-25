@@ -14,13 +14,20 @@ class DefaultMenuArray
                 'title' => 'Accueil',
                 'sort' => 1,
                 'type' => MenuCategoryTypeEnum::INTERNAL_LINK,
+                'itemClasses' => 'home',
                 'pagePath' => '/'
             ],
             [
                 'title' => 'Contact',
-                'sort' => 1,
+                'sort' => 2,
                 'type' => MenuCategoryTypeEnum::INTERNAL_LINK,
                 'pagePath' => 'contact'
+            ],
+            [
+                'title' => 'StoryBook',
+                'sort' => 3,
+                'type' => MenuCategoryTypeEnum::INTERNAL_LINK,
+                'pagePath' => 'story-book'
             ]
         ];
     }

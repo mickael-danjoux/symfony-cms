@@ -1,0 +1,25 @@
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseButtons" aria-expanded="false" aria-controls="collapseButtons">
+            Boutons
+        </button>
+    </h2>
+    <div id="collapseButtons" class="accordion-collapse collapse " aria-labelledby="headingButtons" data-bs-parent="#accordionStoryBook">
+        <div class="accordion-body">
+            {%for buttonClass in buttonsClasses%}
+            <div class="row mb-2">
+                <div class="col-12 col-md-6">
+                    <button class="{{buttonClass.class}}">{{ buttonClass.name | capitalize }}</button>
+                </div>
+                <div class="col-12 col-md-6 d-flex">
+                    <code id="btn-{{loop.index}}">&lt;button class="{{buttonClass.class}}"&gt;{{buttonClass.name | capitalize}}&lt;/button&gt;
+                        <button class=" bg-transparent border-0 copy" @click="copyContent('btn-{{loop.index}}')">
+                        </button>
+                    </code>
+                </div>
+            </div>
+            <hr>
+            {%endfor%}
+        </div>
+    </div>
+</div>

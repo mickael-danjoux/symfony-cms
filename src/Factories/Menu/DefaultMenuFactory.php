@@ -32,6 +32,12 @@ class DefaultMenuFactory
             if($item['type'] === MenuCategoryTypeEnum::INTERNAL_LINK){
                 $entity->setPage($this->pageRepo->findOneByPath($item['pagePath']));
             }
+            if(isset($item['itemId'])){
+                $entity->setItemClasses($item['itemId']);
+            }
+            if(isset($item['itemClasses'])){
+                $entity->setItemClasses($item['itemClasses']);
+            }
             $this->em->persist($entity);
 
         }

@@ -1,7 +1,19 @@
-@media screen and (min-width:777px){
+@media screen and (min-width: 777px) {
+  .nav-item {
+    &.home {
+      .nav-link {
+        &:before {
+          content: "\f015";
+          font-family: "Font Awesome 5 Free";
+          margin-right: 5px;
+          font-weight: 900
+        }
+      }
+    }
+  }
   .nav-link {
-    padding:18px 0;
-    min-width:120px;
+    padding: 18px 0;
+    min-width: 120px;
   }
   .navbar {
     padding: 0

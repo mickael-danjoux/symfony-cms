@@ -28,6 +28,12 @@ class MenuCategory extends Category
     #[ORM\ManyToOne(inversedBy: 'menuCategories')]
     private ?Page $page = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $itemId = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $itemClasses = null;
+
 
     public function __construct()
     {
@@ -95,6 +101,40 @@ class MenuCategory extends Category
 
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getItemId(): ?string
+    {
+        return $this->itemId;
+    }
+
+    /**
+     * @param string|null $itemId
+     */
+    public function setItemId(?string $itemId): void
+    {
+        $this->itemId = $itemId;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getItemClasses(): ?string
+    {
+        return $this->itemClasses;
+    }
+
+    /**
+     * @param string|null $itemClasses
+     */
+    public function setItemClasses(?string $itemClasses): void
+    {
+        $this->itemClasses = $itemClasses;
+    }
+
+
 
 }
 

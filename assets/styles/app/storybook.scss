@@ -1,0 +1,40 @@
+@import "innerpage";
+
+section#storybook {
+  .accordion-item{
+    .accordion-button{
+      @extend h2;
+    }
+    code {
+      position: relative;
+      background: #3e3c3c;
+      color: #ff9999;
+      padding: 15px 10px;
+      width: 100%;
+
+      button.copy {
+        transition: .5s linear;
+        position: absolute;
+        top: 2px;
+        right: 2px;
+
+
+        &:not(.copied) {
+          &:before {
+            @extend .icon;
+            content: '\f0c5';
+            color: white;
+          }
+        }
+
+        &.copied {
+          &:before {
+            @extend .icon;
+            content: '\f560';
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}

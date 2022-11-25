@@ -26,11 +26,14 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('js-app-main', './assets/js/app/main.js')
+    .addEntry('js-app-storybook', './assets/js/app/storybook.js')
     .addEntry('js-admin-main', './assets/js/admin/main.js')
     .addEntry('js-admin-category-edit', './assets/js/admin/category/edit.js')
     .addEntry('js-admin-page-edit', './assets/js/admin/page/edit.js')
 
     .addStyleEntry('style-app-main', './assets/styles/app/main.scss')
+    .addStyleEntry('style-app-innerpage', './assets/styles/app/innerpage.scss')
+    .addStyleEntry('style-app-storybook', './assets/styles/app/storybook.scss')
     .addStyleEntry('style-admin-main', './assets/styles/admin/main.scss')
     .addStyleEntry('style-admin-dashboard', './assets/styles/admin/dashboard.scss')
 

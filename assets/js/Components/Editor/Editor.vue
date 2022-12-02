@@ -85,6 +85,9 @@ onMounted(() => {
 		assetManager: {
 			upload: editorEndpoints.image.collection,
 			uploadName: 'files',
+			params: {
+				pageId
+			}
 		},
 	});
 

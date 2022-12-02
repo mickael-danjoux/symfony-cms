@@ -2,7 +2,9 @@
 
 namespace App\Controller\API\Editor\Image;
 
-use App\Entity\Media\Image;
+use App\Entity\Media\ImagePage;
+use App\Entity\Page\Page;
+use App\Repository\Page\PageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,9 +21,13 @@ class ApiEditorImageController extends AbstractController
 	{}
 
 	#[Route('/image', methods: [Request::METHOD_POST])]
-	public function store(string $relativePathUploadsImagesDir): JsonResponse
+	public function store(string $relativePathUploadsImagesDir, PageRepository $pageRepository): JsonResponse
 	{
 		$uploadedFiles = Request::createFromGlobals()->files->get('files');
+		$pageId = Request::createFromGlobals()->request->getInt('pageId');
+
+		/** @var Page $page */
+		$page = $pageRepository->findOneById($pageId);
 
 		$uploadedFilesResponse = [];
 
@@ -29,8 +35,9 @@ class ApiEditorImageController extends AbstractController
 		foreach ($uploadedFiles as $file) {
 
 			try {
-				$image = (new Image())
-					->setFile($file);
+				$image = (new ImagePage())
+					->setFile($file)
+					->setPage($page);
 
 				$this->em->persist($image);
 				$this->em->flush();
@@ -59,9 +66,9 @@ class ApiEditorImageController extends AbstractController
 	}
 
 	#[Route('/image/{id}', methods: Request::METHOD_DELETE)]
-	public function remove(?Image $image): JsonResponse
+	public function remove(?ImagePage $image): JsonResponse
 	{
-		if ($image instanceof Image && $this->isGranted('ROLE_ADMIN')) {
+		if ($image instanceof ImagePage && $this->isGranted('ROLE_ADMIN')) {
 			try {
 				$this->em->remove($image);
 				$this->em->flush();

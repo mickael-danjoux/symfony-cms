@@ -15,7 +15,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[DiscriminatorColumn(name:'discr', type:'string')]
 #[DiscriminatorMap([
 	'media' => Media::class,
-	'image' => Image::class
+	'image' => Image::class,
+	'image_page' => ImagePage::class,
 ])]
 #[Vich\Uploadable]
 class Media

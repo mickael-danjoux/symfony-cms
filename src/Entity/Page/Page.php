@@ -3,6 +3,7 @@
 namespace App\Entity\Page;
 
 use App\Entity\Category\MenuCategory;
+use App\Entity\Media\ImagePage;
 use App\Entity\Seo\Seo;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\TimestampableTrait;
@@ -71,10 +72,14 @@ class Page
 	#[ORM\Column(type: Types::JSON, nullable: true)]
 	private ?array $htmlCss = [];
 
+	#[ORM\OneToMany(mappedBy: 'page', targetEntity: ImagePage::class, orphanRemoval: true)]
+	private Collection $images;
+
 	public function __construct()
 	{
 		$this->startPublishingAt = new \DateTime();
 		$this->menuCategories = new ArrayCollection();
+		$this->images = new ArrayCollection();
 	}
 
 
@@ -292,6 +297,36 @@ class Page
 	public function setHtmlCss(?array $htmlCss): self
 	{
 		$this->htmlCss = $htmlCss;
+
+		return $this;
+	}
+
+	/**
+	 * @return Collection<int, ImagePage>
+	 */
+	public function getImages(): Collection
+	{
+		return $this->images;
+	}
+
+	public function addImage(ImagePage $image): self
+	{
+		if (!$this->images->contains($image)) {
+			$this->images->add($image);
+			$image->setPage($this);
+		}
+
+		return $this;
+	}
+
+	public function removeImage(ImagePage $image): self
+	{
+		if ($this->images->removeElement($image)) {
+			// set the owning side to null (unless already changed)
+			if ($image->getPage() === $this) {
+				$image->setPage(null);
+			}
+		}
 
 		return $this;
 	}

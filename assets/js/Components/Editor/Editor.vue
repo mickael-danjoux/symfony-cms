@@ -1,7 +1,7 @@
 <script setup>
 import grapesjs from "grapesjs";
 import "grapesjs/dist/css/grapes.min.css"
-import { onMounted } from "vue";
+import { onMounted, reactive } from "vue";
 import { h1, h2, h3, h4, h5, h6,
 	text, image, OneCol, TwoCols, ThreeCols,
 	templateTextImage, templateImageText, templateRowImageRowText, templateImageTextFull
@@ -11,10 +11,16 @@ import { AssetManagerService } from "./Service/AssetManagerService";
 import { Toast } from "../Toast";
 import { editorEndpoints } from "./Config/endpoints";
 
+// Sauvegarde des data de l'éditeur lors de la soumission du formulaire de la page
+// ps: les données de l'éditeur sont save après 5 modifications (nb de steps avant save modifiable)
+window.addEventListener('onFormSubmission', async () => await editor.store())
+
+let editor = reactive({})
+
 onMounted(() => {
 	const pageId = window.location.pathname.split('/')[4]
 
-	const editor = grapesjs.init({
+	editor = grapesjs.init({
 		canvas: {
 			styles: [{href: '/build/style-app-main.css'}]
 		},
@@ -52,7 +58,7 @@ onMounted(() => {
 		storageManager: {
 			type: 'remote',
 			autosave: true,
-			stepsBeforeSave: 1,
+			stepsBeforeSave: 5,
 			autoload: true,
 			onStore: data => data,
 			options: {

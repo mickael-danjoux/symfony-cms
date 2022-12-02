@@ -129,11 +129,14 @@ createApp({
 
         }
 
+        const handleFormSubmission = () => window.dispatchEvent(new CustomEvent("onFormSubmission"))
+
         return {
             formData,
             formHasChanged,
             updateContent,
-            preview
+            preview,
+            handleFormSubmission
         }
 
     }

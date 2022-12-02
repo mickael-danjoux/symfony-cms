@@ -1,1 +1,16 @@
 {% extends 'app/base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<style>
+		{% if css is not null %}
+			{{ css|raw }}
+		{% endif %}
+	</style>
+{% endblock %}
+
+{% block body %}
+	{% if html is not null %}
+		{{ html|raw }}
+	{% endif %}
+{% endblock %}

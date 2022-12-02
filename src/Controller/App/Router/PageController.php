@@ -16,8 +16,15 @@ class PageController extends AbstractController
     {
         $page = $this->getPageOrNotFound($request);
 
+		if ($page->getHtmlCss() && !$page->getHtmlCss() == []) {
+			$css = $page->getHtmlCss()[0]['css'];
+			$html = $page->getHtmlCss()[0]['html'];
+		}
+
         return $this->render('app/router/display.html.twig', [
-            'page' => $page
+            'page' => $page,
+			'css' => $css ?? null,
+			'html' => $html ?? null
         ]);
     }
 }

@@ -10,6 +10,9 @@ import { handleAssetRemove } from "./Utils/AssetManager/AssetManagerUtils";
 import { AssetManagerService } from "./Service/AssetManagerService";
 import { Toast } from "../Toast";
 import { editorEndpoints } from "./Config/endpoints";
+import fr from './Config/translation_fr';
+
+
 
 // Sauvegarde des data de l'éditeur lors de la soumission du formulaire de la page
 // ps: les données de l'éditeur sont save après 5 modifications (nb de steps avant save modifiable)
@@ -33,7 +36,8 @@ onMounted(() => {
 		fromElement: true,
 		i18n: {
 			locale: 'fr',
-			localeFallback: 'en',
+			localeFallback: 'fr',
+			messages: { fr }
 		},
 		mediaCondition: 'min-width',
 		deviceManager: {

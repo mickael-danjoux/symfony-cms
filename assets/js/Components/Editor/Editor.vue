@@ -18,6 +18,9 @@ onMounted(() => {
 		canvas: {
 			styles: [{href: '/build/style-app-main.css'}]
 		},
+		selectorManager: {
+			componentFirst: true,
+		},
 		container: "#gjs",
 		height: "100vh",
 		width: "auto",

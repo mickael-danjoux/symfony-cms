@@ -21,248 +21,279 @@ use Symfony\Component\Validator\Constraints\Valid;
 #[ORM\HasLifecycleCallbacks]
 class Page
 {
-    const PAGE_CONTROLLER_PATH = "App\Controller\App\Router\PageController::display";
-    const PAGE_DEFAULT_TITLE_PREFIX = '[Brouillon] Page ' ;
-    const PAGE_ROUTE_NAME_PREFIX = 'cms_' ;
+	const PAGE_CONTROLLER_PATH = "App\Controller\App\Router\PageController::display";
+	const PAGE_DEFAULT_TITLE_PREFIX = '[Brouillon] Page ';
+	const PAGE_ROUTE_NAME_PREFIX = 'cms_';
 
-    use IdTrait;
-    use TimestampableTrait;
+	use IdTrait;
+	use TimestampableTrait;
 
-    #[ORM\Column(length: 255)]
-    private ?string $title = null;
+	#[ORM\Column(length: 255)]
+	private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $content = "[]";
+	#[ORM\Column(type: Types::TEXT, nullable: true)]
+	private ?string $content = "[]";
 
-    #[ORM\Column(length: 255)]
-    private ?string $path = null;
+	#[ORM\Column(length: 255)]
+	private ?string $path = null;
 
-    #[ORM\Column(length: 255, nullable: false, options: ['default' => 0])]
-    private bool $customPath = false;
+	#[ORM\Column(length: 255, nullable: false, options: ['default' => 0])]
+	private bool $customPath = false;
 
-    #[ORM\Column(length: 255)]
-    private ?string $routeName = null;
+	#[ORM\Column(length: 255)]
+	private ?string $routeName = null;
 
-    #[ORM\Column]
-    private ?bool $published = true;
+	#[ORM\Column]
+	private ?bool $published = true;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $startPublishingAt = null;
+	#[ORM\Column(type: Types::DATE_MUTABLE)]
+	private ?\DateTimeInterface $startPublishingAt = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $endPublishingAt = null;
+	#[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+	private ?\DateTimeInterface $endPublishingAt = null;
 
-    #[ORM\Column(type: Types::STRING, length: 255)]
-    private ?string $controller = null;
+	#[ORM\Column(type: Types::STRING, length: 255)]
+	private ?string $controller = null;
 
-    #[ORM\Column(type: Types::STRING, length: 255, enumType: PageTypeEnum::class)]
-    private PageTypeEnum $type;
+	#[ORM\Column(type: Types::STRING, length: 255, enumType: PageTypeEnum::class)]
+	private PageTypeEnum $type;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    #[Valid]
-    private ?Seo $seo = null;
+	#[ORM\OneToOne(cascade: ['persist', 'remove'])]
+	#[Valid]
+	private ?Seo $seo = null;
 
-    #[ORM\OneToMany(mappedBy: 'page', targetEntity: MenuCategory::class)]
-    private Collection $menuCategories;
+	#[ORM\OneToMany(mappedBy: 'page', targetEntity: MenuCategory::class)]
+	private Collection $menuCategories;
 
-    public function __construct()
-    {
-        $this->startPublishingAt = new \DateTime();
-        $this->menuCategories = new ArrayCollection();
-    }
+	#[ORM\Column(type: Types::JSON, nullable: true)]
+	private ?array $editorContent = [];
 
+	#[ORM\Column(type: Types::JSON, nullable: true)]
+	private ?array $htmlCss = [];
 
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
-    }
+	public function __construct()
+	{
+		$this->startPublishingAt = new \DateTime();
+		$this->menuCategories = new ArrayCollection();
+	}
 
 
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
+	public function getTitle(): ?string
+	{
+		return $this->title;
+	}
 
-    public function setContent(?string $content): self
-    {
-        $this->content = $content;
+	public function setTitle(string $title): self
+	{
+		$this->title = $title;
 
-        return $this;
-    }
-
-    public function getPath(): ?string
-    {
-        return $this->path;
-    }
-
-    public function setPath(string $path): self
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isCustomPath(): bool
-    {
-        return $this->customPath;
-    }
-
-    /**
-     * @param bool $customPath
-     */
-    public function setCustomPath(bool $customPath): void
-    {
-        $this->customPath = $customPath;
-    }
+		return $this;
+	}
 
 
-    public function getRouteName(): ?string
-    {
-        return $this->routeName;
-    }
+	public function getContent(): ?string
+	{
+		return $this->content;
+	}
 
-    public function setRouteName(string $routeName): self
-    {
-        $this->routeName = $routeName;
+	public function setContent(?string $content): self
+	{
+		$this->content = $content;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function isPublished(): ?bool
-    {
-        return $this->published;
-    }
+	public function getPath(): ?string
+	{
+		return $this->path;
+	}
 
-    public function setPublished(bool $published): self
-    {
-        $this->published = $published;
+	public function setPath(string $path): self
+	{
+		$this->path = $path;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getStartPublishingAt(): ?\DateTimeInterface
-    {
-        return $this->startPublishingAt;
-    }
+	/**
+	 * @return bool
+	 */
+	public function isCustomPath(): bool
+	{
+		return $this->customPath;
+	}
 
-    public function setStartPublishingAt(\DateTimeInterface $startPublishingAt): self
-    {
-        $this->startPublishingAt = $startPublishingAt;
+	/**
+	 * @param bool $customPath
+	 */
+	public function setCustomPath(bool $customPath): void
+	{
+		$this->customPath = $customPath;
+	}
 
-        return $this;
-    }
 
-    public function getEndPublishingAt(): ?\DateTimeInterface
-    {
-        return $this->endPublishingAt;
-    }
+	public function getRouteName(): ?string
+	{
+		return $this->routeName;
+	}
 
-    public function setEndPublishingAt(?\DateTimeInterface $endPublishingAt): self
-    {
-        $this->endPublishingAt = $endPublishingAt;
+	public function setRouteName(string $routeName): self
+	{
+		$this->routeName = $routeName;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    #[ORM\PreFlush]
-    public function generateSlug(): void
-    {
+	public function isPublished(): ?bool
+	{
+		return $this->published;
+	}
 
-        $slugger = new Slugify(['regexp' => '/([^A-Za-z0-9-\/]|-)+/']);
-        $this->setPath($slugger->slugify($this->path));
-    }
+	public function setPublished(bool $published): self
+	{
+		$this->published = $published;
 
-    public function getContentAsArray(){
-        return json_decode($this->content, true);
-    }
+		return $this;
+	}
 
-    /**
-     * @return string|null
-     */
-    public function getController(): ?string
-    {
-        return $this->controller;
-    }
+	public function getStartPublishingAt(): ?\DateTimeInterface
+	{
+		return $this->startPublishingAt;
+	}
 
-    /**
-     * @param string|null $controller
-     */
-    public function setController(?string $controller): void
-    {
-        $this->controller = $controller;
-    }
+	public function setStartPublishingAt(\DateTimeInterface $startPublishingAt): self
+	{
+		$this->startPublishingAt = $startPublishingAt;
 
-    /**
-     * @return PageTypeEnum
-     */
-    public function getType(): PageTypeEnum
-    {
-        return $this->type;
-    }
+		return $this;
+	}
 
-    /**
-     * @param PageTypeEnum $type
-     */
-    public function setType(PageTypeEnum $type): void
-    {
-        $this->type = $type;
-    }
+	public function getEndPublishingAt(): ?\DateTimeInterface
+	{
+		return $this->endPublishingAt;
+	}
 
-    public function __toString(): string
-    {
-        return $this->title;
-    }
+	public function setEndPublishingAt(?\DateTimeInterface $endPublishingAt): self
+	{
+		$this->endPublishingAt = $endPublishingAt;
 
-    public function getSeo(): ?Seo
-    {
-        return $this->seo;
-    }
+		return $this;
+	}
 
-    public function setSeo(?Seo $seo): self
-    {
-        $this->seo = $seo;
+	#[ORM\PreFlush]
+	public function generateSlug(): void
+	{
 
-        return $this;
-    }
+		$slugger = new Slugify(['regexp' => '/([^A-Za-z0-9-\/]|-)+/']);
+		$this->setPath($slugger->slugify($this->path));
+	}
 
-    /**
-     * @return Collection<int, MenuCategory>
-     */
-    public function getMenuCategories(): Collection
-    {
-        return $this->menuCategories;
-    }
+	public function getContentAsArray()
+	{
+		return json_decode($this->content, true);
+	}
 
-    public function addMenuCategory(MenuCategory $menuCategory): self
-    {
-        if (!$this->menuCategories->contains($menuCategory)) {
-            $this->menuCategories->add($menuCategory);
-            $menuCategory->setPage($this);
-        }
+	/**
+	 * @return string|null
+	 */
+	public function getController(): ?string
+	{
+		return $this->controller;
+	}
 
-        return $this;
-    }
+	/**
+	 * @param string|null $controller
+	 */
+	public function setController(?string $controller): void
+	{
+		$this->controller = $controller;
+	}
 
-    public function removeMenuCategory(MenuCategory $menuCategory): self
-    {
-        if ($this->menuCategories->removeElement($menuCategory)) {
-            // set the owning side to null (unless already changed)
-            if ($menuCategory->getPage() === $this) {
-                $menuCategory->setPage(null);
-            }
-        }
+	/**
+	 * @return PageTypeEnum
+	 */
+	public function getType(): PageTypeEnum
+	{
+		return $this->type;
+	}
 
-        return $this;
-    }
+	/**
+	 * @param PageTypeEnum $type
+	 */
+	public function setType(PageTypeEnum $type): void
+	{
+		$this->type = $type;
+	}
+
+	public function __toString(): string
+	{
+		return $this->title;
+	}
+
+	public function getSeo(): ?Seo
+	{
+		return $this->seo;
+	}
+
+	public function setSeo(?Seo $seo): self
+	{
+		$this->seo = $seo;
+
+		return $this;
+	}
+
+	/**
+	 * @return Collection<int, MenuCategory>
+	 */
+	public function getMenuCategories(): Collection
+	{
+		return $this->menuCategories;
+	}
+
+	public function addMenuCategory(MenuCategory $menuCategory): self
+	{
+		if (!$this->menuCategories->contains($menuCategory)) {
+			$this->menuCategories->add($menuCategory);
+			$menuCategory->setPage($this);
+		}
+
+		return $this;
+	}
+
+	public function removeMenuCategory(MenuCategory $menuCategory): self
+	{
+		if ($this->menuCategories->removeElement($menuCategory)) {
+			// set the owning side to null (unless already changed)
+			if ($menuCategory->getPage() === $this) {
+				$menuCategory->setPage(null);
+			}
+		}
+
+		return $this;
+	}
+
+	public function getEditorContent(): ?array
+	{
+		return $this->editorContent;
+	}
+
+	public function setEditorContent(?array $editorContent): self
+	{
+		$this->editorContent = $editorContent;
+
+		return $this;
+	}
+
+	public function getHtmlCss(): ?array
+	{
+		return $this->htmlCss;
+	}
+
+	public function setHtmlCss(?array $htmlCss): self
+	{
+		$this->htmlCss = $htmlCss;
+
+		return $this;
+	}
 
 }

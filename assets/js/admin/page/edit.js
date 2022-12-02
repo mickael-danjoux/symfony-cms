@@ -10,8 +10,8 @@ createApp({
     },
     components: { Editor },
     setup() {
-        const formData = ref(null)
         const formHasChanged = ref(false)
+        const showEditor = ref(true)
         onMounted(() => {
             initConfirmDeleteButtons()
             handleFormChange()
@@ -85,46 +85,51 @@ createApp({
 
         const onSelectPageTypeChange = () => {
             const selectElement = document.getElementById('page_type');
-            const pageTypeValue = document.getElementById('pageType').value;
+            const INTERNAL_PAGE = 'INTERNAL_PAGE';
+            const CUSTOM_PAGE = 'CUSTOM_PAGE';
 
             // si l'élément est défini, alors l'utilisateur est un SA
             if (selectElement) {
                 const blockInputControllerElement = document.getElementById('form-page-controller');
                 const blockInputRouteElement = document.getElementById('form-page-route');
                 const inputControllerElement = document.getElementById('page_controller');
+                const pageTypeValue = document.getElementById('page_type').value;
 
                 // sert uniquement au chargement de la page
-                if (pageTypeValue === "INTERNAL_PAGE") {
+                if (pageTypeValue === INTERNAL_PAGE) {
                     blockInputControllerElement.classList.remove('d-none')
                     blockInputRouteElement.classList.remove('d-none')
                     inputControllerElement.setAttribute('required', 'required')
-                    formData.value = false;
+                    showEditor.value = false
                 }
 
                 selectElement.addEventListener('change', (e) => {
 
-                    if (+e.target.value === 0) {
+                    const selectedValue = e.target.value
+
+                    if (selectedValue === INTERNAL_PAGE) {
                         blockInputControllerElement.classList.remove('d-none')
                         blockInputRouteElement.classList.remove('d-none')
                         inputControllerElement.value = ''
                         inputControllerElement.setAttribute('required', 'required')
-                        formData.value = false;
-                    } else if (+e.target.value === 1) {
+                        showEditor.value = false
+
+                    } else if (selectedValue === CUSTOM_PAGE) {
                         blockInputControllerElement.classList.add('d-none')
                         blockInputRouteElement.classList.add('d-none')
                         inputControllerElement.removeAttribute('required')
                         inputControllerElement.value = ''
-                        formData.value = JSON.parse(document.getElementById('formContent').value)
+                        showEditor.value = true
                     }
 
                 })
             }
-            // élément non défini
+            // élément non défini (=user role ADMIN)
             else {
+                // l'élément #pageType est un input:hidden pour récupérer le type de la page
                 // sert uniquement au chargement de la page
-                if (pageTypeValue === "INTERNAL_PAGE") {
-                    formData.value = false;
-                }
+                const pageTypeValue = document.getElementById('pageType').value;
+                if (pageTypeValue === INTERNAL_PAGE) showEditor.value = false
             }
 
         }
@@ -132,11 +137,11 @@ createApp({
         const handleFormSubmission = () => window.dispatchEvent(new CustomEvent("onFormSubmission"))
 
         return {
-            formData,
             formHasChanged,
             updateContent,
             preview,
-            handleFormSubmission
+            handleFormSubmission,
+            showEditor
         }
 
     }

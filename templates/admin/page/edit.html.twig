@@ -159,7 +159,9 @@
         </div>
         {{ form_rest(form) }}
 
-        <editor></editor>
+        <editor
+            v-if="showEditor"
+        ></editor>
 
         <button @click="handleFormSubmission" class="btn-save">Enregistrer</button>
         {{ form_end(form) }}

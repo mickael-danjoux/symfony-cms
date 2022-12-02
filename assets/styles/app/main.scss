@@ -107,3 +107,14 @@ body {
 }
 
 
+/** CSS uniquement pour l'éditeur de page
+ * ajout de bordure autour du block + hauteur min. pour les colones sinon height=0px
+ * le style ne sera pas appliqué en front
+ */
+*[data-gjs-highlightable] {
+    outline: 1px dashed rgba(170,170,170,0.7);
+    outline-offset: -2px;
+    &[class*="col-"] {
+        min-height: 75px;
+    }
+}

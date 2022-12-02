@@ -49,7 +49,7 @@ const defaultColumnBlock = {
     highlightable: true,
     selectable: true,
     hoverable: true,
-    class: ['col-12', 'min-h-75']
+    class: ['col-12']
 }
 
 const defaultRowAttr = objToAttrString(defaultRowBlock)

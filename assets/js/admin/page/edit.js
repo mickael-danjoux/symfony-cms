@@ -2,12 +2,13 @@ import '../main'
 import {createApp, ref, onMounted} from "vue";
 import {initConfirmDeleteButtons} from "../../Components/ConfirmDeleteComponent";
 import slugger from 'slugger'
+import Editor from '../../Components/Editor/Editor'
 
 createApp({
     compilerOptions: {
         delimiters: ["${", "}"]
     },
-    components: {},
+    components: { Editor },
     setup() {
         const formData = ref(null)
         const formHasChanged = ref(false)

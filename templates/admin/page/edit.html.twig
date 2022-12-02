@@ -3,11 +3,11 @@
 {% block title %}Pages{% endblock %}
 
 {% block messages %}{% endblock %}
-{#{% block stylesheets %}#}
-{#    {{ encore_entry_link_tags('style-admin-page') }}#}
-{#    {{ encore_entry_link_tags('js-admin-page-edit') }}#}
 
-{#{% endblock %}#}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('js-admin-page-edit') }}
+{% endblock %}
 
 {% block body %}
 
@@ -158,6 +158,9 @@
 
         </div>
         {{ form_rest(form) }}
+
+        <editor></editor>
+
         <button class="btn-save">Enregistrer</button>
         {{ form_end(form) }}
     </div>

@@ -5,8 +5,6 @@ const options = {
     stateSave: true,
 }
 
-const event = new Event('datatableDrawn');
-
 export function initDatatable(selector, datatable, options = {}) {
     const dataTableContainer = document.querySelector(selector)
     if (dataTableContainer) {
@@ -14,7 +12,7 @@ export function initDatatable(selector, datatable, options = {}) {
             dt.on('draw', function () {
                 addOnDeleteEvent()
                 // On émet un évènement pour pouvoir s'en servir ailleurs
-                document.dispatchEvent(event);
+                document.dispatchEvent(new CustomEvent('datatableDrawn',{detail:{table:dt}}));
             })
         });
     }

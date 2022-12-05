@@ -62,7 +62,7 @@ onMounted(() => {
 		storageManager: {
 			type: 'remote',
 			autosave: true,
-			stepsBeforeSave: 5,
+			stepsBeforeSave: 1,
 			autoload: true,
 			onStore: data => data,
 			options: {
@@ -214,6 +214,10 @@ onMounted(() => {
 	justify-content: center;
 	height: auto;
 	min-height: auto;
+}
+
+.gjs-am-assets-header {
+	display: none;
 }
 
 /**[data-gjs-highlightable] {*/

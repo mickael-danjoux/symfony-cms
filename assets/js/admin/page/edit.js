@@ -1,6 +1,6 @@
-import '../main'
-import {createApp, ref, onMounted} from "vue";
-import {initConfirmDeleteButtons} from "../../Components/ConfirmDeleteComponent";
+import { initAdminPage } from "../../Utils/InitAdminPage";
+import { createApp, ref, onMounted } from "vue";
+import { initConfirmDeleteButtons } from "../../Components/ConfirmDeleteComponent";
 import slugger from 'slugger'
 import Editor from '../../Components/Editor/Editor'
 
@@ -13,6 +13,7 @@ createApp({
         const formHasChanged = ref(false)
         const showEditor = ref(true)
         onMounted(() => {
+            initAdminPage()
             initConfirmDeleteButtons()
             handleFormChange()
             onSelectPageTypeChange()

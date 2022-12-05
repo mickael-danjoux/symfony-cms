@@ -3,6 +3,11 @@ admin:
   type: annotation
   prefix: '/admin'
 
+api_editor:
+  resource: '../src/Controller/API/Editor'
+  type: attribute
+  prefix: '/api/editor'
+
 cms:
   resource: .
   type: cms

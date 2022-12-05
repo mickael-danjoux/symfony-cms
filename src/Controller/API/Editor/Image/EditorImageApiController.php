@@ -14,8 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/api/editor')]
-class ApiEditorImageController extends AbstractController
+class EditorImageApiController extends AbstractController
 {
 	public function __construct(private EntityManagerInterface $em, private LoggerInterface $logger)
 	{}
@@ -68,7 +67,7 @@ class ApiEditorImageController extends AbstractController
 	#[Route('/image/{id}', methods: Request::METHOD_DELETE)]
 	public function remove(?ImagePage $image): JsonResponse
 	{
-		if ($image instanceof ImagePage && $this->isGranted('ROLE_ADMIN')) {
+		if ($image instanceof ImagePage) {
 			try {
 				$this->em->remove($image);
 				$this->em->flush();

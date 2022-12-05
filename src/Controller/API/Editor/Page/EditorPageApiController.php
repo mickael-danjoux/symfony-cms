@@ -10,8 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/api/editor')]
-class ApiEditorPageController extends AbstractController
+class EditorPageApiController extends AbstractController
 {
 	public function __construct(private EntityManagerInterface $em)
 	{}

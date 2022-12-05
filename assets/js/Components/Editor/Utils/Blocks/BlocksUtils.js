@@ -32,6 +32,17 @@ const generateHeadingBlock = (htmlTag, level) => {
     }
 }
 
+const generateContainerAttr = type => {
+    const containerBlockClone = {...defaultContainerBlock}
+
+    if (type === 'fluid') {
+        containerBlockClone.name = 'Conteneur Fluid'
+        containerBlockClone.class.length = 0
+        containerBlockClone.class = ['container-fluid']
+    }
+
+    return objToAttrString(containerBlockClone)
+}
 
 const dataAttrPrefix = 'data-gjs'
 
@@ -52,7 +63,18 @@ const defaultColumnBlock = {
     class: ['col-12']
 }
 
+const defaultContainerBlock = {
+    name: 'Conteneur',
+    draggable: true,
+    highlightable: true,
+    selectable: true,
+    hoverable: true,
+    class: ['container']
+}
+
+
+
 const defaultRowAttr = objToAttrString(defaultRowBlock)
 const defaultColAttr = objToAttrString(defaultColumnBlock)
 
-export { defaultRowBlock, defaultColumnBlock, defaultRowAttr, defaultColAttr, generateHeadingBlock, objToAttrString, generateColumnAttr }
+export { defaultRowBlock, defaultColumnBlock, defaultRowAttr, defaultColAttr, generateHeadingBlock, objToAttrString, generateColumnAttr, generateContainerAttr }

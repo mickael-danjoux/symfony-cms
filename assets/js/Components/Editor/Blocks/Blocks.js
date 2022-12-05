@@ -1,7 +1,7 @@
 import {
     generateHeadingBlock,
     defaultRowAttr,
-    generateColumnAttr
+    generateColumnAttr, generateContainerAttr
 } from "../Utils/Blocks/BlocksUtils";
 
 const h1 = generateHeadingBlock('h1', 1)
@@ -29,11 +29,19 @@ const image = {
       </svg>`,
     // Select the component once it's dropped
     select: true,
-    // You can pass components as a JSON instead of a simple HTML string,
-    // in this case we also use a defined component type `image`
     content: {
-        type: 'image',
-        classes: ['img-fluid']
+        tagName: 'div',
+        draggable: true,
+        highlightable: false,
+        selectable: false,
+        hoverable: false,
+        classes: ['text-center'],
+        components: [
+            {
+                type: 'image',
+                classes: ['img-fluid']
+            }
+        ]
     },
     // This triggers `active` event on dropped components and the `image`
     // reacts by opening the AssetManager
@@ -269,7 +277,22 @@ const ThreeCols = {
     </div>`
 }
 
+const attrContainer = generateContainerAttr()
+const containerBlock = {
+    label: 'Conteneur',
+    category: 'Conteneurs',
+    content: `<div ${attrContainer}></div>`
+}
+
+const attrContainerFluid = generateContainerAttr('fluid')
+const containerFluidBlock = {
+    label: 'Conteneur Fluid',
+    category: 'Conteneurs',
+    content: `<div ${attrContainerFluid}></div>`
+}
+
 export { h1, h2, h3, h4, h5, h6, text, image,
     OneCol, TwoCols, ThreeCols,
-    templateTextImage, templateImageText, templateRowImageRowText, templateImageTextFull
+    templateTextImage, templateImageText, templateRowImageRowText, templateImageTextFull,
+    containerBlock, containerFluidBlock
 }

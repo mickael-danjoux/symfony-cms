@@ -4,7 +4,7 @@ import "grapesjs/dist/css/grapes.min.css"
 import { onMounted, reactive } from "vue";
 import { h1, h2, h3, h4, h5, h6,
 	text, image, OneCol, TwoCols, ThreeCols,
-	templateTextImage, templateImageText, templateRowImageRowText, templateImageTextFull
+	templateTextImage, templateImageText, templateRowImageRowText, templateImageTextFull, containerBlock, containerFluidBlock
 } from "./Blocks/Blocks";
 import { handleAssetRemove } from "./Utils/AssetManager/AssetManagerUtils";
 import { AssetManagerService } from "./Service/AssetManagerService";
@@ -110,6 +110,8 @@ onMounted(() => {
 	editor.BlockManager.add("ImgText", templateImageText)
 	editor.BlockManager.add("RowImgRowText", templateRowImageRowText)
 	editor.BlockManager.add("ImgFullText", templateImageTextFull)
+	editor.BlockManager.add("Container", containerBlock)
+	editor.BlockManager.add("ContainerFluid", containerFluidBlock)
 
 	const panelManager = editor.Panels;
 	panelManager.removePanel('options')

@@ -11,6 +11,7 @@ import {
 import { handleAssetRemove } from "../Utils/AssetManager/AssetManagerUtils";
 import { AssetManagerService } from "./AssetManagerService";
 import { Toast } from "../../Toast";
+import "../Utils/CKEditorPlugin/index"
 
 export const initEditor = entrypointPath => {
 
@@ -86,7 +87,37 @@ export const initEditor = entrypointPath => {
                 pageId
             }
         },
+        plugins: ['gjs-plugin-ckeditor5'],
+        pluginsOpts: {
+            'gjs-plugin-ckeditor5': {
+                position: 'left',
+                options: {
+                    trackChanges: {},
+                    toolbar: {
+                        items: [
+                            '|',
+                            'bold',
+                            'italic',
+                            'link',
+                            'bulletedList',
+                            'numberedList',
+                            '|',
+                            'outdent',
+                            'indent',
+                            '|',
+                            'undo',
+                            'redo'
+                        ]
+                    },
+                    language: 'fr',
+                    licenseKey: ''
+                }
+            }
+        }
     });
+
+
+
 
     editor.BlockManager.add("h1", h1)
     editor.BlockManager.add("h2", h2)

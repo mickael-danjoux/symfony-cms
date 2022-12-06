@@ -19,6 +19,7 @@ onMounted( async () => {
 		entrypointPath = res.data.entrypoint
 		editor = initEditor(entrypointPath)
 	} catch (e) {
+		console.error(e)
 		Toast.error('Une erreur est survenue lors du chargement de l\'éditeur. Veuillez recharger la page.')
 	}
 });
@@ -60,6 +61,10 @@ onMounted( async () => {
 }
 
 .gjs-am-assets-header {
+	display: none;
+}
+
+.gjs-rte-toolbar {
 	display: none;
 }
 

@@ -7,5 +7,8 @@ export const editorEndpoints = {
     page: {
         item: id => `${baseURL}/page/${id}`,
         load: id => `${baseURL}/page/load/${id}`
+    },
+    webpack: {
+        entrypoint: `${baseURL}/webpack/entrypoint`
     }
 }

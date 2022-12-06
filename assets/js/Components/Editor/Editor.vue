@@ -4,28 +4,37 @@ import "grapesjs/dist/css/grapes.min.css"
 import { onMounted, reactive } from "vue";
 import { h1, h2, h3, h4, h5, h6,
 	text, image, OneCol, TwoCols, ThreeCols,
-	templateTextImage, templateImageText, templateRowImageRowText, templateImageTextFull, containerBlock, containerFluidBlock
+	templateTextImage, templateImageText, templateRowImageRowText,
+	templateImageTextFull, containerBlock, containerFluidBlock
 } from "./Blocks/Blocks";
 import { handleAssetRemove } from "./Utils/AssetManager/AssetManagerUtils";
 import { AssetManagerService } from "./Service/AssetManagerService";
 import { Toast } from "../Toast";
 import { editorEndpoints } from "./Config/endpoints";
 import fr from './Config/translation_fr';
-
+import { WebpackService } from "./Service/WebpackService";
 
 
 // Sauvegarde des data de l'éditeur lors de la soumission du formulaire de la page
-// ps: les données de l'éditeur sont save après 5 modifications (nb de steps avant save modifiable)
+// ps: les données de l'éditeur sont save après chaque modification (nb de steps avant save modifiable)
 window.addEventListener('onFormSubmission', async () => await editor.store())
 
 let editor = reactive({})
 
-onMounted(() => {
+onMounted( async () => {
+	let entrypointPath = null
+	try {
+		const res = await WebpackService.getEntrypoint()
+		entrypointPath = res.data.entrypoint
+	} catch (e) {
+		Toast.error('Une erreur est survenue lors du chargement de l\'éditeur. Veuillez recharger la page.')
+	}
+
 	const pageId = window.location.pathname.split('/')[4]
 
 	editor = grapesjs.init({
 		canvas: {
-			styles: [{href: '/build/style-app-main.css'}]
+			styles: [{href: entrypointPath}]
 		},
 		selectorManager: {
 			componentFirst: true,
@@ -37,7 +46,7 @@ onMounted(() => {
 		i18n: {
 			locale: 'fr',
 			localeFallback: 'fr',
-			messages: { fr }
+			messages: {fr}
 		},
 		mediaCondition: 'min-width',
 		deviceManager: {
@@ -76,11 +85,11 @@ onMounted(() => {
 						const pageHtml = editor.Pages.getAll().map(page => {
 							const component = page.getMainComponent();
 							return {
-								html: editor.getHtml({ component }),
-								css: editor.getCss({ component })
+								html: editor.getHtml({component}),
+								css: editor.getCss({component})
 							}
 						});
-						return { data, pageHtml };
+						return {data, pageHtml};
 					},
 					onLoad: res => res.data
 				}

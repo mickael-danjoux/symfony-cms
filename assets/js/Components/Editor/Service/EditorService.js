@@ -12,6 +12,7 @@ import { handleAssetRemove } from "../Utils/AssetManager/AssetManagerUtils";
 import { AssetManagerService } from "./AssetManagerService";
 import { Toast } from "../../Toast";
 import "../Utils/CKEditorPlugin/index"
+import { componentsTypesPlugin } from "../Utils/ComponentsTypesPlugin/componentsTypesPlugin";
 
 export const initEditor = entrypointPath => {
 
@@ -31,7 +32,7 @@ export const initEditor = entrypointPath => {
         i18n: {
             locale: 'fr',
             localeFallback: 'fr',
-            messages: {fr}
+            messages: { fr }
         },
         mediaCondition: 'min-width',
         deviceManager: {
@@ -87,7 +88,39 @@ export const initEditor = entrypointPath => {
                 pageId
             }
         },
-        plugins: ['gjs-plugin-ckeditor5'],
+        blockManager: {
+            blocks: [containerBlock, containerFluidBlock,
+                h1, h2, h3, h4, h5, h6, image, text,
+                OneCol,ThreeCols, TwoCols,
+                templateImageText, templateImageTextFull,
+                templateRowImageRowText, templateTextImage]
+        },
+        styleManager: {
+          sectors: [
+              {
+                  name: 'typography',
+                  properties: ['font-size', 'color', 'text-align'],
+              },
+              {
+                  name: 'Image',
+                  buildProps: ['object-fit'],
+                  properties: [
+                      {
+                          name: 'Comportement de l\'image',
+                          property: 'object-fit',
+                          type: 'select',
+                          defaults: 'cover',
+                          toRequire: true,
+                          list: [
+                              { value: 'cover' },
+                              { value: 'contain' }
+                          ]
+                      }
+                  ]
+              }
+          ]
+        },
+        plugins: ['gjs-plugin-ckeditor5', componentsTypesPlugin],
         pluginsOpts: {
             'gjs-plugin-ckeditor5': {
                 position: 'left',
@@ -116,38 +149,8 @@ export const initEditor = entrypointPath => {
         }
     });
 
-
-
-
-    editor.BlockManager.add("h1", h1)
-    editor.BlockManager.add("h2", h2)
-    editor.BlockManager.add("h3", h3)
-    editor.BlockManager.add("h4", h4)
-    editor.BlockManager.add("h5", h5)
-    editor.BlockManager.add("h6", h6)
-    editor.BlockManager.add("text", text)
-    editor.BlockManager.add("image", image)
-    editor.BlockManager.add("OneCol", OneCol)
-    editor.BlockManager.add("TwoCols", TwoCols)
-    editor.BlockManager.add("ThreeCols", ThreeCols)
-    editor.BlockManager.add("TextImg", templateTextImage)
-    editor.BlockManager.add("ImgText", templateImageText)
-    editor.BlockManager.add("RowImgRowText", templateRowImageRowText)
-    editor.BlockManager.add("ImgFullText", templateImageTextFull)
-    editor.BlockManager.add("Container", containerBlock)
-    editor.BlockManager.add("ContainerFluid", containerFluidBlock)
-
-    const panelManager = editor.Panels;
-    panelManager.removePanel('options')
-    panelManager.getButton('views', 'open-blocks').set('active', true)
-    //panelManager.removeButton('views', 'open-sm')
-
-    const styleManager = editor.StyleManager;
-    styleManager.removeSector('general');
-    styleManager.removeSector('flex');
-    styleManager.removeSector('dimension');
-    styleManager.removeSector('decorations');
-    styleManager.removeSector('extra');
+    editor.Panels.removePanel('options')
+    editor.Panels.getButton('views', 'open-blocks').set('active', true)
 
     // désactive l'affichage par défaut du mode responsive
     editor.getConfig().showDevices = false;

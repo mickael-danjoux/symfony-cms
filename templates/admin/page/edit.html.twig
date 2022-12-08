@@ -163,7 +163,7 @@
             :is-super-admin="{{ is_granted('ROLE_SUPER_ADMIN') | json_encode }}"
         ></editor>
 
-        <button @click="handleFormSubmission" class="btn-save">Enregistrer</button>
+        <button @click="storeEditorContent" class="btn-save">Enregistrer</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

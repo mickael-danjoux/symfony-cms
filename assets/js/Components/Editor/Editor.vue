@@ -8,7 +8,7 @@ import { initEditor } from "./Service/EditorService";
 
 // Sauvegarde des data de l'éditeur lors de la soumission du formulaire de la page
 // ps: les données de l'éditeur sont save après chaque modification (nb de steps avant save modifiable)
-window.addEventListener('onFormSubmission', async () => await editor.store())
+window.addEventListener('storeEditorContent', async () => await editor.store())
 
 let editor = reactive({})
 

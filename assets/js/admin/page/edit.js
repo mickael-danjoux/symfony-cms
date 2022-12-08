@@ -79,6 +79,7 @@ createApp({
 
         const preview = () => {
             if (!formHasChanged.value) {
+                storeEditorContent()
                 const path = document.getElementById('page_path').value
                 window.open('/' + path + '?preview=true', '_blank').focus();
             }
@@ -135,13 +136,13 @@ createApp({
 
         }
 
-        const handleFormSubmission = () => window.dispatchEvent(new CustomEvent("onFormSubmission"))
+        const storeEditorContent = () => window.dispatchEvent(new CustomEvent("storeEditorContent"))
 
         return {
             formHasChanged,
             updateContent,
             preview,
-            handleFormSubmission,
+            storeEditorContent,
             showEditor
         }
 

@@ -4,9 +4,9 @@ import { editorEndpoints } from "../Config/endpoints";
 import {
     containerBlock, containerFluidBlock,
     h1, h2, h3, h4, h5, h6, image, text,
-    OneCol,ThreeCols, TwoCols,
+    OneCol, ThreeCols, TwoCols,
     templateImageText, templateImageTextFull,
-    templateRowImageRowText, templateTextImage
+    templateRowImageRowText, templateTextImage, videoBlock, mapBlock
 } from "../Blocks/Blocks";
 import { handleAssetRemove } from "../Utils/AssetManager/AssetManagerUtils";
 import { AssetManagerService } from "./AssetManagerService";
@@ -93,7 +93,7 @@ export const initEditor = entrypointPath => {
                 h1, h2, h3, h4, h5, h6, image, text,
                 OneCol,ThreeCols, TwoCols,
                 templateImageText, templateImageTextFull,
-                templateRowImageRowText, templateTextImage]
+                templateRowImageRowText, templateTextImage, videoBlock, mapBlock]
         },
         styleManager: {
           sectors: [
@@ -150,7 +150,6 @@ export const initEditor = entrypointPath => {
     });
 
     editor.Panels.removePanel('options')
-    editor.Panels.getButton('views', 'open-blocks').set('active', true)
 
     // désactive l'affichage par défaut du mode responsive
     editor.getConfig().showDevices = false;
@@ -183,6 +182,47 @@ export const initEditor = entrypointPath => {
             }
         ]
     });
+
+    // editor.on('component:selected', component => {
+    //     if (component.is('video')) {
+    //
+    //         component.removeTrait(['modest', 'related', 'poster', 'src'])
+    //         //console.log(component.removeTrait('provider'))
+    //         component.addTrait({
+    //             label: 'Vidéo',
+    //             type: 'button',
+    //             text: 'Paramétrer',
+    //             command: (editor, trait) => {
+    //                 console.log(trait)
+    //                 const modal = editor.Modal;
+    //
+    //                 modal.open({
+    //                     title: 'Paramétrage vidéo',
+    //                     content: `        <div class="row">
+    //         <div class="col-12">
+    //             <label for="url_yt">URL vidéo youtube</label>
+    //             <input type="text" name="url_yt" id="url_yt">
+    //         </div>
+    //     </div>
+    //     <div class="row">
+    //         <div class="col">
+    //             <button type="button" id="btn-validate">Valider</button>
+    //         </div>
+    //     </div>`
+    //                 })
+    //                 document.getElementById('btn-validate').onclick = () => {
+    //                     const input = document.getElementById('url_yt').value
+    //                     const regex = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*!/;
+    //                     const r = input.match(regex)
+    //                     component.set('provider', 'yt')
+    //                     component.set('videoId', r[1])
+    //                     modal.close()
+    //                 }
+    //             }
+    //         })
+    //
+    //     }
+    // })
 
 
     editor.on('asset:open', () => {

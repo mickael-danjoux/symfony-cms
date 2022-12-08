@@ -176,6 +176,11 @@ export default {
                 alt: 'Texte alternatif',
                 title: 'Titre',
                 href: 'Source lien',
+                address: 'Adresse',
+                mapType: 'Type de carte',
+                autoplay: 'Lecture auto.',
+                loop: 'En boucle',
+                controls: 'Commandes du lecteur'
             },
             // In a simple trait, like text input, these are used on input attributes
             attributes: {
@@ -183,6 +188,7 @@ export default {
                 alt: traitInputAttr,
                 title: traitInputAttr,
                 href: { placeholder: 'eg. https://google.com' },
+                address: { placeholder: 'ex. Lyon' }
             },
             // In a trait like select, these are used to translate option names
             options: {
@@ -190,6 +196,10 @@ export default {
                     false: 'Cette fenêtre',
                     _blank: 'Nouvelle fenêtre',
                 },
+                mapType: {
+                    q: 'Routière',
+                    w: 'Satellite'
+                }
             },
         },
     },

@@ -1,6 +1,6 @@
 <script setup>
 import "grapesjs/dist/css/grapes.min.css"
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, defineProps } from "vue";
 import { Toast } from "../Toast";
 import { WebpackService } from "./Service/WebpackService";
 import { initEditor } from "./Service/EditorService";
@@ -12,12 +12,18 @@ window.addEventListener('onFormSubmission', async () => await editor.store())
 
 let editor = reactive({})
 
+const props = defineProps({
+	isSuperAdmin: {
+		type: Boolean
+	}
+})
+
 onMounted( async () => {
 	let entrypointPath = null
 	try {
 		const res = await WebpackService.getEntrypoint()
 		entrypointPath = res.data.entrypoint
-		editor = initEditor(entrypointPath)
+		editor = initEditor(entrypointPath, props.isSuperAdmin)
 	} catch (e) {
 		console.error(e)
 		Toast.error('Une erreur est survenue lors du chargement de l\'éditeur. Veuillez recharger la page.')

@@ -1,4 +1,5 @@
 import grapesjs from "grapesjs";
+import customCodePlugin from 'grapesjs-custom-code';
 import fr from "../Config/translation_fr";
 import { editorEndpoints } from "../Config/endpoints";
 import {
@@ -6,7 +7,7 @@ import {
     h1, h2, h3, h4, h5, h6, image, text,
     OneCol, ThreeCols, TwoCols,
     templateImageText, templateImageTextFull,
-    templateRowImageRowText, templateTextImage, videoBlock, mapBlock
+    templateRowImageRowText, templateTextImage, videoBlock, mapBlock, customCodeBlock
 } from "../Blocks/Blocks";
 import { handleAssetRemove } from "../Utils/AssetManager/AssetManagerUtils";
 import { AssetManagerService } from "./AssetManagerService";
@@ -14,7 +15,7 @@ import { Toast } from "../../Toast";
 import "../Utils/CKEditorPlugin/index"
 import { componentsTypesPlugin } from "../Utils/ComponentsTypesPlugin/componentsTypesPlugin";
 
-export const initEditor = entrypointPath => {
+export const initEditor = (entrypointPath, isSuperAdmin = false) => {
 
     const pageId = window.location.pathname.split('/')[4]
 
@@ -120,7 +121,7 @@ export const initEditor = entrypointPath => {
               }
           ]
         },
-        plugins: ['gjs-plugin-ckeditor5', componentsTypesPlugin],
+        plugins: ['gjs-plugin-ckeditor5', componentsTypesPlugin, customCodePlugin],
         pluginsOpts: {
             'gjs-plugin-ckeditor5': {
                 position: 'left',
@@ -145,6 +146,17 @@ export const initEditor = entrypointPath => {
                     language: 'fr',
                     licenseKey: ''
                 }
+            },
+            [customCodePlugin]: {
+                blockCustomCode: {
+                    label: 'Code',
+                    category: 'Contenu'
+                },
+                propsCustomCode: {
+                    components: 'Votre code personnalisé'
+                },
+                modalTitle: 'Insérez votre code',
+                buttonLabel: 'Sauvegarder'
             }
         }
     });
@@ -182,6 +194,8 @@ export const initEditor = entrypointPath => {
             }
         ]
     });
+
+    if (!isSuperAdmin) editor.BlockManager.remove('custom-code')
 
     // editor.on('component:selected', component => {
     //     if (component.is('video')) {

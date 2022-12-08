@@ -158,9 +158,9 @@
 
         </div>
         {{ form_rest(form) }}
-
         <editor
             v-if="showEditor"
+            :is-super-admin="{{ is_granted('ROLE_SUPER_ADMIN') | json_encode }}"
         ></editor>
 
         <button @click="handleFormSubmission" class="btn-save">Enregistrer</button>

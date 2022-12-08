@@ -29,6 +29,7 @@
         "cash-dom": "^8.1.2",
         "concurrently": "^6.3.0",
         "grapesjs": "^0.20.1",
+        "grapesjs-custom-code": "^1.0.1",
         "slugger": "^1.0.1",
         "sweetalert2": "^11.4.13",
         "toastify-js": "^1.12.0",

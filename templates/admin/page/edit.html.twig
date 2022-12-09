@@ -31,7 +31,7 @@
                        data-href="{{ path('admin_page_remove', {id: page.id}) }}" href="#"><i
                                 class="fas fa-trash me-2"></i>Supprimer</a>
                 {% endif %}
-                <button @click="handleFormSubmission" class="btn-save ms-1">Enregistrer</button>
+                <button @click="storeEditorContent" class="btn-save ms-1">Enregistrer</button>
                 <a class="btn btn-primary ms-1 js-disabled-on-change" @click="preview" ><i class="fas fa-eye me-2"></i>Prévisualiser</a>
             </div>
 

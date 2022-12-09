@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/editor')]
 class EditorImageApiController extends AbstractController
 {
-	public function __construct(private EntityManagerInterface $em, private LoggerInterface $logger)
+	public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger)
 	{}
 
 	#[Route('/image', name: 'api_editor_image_post', methods: [Request::METHOD_POST])]
@@ -34,38 +34,40 @@ class EditorImageApiController extends AbstractController
 		/** @var UploadedFile $file */
 		foreach ($uploadedFiles as $file) {
 
-			try {
-				$image = (new ImagePage())
-					->setFile($file)
-					->setPage($page);
+			$image = (new ImagePage())
+				->setFile($file)
+				->setPage($page);
 
-				$this->em->persist($image);
-				$this->em->flush();
+			$this->em->persist($image);
 
-				if (is_file($image->getFile()->getPathname())) {
-					// récupérer la largeur + hauteur de l'image
-					// car cette info est nécessaire dans la réponse JSON
-					[$imageWidth, $imageHeight] = getimagesize($image->getFile()->getPathname());
+			if (is_file($image->getFile()->getPathname())) {
+				// récupérer la largeur + hauteur de l'image
+				// car cette info est nécessaire dans la réponse JSON
+				[$imageWidth, $imageHeight] = getimagesize($image->getFile()->getPathname());
 
-					$uploadedFilesResponse[] = [
-						"src" => $relativePathUploadsImagesDir . '/' . $image->getUrl(),
-						"type" => 'image',
-						"height" => $imageHeight,
-						"width" => $imageWidth,
-						"id" => $image->getId()
-					];
-				}
-			} catch (\Exception $e) {
-				$this->logger->critical('Erreur upload fichier depuis editor :' . $e->getMessage(), ['erreur' => $e]);
+				$uploadedFilesResponse[] = [
+					"src" => $relativePathUploadsImagesDir . '/' . $image->getUrl(),
+					"type" => 'image',
+					"height" => $imageHeight,
+					"width" => $imageWidth,
+					"url" => $image->getUrl()
+				];
 			}
 		}
 
-		// la réponse API doit obligatoirement avoir la clé "data"
-		// cf: https://grapesjs.com/docs/modules/Assets.html#uploading-assets
-		return $this->json(["data" => $uploadedFilesResponse], Response::HTTP_OK);
+		try {
+			$this->em->flush();
+			// la réponse API doit obligatoirement avoir la clé "data"
+			// cf: https://grapesjs.com/docs/modules/Assets.html#uploading-assets
+			return $this->json(["data" => $uploadedFilesResponse], Response::HTTP_OK);
+
+		} catch (\Exception $e) {
+			$this->logger->critical('Erreur upload fichier depuis editor :' . $e->getMessage(), ['erreur' => $e]);
+			return $this->json(['erreur' => 'Une erreur est survenue', Response::HTTP_INTERNAL_SERVER_ERROR]);
+		}
 	}
 
-	#[Route('/image/{id}', name: 'api_editor_image_remove', methods: Request::METHOD_DELETE)]
+	#[Route('/image/{url}', name: 'api_editor_image_remove', methods: Request::METHOD_DELETE)]
 	public function remove(?ImagePage $image): JsonResponse
 	{
 		if ($image instanceof ImagePage) {
@@ -75,9 +77,9 @@ class EditorImageApiController extends AbstractController
 				return $this->json([], Response::HTTP_OK);
 			} catch (\Exception $e) {
 				$this->logger->critical('Erreur suppression image depuis editor :' . $e->getMessage(), ['erreur' => $e]);
+				return $this->json(['erreur' => 'Une erreur est survenue', Response::HTTP_INTERNAL_SERVER_ERROR]);
 			}
 		}
-
-		return $this->json('Une erreur est survenue.', Response::HTTP_NOT_FOUND);
+		return $this->json('Cette image n\'existe pas.', Response::HTTP_NOT_FOUND);
 	}
 }

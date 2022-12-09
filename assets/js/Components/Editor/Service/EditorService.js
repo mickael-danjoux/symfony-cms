@@ -14,6 +14,7 @@ import { AssetManagerService } from "./AssetManagerService";
 import { Toast } from "../../Toast";
 import "../Utils/CKEditorPlugin/index"
 import { componentsTypesPlugin } from "../Utils/ComponentsTypesPlugin/componentsTypesPlugin";
+import { Messages } from "../Config/Messages";
 
 export const initEditor = (entrypointPath, isSuperAdmin = false) => {
 
@@ -198,25 +199,23 @@ export const initEditor = (entrypointPath, isSuperAdmin = false) => {
     if (!isSuperAdmin) editor.BlockManager.remove('custom-code')
 
 
-    editor.on('asset:open', () => {
-        handleAssetRemove()
-    })
+    editor.on('storage:error:store', error => Toast.error(Messages.storage.store.error))
+    editor.on('storage:error:load', error => Toast.error(Messages.storage.load.error))
 
-    editor.on('asset:upload:end', () => {
-        handleAssetRemove()
-    })
-
+    editor.on('asset:open', () => handleAssetRemove())
+    editor.on('asset:upload:end', () => handleAssetRemove())
+    editor.on('asset:upload:error', error => Toast.error(Messages.asset.upload.error))
 
     editor.on('asset:remove', async (asset) => {
         try {
-            const assetId = asset.attributes.id;
-            const res = await AssetManagerService.remove(assetId)
-            if (res.status === 200) Toast.success('L\'image a bien été supprimée !')
+            const assetUrl = asset.attributes.url;
+            const res = await AssetManagerService.remove(assetUrl)
+            if (res.status === 200) Toast.success(Messages.asset.remove.success)
 
         } catch (e) {
             // si erreur API, l'asset ne sera pas supprimée du serveur
             // mais correctement supprimée dans l'éditeur
-            Toast.error('Une erreur est survenue lors de la suppression.')
+            Toast.error(Messages.asset.remove.error)
         }
     })
 

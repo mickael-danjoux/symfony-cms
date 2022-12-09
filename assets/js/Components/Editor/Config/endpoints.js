@@ -1,7 +1,7 @@
 const baseURL = '/api/editor'
 export const editorEndpoints = {
     image: {
-        item: id => `${baseURL}/image/${id}`,
+        item: url => `${baseURL}/image/${url}`,
         collection: `${baseURL}/image`
     },
     page: {

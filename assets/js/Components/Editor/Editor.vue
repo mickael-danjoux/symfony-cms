@@ -1,6 +1,6 @@
 <script setup>
 import "grapesjs/dist/css/grapes.min.css"
-import { onMounted, reactive, defineProps } from "vue";
+import { onMounted, reactive } from "vue";
 import { Toast } from "../Toast";
 import { WebpackService } from "./Service/WebpackService";
 import { initEditor } from "./Service/EditorService";

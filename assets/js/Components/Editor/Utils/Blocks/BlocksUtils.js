@@ -24,6 +24,7 @@ const generateHeadingBlock = (htmlTag, level) => {
         tagName: htmlTag,
         label: htmlTag.toUpperCase(),
         type: 'text',
+        activate: true,
         content: `<${htmlTag} data-gjs-name="${htmlTag.toUpperCase()}">Titre de niveau ${level}</${htmlTag}>`,
         category: 'Titres',
         attributes: {

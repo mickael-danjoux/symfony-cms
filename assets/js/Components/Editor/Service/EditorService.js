@@ -7,7 +7,7 @@ import {
     h1, h2, h3, h4, h5, h6, image, text,
     OneCol, ThreeCols, TwoCols,
     templateImageText, templateImageTextFull,
-    templateRowImageRowText, templateTextImage, videoBlock, mapBlock, customCodeBlock
+    templateRowImageRowText, templateTextImage, videoBlock, mapBlock
 } from "../Blocks/Blocks";
 import { handleAssetRemove } from "../Utils/AssetManager/AssetManagerUtils";
 import { AssetManagerService } from "./AssetManagerService";

@@ -3,6 +3,28 @@ import { Toast } from "../../../Toast";
 export const componentsTypesPlugin = editor => {
     const domc = editor.DomComponents;
 
+
+/*    const supportedHeading = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+    domc.addType('text-heading', {
+        isComponent: el => supportedHeading.includes(el.tagName),
+        model: {
+            defaults: {
+                draggable: true,
+                droppable: true,
+                content: 'Title',
+                tagName: 'h1'
+            }
+        },
+        extendView: 'text',
+        view: {
+            events: {
+                click: 'onActive'
+            }
+        }
+    })*/
+
+    //editor.DomComponents.getTypes().forEach(compType => console.log(compType.id))
+
     domc.addType('image', {
         model: {
             defaults: {
@@ -96,5 +118,35 @@ export const componentsTypesPlugin = editor => {
 
             }
         }
+    })
+
+
+
+    const componentsTypes = ['text', 'textnode', 'image'];
+    componentsTypes.forEach(type => {
+        const typeOpt = domc.getType(type).model;
+        domc.addType(type, {
+            model: {
+                initToolbar() {
+                    console.log(editor.Commands.getAll())
+                    typeOpt.prototype.initToolbar.apply(this, arguments);
+                    const tb = this.get('toolbar');
+
+                    if (tb.length === 4) {
+                        tb.unshift({
+                            command: (editor) => this.edit(editor),
+                            label: '<i class="fa fa-pen"></i>',
+                        });
+                        this.set('toolbar', tb);
+                    }
+                },
+                edit(editor) {
+                    const el = editor.getSelected().getEl()
+                    const event = new Event("dblclick")
+                    el.dispatchEvent(event);
+                    el.contentEditable = true
+                }
+            }
+        });
     })
 }

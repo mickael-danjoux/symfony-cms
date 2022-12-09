@@ -2,6 +2,8 @@
 
 namespace App\Entity\Media;
 
+use App\Entity\Traits\IdTrait;
+use App\Entity\Traits\TimestampableTrait;
 use App\Repository\Media\MediaRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -21,24 +23,14 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 class Media
 {
-	#[ORM\Id]
-	#[ORM\GeneratedValue]
-	#[ORM\Column(type: Types::INTEGER)]
-	protected ?int $id = null;
+	use IdTrait;
+	use TimestampableTrait;
 
 	#[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
 	protected ?string $name = null;
 
 	#[ORM\Column(type: Types::STRING, length: 255)]
 	protected ?string $url = null;
-
-	#[ORM\Column(type: Types::DATETIME_MUTABLE)]
-	protected ?\DateTime $updatedAt;
-
-	public function getId(): ?int
-	{
-		return $this->id;
-	}
 
 	public function getName(): ?string
 	{
@@ -60,18 +52,6 @@ class Media
 	public function setUrl(?string $url): self
 	{
 		$this->url = $url;
-
-		return $this;
-	}
-
-	public function getUpdatedAt(): ?\DateTime
-	{
-		return $this->updatedAt;
-	}
-
-	public function setUpdatedAt(?\DateTime $updatedAt): self
-	{
-		$this->updatedAt = $updatedAt;
 
 		return $this;
 	}

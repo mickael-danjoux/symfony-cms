@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/editor')]
 class WebpackApiController extends AbstractController
 {
 	const ENTRYPOINT_KEY = 'build/style-app-main.css';
@@ -15,7 +16,7 @@ class WebpackApiController extends AbstractController
 	public function __construct(private LoggerInterface $logger)
 	{}
 
-	#[Route('/webpack/entrypoint')]
+	#[Route('/webpack/entrypoint', name: 'api_editor_webpack_entrypoint')]
 	public function __invoke(): JsonResponse
 	{
 		$pathToFile = $_SERVER['DOCUMENT_ROOT'] . '/build/manifest.json';

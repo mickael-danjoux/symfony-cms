@@ -14,12 +14,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/editor')]
 class EditorImageApiController extends AbstractController
 {
 	public function __construct(private EntityManagerInterface $em, private LoggerInterface $logger)
 	{}
 
-	#[Route('/image', methods: [Request::METHOD_POST])]
+	#[Route('/image', name: 'api_editor_image_post', methods: [Request::METHOD_POST])]
 	public function store(string $relativePathUploadsImagesDir, PageRepository $pageRepository): JsonResponse
 	{
 		$uploadedFiles = Request::createFromGlobals()->files->get('files');
@@ -64,7 +65,7 @@ class EditorImageApiController extends AbstractController
 		return $this->json(["data" => $uploadedFilesResponse], Response::HTTP_OK);
 	}
 
-	#[Route('/image/{id}', methods: Request::METHOD_DELETE)]
+	#[Route('/image/{id}', name: 'api_editor_image_remove', methods: Request::METHOD_DELETE)]
 	public function remove(?ImagePage $image): JsonResponse
 	{
 		if ($image instanceof ImagePage) {

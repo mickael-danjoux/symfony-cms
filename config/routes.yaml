@@ -4,9 +4,9 @@ admin:
   prefix: '/admin'
 
 api_editor:
-  resource: '../src/Controller/API/Editor'
+  resource: '../src/Controller/API'
   type: attribute
-  prefix: '/api/editor'
+  prefix: '/api'
 
 cms:
   resource: .

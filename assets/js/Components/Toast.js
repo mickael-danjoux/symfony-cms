@@ -66,5 +66,6 @@ export const Toast = {
     success,
     error,
     info,
-    warning
+    warning,
+    custom
 }

@@ -197,47 +197,6 @@ export const initEditor = (entrypointPath, isSuperAdmin = false) => {
 
     if (!isSuperAdmin) editor.BlockManager.remove('custom-code')
 
-    // editor.on('component:selected', component => {
-    //     if (component.is('video')) {
-    //
-    //         component.removeTrait(['modest', 'related', 'poster', 'src'])
-    //         //console.log(component.removeTrait('provider'))
-    //         component.addTrait({
-    //             label: 'Vidéo',
-    //             type: 'button',
-    //             text: 'Paramétrer',
-    //             command: (editor, trait) => {
-    //                 console.log(trait)
-    //                 const modal = editor.Modal;
-    //
-    //                 modal.open({
-    //                     title: 'Paramétrage vidéo',
-    //                     content: `        <div class="row">
-    //         <div class="col-12">
-    //             <label for="url_yt">URL vidéo youtube</label>
-    //             <input type="text" name="url_yt" id="url_yt">
-    //         </div>
-    //     </div>
-    //     <div class="row">
-    //         <div class="col">
-    //             <button type="button" id="btn-validate">Valider</button>
-    //         </div>
-    //     </div>`
-    //                 })
-    //                 document.getElementById('btn-validate').onclick = () => {
-    //                     const input = document.getElementById('url_yt').value
-    //                     const regex = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*!/;
-    //                     const r = input.match(regex)
-    //                     component.set('provider', 'yt')
-    //                     component.set('videoId', r[1])
-    //                     modal.close()
-    //                 }
-    //             }
-    //         })
-    //
-    //     }
-    // })
-
 
     editor.on('asset:open', () => {
         handleAssetRemove()

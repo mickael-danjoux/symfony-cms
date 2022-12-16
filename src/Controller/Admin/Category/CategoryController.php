@@ -8,6 +8,7 @@ use App\Enum\MenuCategoryTypeEnum;
 use App\Form\Category\CategoryType;
 use App\Repository\Category\CategoryRepository;
 use App\Services\Menu\MenuService;
+use App\Utils\ActionBar;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,13 +42,17 @@ class CategoryController extends AbstractController
     public function list(?Category $category, CategoryRepository $repo): Response
     {
 
-       $arrayTree = $repo->childrenHierarchy($category);
-
-
-
+        $arrayTree = $repo->childrenHierarchy($category);
+        $actions = (new ActionBar())
+            ->addAddAction($this->generateUrl('admin_category_add', [
+                'slug' => $category->getRoot()->getSlug()
+            ]));
         return $this->render('admin/category/list.html.twig', [
             'arrayTree' => $arrayTree,
-            'root' => $category
+            'root' => $category,
+            'actions' => $actions->getAll(),
+            'currentPage' => $this->getCurrentPage($category)
+
         ]);
     }
 
@@ -82,11 +87,20 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('admin_category_list', ['slug' => $parent->getSlug()]);
         }
 
+        $actions = (new ActionBar())
+            ->addBackAction($this->generateUrl('admin_category_list', [
+                'slug' => $parent->getRoot()->getSlug()
+            ]))
+            ->addSaveAction('category')
+        ;
+
         return $this->render('admin/category/edit.html.twig', array(
             'form' => $form->createView(),
             'catParent' => $parent,
             'category' => $category,
-            'action' => 'ajouter',
+            'actions' => $actions->getAll(),
+            'currentPage' => $this->getCurrentPage($category)
+
         ));
     }
 
@@ -103,9 +117,9 @@ class CategoryController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() ){
+        if ($form->isSubmitted()) {
 
-            if($category instanceof MenuCategory) {
+            if ($category instanceof MenuCategory) {
                 if ($category->getChildren()->count() > 0 && $category->getType() === MenuCategoryTypeEnum::ITEM) {
                     $form->get('type')->addError(new FormError('Cet item possède un sous menu. Il ne peux pas être une page.'));
                 }
@@ -127,12 +141,36 @@ class CategoryController extends AbstractController
             }
         }
 
+        $actions = (new ActionBar())
+            ->addBackAction($this->generateUrl('admin_category_list', [
+                'slug' => $parent->getRoot()->getSlug()
+            ]))
+            ->addDeleteAction($this->generateUrl('admin_category_delete', [
+                'id' => $category->getId()
+            ]))
+            ->addSaveAction('category')
+
+        ;
 
         return $this->render('admin/category/edit.html.twig', array(
             'form' => $form->createView(),
             'catParent' => $parent,
             'category' => $category,
-            'action' => 'modifier'
+            'actions' =>$actions->getAll(),
+            'currentPage' => $this->getCurrentPage($category)
         ));
+    }
+
+    private function getCurrentPage(Category $category): array
+    {
+        if($category instanceof MenuCategory){
+            return [
+                'menu' => [
+                    'id' => 'pages_content',
+                    'action' => 'menu'
+                ]
+            ];
+        }
+        return [];
     }
 }

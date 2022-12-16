@@ -2,6 +2,9 @@
 
 {% block title %}Administration{% endblock %}
 
+{% set currentPage = {'menu': {'id': 'dashboard'}} %}
+
+
 {% block stylesheets %}
     {{ encore_entry_link_tags('style-admin-dashboard') }}
 {% endblock %}

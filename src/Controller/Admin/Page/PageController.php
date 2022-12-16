@@ -7,7 +7,9 @@ use App\Entity\Page\Page;
 use App\Enum\PageTypeEnum;
 use App\Form\Page\PageType;
 use App\Services\RouterCacheService;
+use App\Utils\ActionBar;
 use Doctrine\ORM\EntityManagerInterface;
+use JetBrains\PhpStorm\ArrayShape;
 use Omines\DataTablesBundle\DataTableFactory;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,8 +40,13 @@ class PageController extends AbstractController
         if ($datatable->isCallback()) {
             return $datatable->getResponse();
         }
+        $actions = (new ActionBar())
+            ->addAddAction($this->generateUrl('admin_page_add'));
         return $this->render('admin/page/list.html.twig', [
             'datatable' => $datatable,
+            'actions' => $actions->getAll(),
+            'currentPage' => $this->getCurrentPage()
+
         ]);
     }
 
@@ -85,9 +92,22 @@ class PageController extends AbstractController
                 ]);
             }
         }
+
+        $actions = (new ActionBar())
+            ->addBackAction($this->generateUrl('admin_page_list'))
+            ->addDeleteAction($this->generateUrl('admin_page_remove',[
+                'id' => $page->getId()
+            ]))
+            ->addSaveAction('page')
+            ->addPreviewAction('#')
+        ;
+
+
         return $this->render('admin/page/edit.html.twig', [
             'form' => $form->createView(),
             'page' => $page,
+            'actions' => $actions->getAll(),
+            'currentPage' => $this->getCurrentPage()
         ]);
     }
 
@@ -105,5 +125,15 @@ class PageController extends AbstractController
             ]);
         }
         return $this->redirectToRoute('admin_page_list');
+    }
+
+    private function getCurrentPage(): array
+    {
+        return [
+            'menu' => [
+                'id' => 'pages_content',
+                'action' => 'pages'
+            ]
+        ];
     }
 }

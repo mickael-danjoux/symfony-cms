@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Utils\ActionBar;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Sherlockode\ConfigurationBundle\Form\Type\ParametersType;
@@ -37,8 +38,13 @@ class ChannelController extends AbstractController
             }
         }
 
+        $actions = (new ActionBar())
+            ->addSaveAction('parameters')
+        ;
+
         return $this->render('admin/channel/index.html.twig', [
             'parametersForm' => $parametersForm->createView(),
+            'actions' => $actions->getAll()
         ]);
     }
 }

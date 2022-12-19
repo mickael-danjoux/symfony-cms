@@ -55,6 +55,7 @@ class PageController extends AbstractController
         } elseif ($request->attributes->get("_route") === 'admin_page_add') {
             try{
                 $page = $pageFactory->createForForm();
+				$routerCacheService->removeCache();
                 return $this->redirectToRoute('admin_page_edit', ['id' => $page->getId()]);
             }catch (\Exception $e){
                 $this->logger->critical('Impossible de créer une page : ' . $e->getMessage());

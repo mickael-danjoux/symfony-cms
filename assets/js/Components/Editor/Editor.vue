@@ -29,21 +29,6 @@ onMounted( async () => {
 		Toast.error('Une erreur est survenue lors du chargement de l\'éditeur. Veuillez recharger la page.')
 	}
 });
-
-
-/*const getHtml = () => {
-	const projectData = editor.getProjectData();
-	console.log(projectData)
-
-	const pagesHtml = editor.Pages.getAll().map(page => {
-		const component = page.getMainComponent()
-		return {
-			html: editor.getHtml({component}),
-			css: editor.getCss({component}),
-		}
-	})
-	return { id: 'demo', projectData, pagesHtml };
-}*/
 </script>
 
 

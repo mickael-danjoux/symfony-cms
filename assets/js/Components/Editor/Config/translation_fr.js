@@ -165,6 +165,14 @@ export default {
             'flex-shrink': 'Flex shrink',
             'align-self': 'Aligner',
         },
+        options: {
+            'text-align': {
+                left: 'gauche',
+                center: 'centrer',
+                right: 'droite',
+                justify: 'justifier'
+            }
+        }
     },
     traitManager: {
         empty: 'Veuillez sélectionner un élément pour modifier les paramètres de cet élément',

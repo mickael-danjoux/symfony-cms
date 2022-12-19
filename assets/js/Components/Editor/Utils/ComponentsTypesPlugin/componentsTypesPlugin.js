@@ -3,28 +3,6 @@ import { Toast } from "../../../Toast";
 export const componentsTypesPlugin = editor => {
     const domc = editor.DomComponents;
 
-
-/*    const supportedHeading = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
-    domc.addType('text-heading', {
-        isComponent: el => supportedHeading.includes(el.tagName),
-        model: {
-            defaults: {
-                draggable: true,
-                droppable: true,
-                content: 'Title',
-                tagName: 'h1'
-            }
-        },
-        extendView: 'text',
-        view: {
-            events: {
-                click: 'onActive'
-            }
-        }
-    })*/
-
-    //editor.DomComponents.getTypes().forEach(compType => console.log(compType.id))
-
     domc.addType('image', {
         model: {
             defaults: {
@@ -128,7 +106,6 @@ export const componentsTypesPlugin = editor => {
         domc.addType(type, {
             model: {
                 initToolbar() {
-                    console.log(editor.Commands.getAll())
                     typeOpt.prototype.initToolbar.apply(this, arguments);
                     const tb = this.get('toolbar');
 

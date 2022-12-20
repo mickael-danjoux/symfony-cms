@@ -18,7 +18,7 @@ class PageFactory
 
     public function createForForm(): Page
     {
-        $count = $this->pageRepo->count([]);
+        $count = $this->pageRepo->findNextId();
         $page = new Page();
         $page->setTitle(Page::PAGE_DEFAULT_TITLE_PREFIX . $count);
         $page->setPath($page->getTitle());

@@ -18,11 +18,22 @@
     {% include "admin/partials/_sidebar.html.twig" %}
 
     <div class="content-wrapper">
-        <div id="topbar">
-            {{ actionBar() }}
+        <div id="top-bar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12" id="top-bar-content">
+                        <div class="breadcrumb-bar">
+                            {% include "admin/partials/_breadcrumb.html.twig" with {'breadcrumb': currentPage.breadcrumb|default([])} only %}
+                        </div>
+                        <div class="actions">
+                            {{ actionBar() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div id="main-body">
+        <div id="main-content">
             {% block messages %}
                 {% include "admin/partials/_messages.html.twig" %}
             {% endblock %}

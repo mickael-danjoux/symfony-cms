@@ -1,58 +1,66 @@
-.fs-icon{
-  display: inline-block;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  font: var(--fa-font-solid);
-  font-weight: 900;
-}
-
-.fs-icon-before{
+.fs-icon-before {
   @extend .fs-icon;
 }
 
+.btn-back {
+  @extend .btn;
+  @extend .btn-dark;
 
+  &::before {
+    @extend .fs-icon-before;
+    content: "\f060";
+  }
+}
 
-.btn-add{
+.btn-add {
   @extend .btn;
   @extend .btn-primary;
-  &::before{
+
+  &::before {
     @extend .fs-icon-before;
     content: "\2b";
   }
 }
 
-.btn-save{
+.btn-save {
   @extend .btn;
   @extend .btn-success;
-  &::before{
+
+  &::before {
     @extend .fs-icon-before;
     content: "\f0c7";
   }
 }
 
-.btn-back{
+.btn-back {
   @extend .btn;
   @extend .btn-dark;
-  &::before{
+
+  &::before {
     @extend .fs-icon-before;
     content: "\f060";
   }
 }
-.btn-preview{
+
+.btn-preview {
   @extend .btn;
   @extend .btn-primary;
-  &::before{
+
+  &::before {
     @extend .fs-icon-before;
     content: "\f06e";
   }
 }
 
-.btn-remove{
+.btn-remove {
   @extend .btn;
   @extend .btn-danger;
-  &::before{
+
+  &::before {
     @extend .fs-icon-before;
     content: "\f2ed";
   }
 }
+
+
 

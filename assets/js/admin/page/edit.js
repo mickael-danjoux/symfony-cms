@@ -1,6 +1,6 @@
 import '../main'
 import {createApp, ref, onMounted} from "vue";
-import {initConfirmDeleteButtons} from "../../Components/ConfirmDeleteComponent";
+import {initConfirmButtons} from "../../Components/ConfirmComponent";
 import slugger from 'slugger'
 
 createApp({
@@ -12,7 +12,7 @@ createApp({
         const formData = ref(null)
         const formHasChanged = ref(false)
         onMounted(() => {
-            initConfirmDeleteButtons()
+            initConfirmButtons()
             handleFormChange()
             onSelectPageTypeChange()
             manageUrlField()

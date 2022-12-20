@@ -37,6 +37,7 @@ Encore
     .addStyleEntry('style-app-storybook', './assets/styles/app/storybook.scss')
     .addStyleEntry('style-admin-main', './assets/styles/admin/main.scss')
     .addStyleEntry('style-admin-dashboard', './assets/styles/admin/dashboard.scss')
+    .addStyleEntry('style-admin-login', './assets/styles/admin/login.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     // .enableStimulusBridge('./assets/controllers.json')

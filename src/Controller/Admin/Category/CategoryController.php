@@ -35,6 +35,7 @@ class CategoryController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_category_list', ['slug' => $slug]);
+
     }
 
 
@@ -45,7 +46,7 @@ class CategoryController extends AbstractController
         $arrayTree = $repo->childrenHierarchy($category);
         $actions = (new ActionBar())
             ->addAddAction($this->generateUrl('admin_category_add', [
-                'slug' => $category->getRoot()->getSlug()
+                'slug' => Category::MENU_SLUG
             ]));
         return $this->render('admin/category/list.html.twig', [
             'arrayTree' => $arrayTree,
@@ -57,23 +58,22 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{slug}/ajouter', name: 'add')]
-    public function add(Category $parent, Request $request, EntityManagerInterface $em, CategoryRepository $repo): RedirectResponse|Response
+    public function add(Category $root, Request $request, EntityManagerInterface $em, CategoryRepository $repo): RedirectResponse|Response
     {
-        if ($parent instanceof MenuCategory) {
+        if ($root instanceof MenuCategory) {
             $category = new MenuCategory();
-            $parent = $repo->findOneBySlug(Category::MENU_SLUG);
-            $category->setParent($parent);
+            $category->setParent($root);
         } else {
             return $this->redirectToRoute('admin_dashboard');
         }
 
 
         $form = $this->createForm(
-            CategoryType::class, $category, ['attr' => ['category' => $parent]]
+            CategoryType::class, $category, ['attr' => ['category' => $root]]
         )->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($parent instanceof MenuCategory) {
+            if ($root instanceof MenuCategory) {
                 MenuService::clearFields($category);
             }
             $em->persist($category);
@@ -83,37 +83,36 @@ class CategoryController extends AbstractController
             $repo->recover();
             $em->flush();
             $em->clear();
-            $this->addFlash('success', 'la catégorie a bien été ajoutée');
-            return $this->redirectToRoute('admin_category_list', ['slug' => $parent->getSlug()]);
+            $this->addFlash('success', 'La catégorie a bien été ajoutée');
+            return $this->redirectToRoute('admin_category_list', ['slug' => $root->getSlug()]);
         }
 
         $actions = (new ActionBar())
             ->addBackAction($this->generateUrl('admin_category_list', [
-                'slug' => $parent->getRoot()->getSlug()
+                'slug' => $root->getRoot()->getSlug()
             ]))
-            ->addSaveAction('category')
-        ;
+            ->addSaveAction('category');
+
+        $currentPage = $this->getCurrentPage($category);
+        $currentPage['breadcrumb'][] = ['label' => 'Nouvel item',];
 
         return $this->render('admin/category/edit.html.twig', array(
             'form' => $form->createView(),
-            'catParent' => $parent,
+            'root' => $root,
             'category' => $category,
             'actions' => $actions->getAll(),
-            'currentPage' => $this->getCurrentPage($category)
-
+            'currentPage' => $currentPage
         ));
     }
 
-    #[Route('/{parent}/{slugChild}', name: 'edit')]
-    #[ParamConverter('parent', options: ['mapping' => ['parent' => 'slug']])]
-    public function edit(Category $parent, string $slugChild, Request $request, CategoryRepository $repo, EntityManagerInterface $em): RedirectResponse|Response
+    #[Route('/{root}/{idChild}', name: 'edit')]
+    #[ParamConverter('root', options: ['mapping' => ['root' => 'slug']])]
+    public function edit(Category $root, int $idChild, Request $request, CategoryRepository $repo, EntityManagerInterface $em): RedirectResponse|Response
     {
 
-        //Can't get the children directly with the param converter
-        //because child depends on the slug and id of the parent (not just the parent's slug)
-        $category = $repo->findOneBy(['root' => $parent, 'slug' => $slugChild]);
+        $category = $repo->findOneBy(['root' => $root, 'id' => $idChild]);
 
-        $form = $this->createForm(CategoryType::class, $category, ['attr' => ['category' => $parent]]);
+        $form = $this->createForm(CategoryType::class, $category, ['attr' => ['category' => $root]]);
 
         $form->handleRequest($request);
 
@@ -126,7 +125,7 @@ class CategoryController extends AbstractController
             }
 
             if ($form->isValid()) {
-                if ($parent instanceof MenuCategory) {
+                if ($root instanceof MenuCategory) {
                     MenuService::clearFields($category);
                 }
                 $em->persist($category);
@@ -136,38 +135,46 @@ class CategoryController extends AbstractController
                 $repo->recover();
                 $em->flush();
                 $em->clear();
-                $this->addFlash('success', 'la catégorie a bien été modifiée');
-                return $this->redirectToRoute('admin_category_list', ['slug' => $parent->getSlug()]);
+                $this->addFlash('success', 'La catégorie a bien été modifiée');
+                return $this->redirectToRoute('admin_category_list', ['slug' => $root->getSlug()]);
             }
         }
 
         $actions = (new ActionBar())
             ->addBackAction($this->generateUrl('admin_category_list', [
-                'slug' => $parent->getRoot()->getSlug()
+                'slug' => $root->getRoot()->getSlug()
             ]))
             ->addDeleteAction($this->generateUrl('admin_category_delete', [
                 'id' => $category->getId()
             ]))
-            ->addSaveAction('category')
+            ->addSaveAction('category');
 
-        ;
+        $currentPage = $this->getCurrentPage($category);
+        $currentPage['breadcrumb'][] = ['label' => $category->getTitle()];
 
         return $this->render('admin/category/edit.html.twig', array(
             'form' => $form->createView(),
-            'catParent' => $parent,
+            'root' => $root,
             'category' => $category,
-            'actions' =>$actions->getAll(),
-            'currentPage' => $this->getCurrentPage($category)
+            'actions' => $actions->getAll(),
+            'currentPage' => $currentPage
         ));
     }
 
+
     private function getCurrentPage(Category $category): array
     {
-        if($category instanceof MenuCategory){
+        if ($category instanceof MenuCategory) {
             return [
                 'menu' => [
                     'id' => 'pages_content',
                     'action' => 'menu'
+                ],
+                'breadcrumb' => [
+                    [
+                        'label' => 'Menus',
+                        'link' => $this->generateUrl('admin_category_list', ['slug' => Category::MENU_SLUG])
+                    ]
                 ]
             ];
         }

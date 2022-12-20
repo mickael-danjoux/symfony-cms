@@ -40,11 +40,7 @@ class AdminUserController extends AbstractController
         }
         $actions = (new ActionBar())
             ->addAddAction($this->generateUrl('admin_user_add'));
-        $currentPage = [
-            'menu' => [
-                'id' => 'user_admin_list'
-            ]
-        ];
+        $currentPage = $this->getCurrentPage();
 
         return $this->render('admin/user/list.html.twig', [
             'datatable' => $datatable,
@@ -57,11 +53,15 @@ class AdminUserController extends AbstractController
     #[Route('/editer/{id}', name: 'edit')]
     public function edit(?User $user, Request $request, UserPasswordHasherInterface $hasher): Response
     {
+        $currentPage = $this->getCurrentPage();
         if ($request->attributes->get("_route") === 'admin_user_edit' && !$user instanceof User) {
             $this->addFlash('danger', "Page introuvable");
             return $this->redirectToRoute('admin_user_list');
         } elseif ($request->attributes->get("_route") === 'admin_user_add') {
             $user = new User();
+            $currentPage['breadcrumb'][] = ['label' => 'Nouvel Admin'];
+        }else{
+            $currentPage['breadcrumb'][] = ['label' => $user->getDisplayName()];
         }
 
         $form = $this->createForm(AdminUserType::class, $user);
@@ -120,11 +120,7 @@ class AdminUserController extends AbstractController
             ->addBackAction($this->generateUrl('admin_user_list'))
             ->addSaveAction('admin_user')
         ;
-        $currentPage = [
-            'menu' => [
-                'id' => 'user_admin_list'
-            ]
-        ];
+
         return $this->render('admin/user/edit.html.twig', [
             'form' => $form->createView(),
             'currentPage' => $currentPage,
@@ -146,5 +142,17 @@ class AdminUserController extends AbstractController
             ]);
         }
         return $this->redirectToRoute('admin_user_list');
+    }
+
+    private function getCurrentPage(): array
+    {
+        return [
+            'menu' => [
+                'id' => 'user_admin_list',
+            ],
+            'breadcrumb' => [
+                ['label' => 'Administrateurs', 'link' => $this->generateUrl('admin_user_list')]
+            ]
+        ];
     }
 }

@@ -5,15 +5,7 @@
 {% block messages %}{% endblock %}
 
 {% block body %}
-
     <input type="hidden" id="pageId" value="{{ page.id }}">
-
-    <ol class="breadcrumb main-breadcrumb px-4 py-2">
-        <li class="breadcrumb-item"><a href="{{ path('admin_page_list') }}">Pages</a></li>
-        <li class="breadcrumb-item">Editer une page</li>
-    </ol>
-
-
     <div class="container-fluid">
         {{ form_start(form) }}
         {{ form_errors(form) }}
@@ -137,10 +129,8 @@
         <hr>
         <div class="d-none">
             {{form_row(form.content)}}
-
         </div>
         {{ form_rest(form) }}
-        <button class="btn-save">Enregistrer</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

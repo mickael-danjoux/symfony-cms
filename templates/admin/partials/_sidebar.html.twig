@@ -7,20 +7,20 @@
 		</span>
     </button>
 
-    <nav role="navigation" class="menu">
-        <div class="menu-header">
+    <nav role="navigation" class="nav">
+        <div class="nav-header">
             <a href="{{ path('admin_dashboard') }}">
                 <span>Administration</span>
             </a>
         </div>
 
-        <div class="menu-body">
-            {% set currentMenuId = currentPage.menu.id|default(null) %}
-            {% set currentMenuAction = currentPage.menu.action|default(null) %}
+        <div class="nav-body">
+            {% set currentNavId = currentPage.menu.id|default(null) %}
+            {% set currentNavAction = currentPage.menu.action|default(null) %}
 
-            <ul class="menu-items">
-                <li data-id="dashboard" class="menu-item {{ currentMenuId == 'dashboard' ? 'active' : '' }}">
-                    <a href="{{ path('admin_dashboard') }}" class="menu-link">
+            <ul class="nav-items">
+                <li data-id="dashboard" class="nav-item {{ currentNavId == 'dashboard' ? 'active' : '' }}">
+                    <a href="{{ path('admin_dashboard') }}" class="nav-link">
                         <span>Dashboard</span>
                         <span class="icon">
 							<i class="fa-solid fa-gauge"></i>
@@ -28,57 +28,54 @@
                     </a>
                 </li>
 
-                <li data-id="logos" class="menu-item menu-hasdropdown {{ currentMenuId == 'pages_content' ? 'active' : '' }}">
-                    <label title="toggle menu" for="pages_content">
-						<span class="menu-link">
-							<span>Contenus</span>
-							<span class="icon">
-								<i class="fa-regular fa-images"></i>
-							</span>
+                <li data-id="pageContents" class="nav-item has-dropdown {{ currentNavId == 'pages_content' ? 'open' : '' }}">
+					<span class="nav-link">
+						<span>Contenus</span>
+						<span class="icon">
+							<i class="fa-regular fa-images"></i>
 						</span>
-                        <span class="downarrow"><i class="fa fa-caret-down"></i></span>
-                    </label>
-                    <input type="checkbox" class="sub-menu-checkbox" id="pages_content" {{ currentMenuId == 'pages_content' ? 'checked="checked"' : '' }}>
+					</span>
 
-                    <ul class="sub-menu-items ps-1">
-                        <li class="menu-item {{ currentMenuId == 'page_contents' and currentMenuAction == 'menu' ? 'active' : '' }}">
-                            <a href="{{ path('admin_category_list',{'slug':constant('App\\Entity\\Category\\Category::MENU_SLUG')  }) }}" class="menu-link">
+                    <ul class="sub-nav-items ps-1">
+                        <li class="nav-item {{ currentNavId == 'pages_content' and currentNavAction == 'menu' ? 'active' : '' }}">
+                            <a href="{{ path('admin_category_list',{'slug':constant('App\\Entity\\Category\\Category::MENU_SLUG')  }) }}" class="nav-link">
                                 <span>Menu</span>
                                 <span class="icon">
-									<i class="fa-solid fa-list"></i>
+								<i class="fa-solid fa-network-wired"></i>
 								</span>
                             </a>
                         </li>
-                        <li class="menu-item {{ currentMenuId == 'page_contents' and currentMenuAction == 'pages' ? 'active' : '' }}">
-                            <a href="{{path('admin_page_list')}}" class="menu-link">
+                        <li class="nav-item {{ currentNavId == 'pages_content' and currentNavAction == 'pages' ? 'active' : '' }}">
+                            <a href="{{path('admin_page_list')}}" class="nav-link">
                                 <span>Pages</span>
                                 <span class="icon">
-									<i class="fa-solid fa-pen-to-square"></i>
+									<i class="fa-solid fa-pager"></i>
 								</span>
                             </a>
                         </li>
                     </ul>
                 </li>
 
+
                 {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <li data-id="channelConfig"  class="menu-item {{ currentMenuId == 'channel_config' ? 'active' : '' }} ">
-                        <a href="{{ path('app_admin_channel_index') }}" class="menu-link">
+                    <li data-id="channelConfig"  class="nav-item {{ currentNavId == 'channel_config' ? 'active' : '' }} ">
+                        <a href="{{ path('admin_channel_index') }}" class="nav-link">
                             <span>Configuration</span>
                             <span class="icon">
                     			<i class="fa-solid fa-gear"></i>
                     		</span>
                         </a>
                     </li>
-                    <li data-id="userAdminList"  class="menu-item {{ currentMenuId == 'user_admin_list' ? 'active' : '' }} " >
-                        <a href="{{ path('admin_user_list') }}" class="menu-link">
+                    <li data-id="userAdminList"  class="nav-item {{ currentNavId == 'user_admin_list' ? 'active' : '' }} " >
+                        <a href="{{ path('admin_user_list') }}" class="nav-link">
                             <span>Administrateurs</span>
                             <span class="icon">
                     		    <i class="fa-solid fa-users-gear"></i>
                     		</span>
                         </a>
                     </li>
-                    <li data-id="cacheClear"  class="menu-item" >
-                        <a href="{{ path('admin_clear_cache') }}" class="menu-link">
+                    <li data-id="cacheClear"  class="nav-item" >
+                        <a href="{{ path('admin_clear_cache') }}" class="nav-link">
                             <span>Vider le cache</span>
                             <span class="icon">
                     			<i class="fa-solid fa-rotate"></i>
@@ -88,18 +85,18 @@
                 {% endif %}
             </ul>
         </div>
-        <div class="menu-footer border-top pt-2">
-            <ul class="menu-items">
-                <li data-id="homepage" class="menu-item">
-                    <a href="{{ path('app_home') }}" class="menu-link">
+        <div class="nav-footer border-top pt-2">
+            <ul class="nav-items">
+                <li data-id="homepage" class="nav-item">
+                    <a href="{{ path('app_home') }}" class="nav-link">
                         <span>Retour au site</span>
                         <span class="icon">
 							<i class="fa fa-home"></i>
 						</span>
                     </a>
                 </li>
-                <li data-id="logout" class="menu-item">
-                    <a href="{{ path('admin_logout') }}" class="menu-link">
+                <li data-id="logout" class="nav-item">
+                    <a href="{{ path('admin_logout') }}" class="nav-link js-btn-confirm" data-message="Voulez-vous vraiment vous déconnecter?" >
                         <span>Déconnexion</span>
                         <span class="icon">
 							<i class="fa-solid fa-power-off text-danger"></i>

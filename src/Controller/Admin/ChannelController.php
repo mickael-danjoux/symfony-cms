@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/channel', name: 'app_admin_channel_')]
+#[Route('/channel', name: 'admin_channel_')]
 class ChannelController extends AbstractController
 {
     #[Route('', name: 'index')]
@@ -41,10 +41,17 @@ class ChannelController extends AbstractController
         $actions = (new ActionBar())
             ->addSaveAction('parameters')
         ;
+        $currentPage = [
+            'menu' => ['id' => 'channel_config'],
+            'breadcrumb' => [
+                ['label' => 'Configuration']
+            ]
+        ];
 
         return $this->render('admin/channel/index.html.twig', [
             'parametersForm' => $parametersForm->createView(),
-            'actions' => $actions->getAll()
+            'actions' => $actions,
+            'currentPage' => $currentPage
         ]);
     }
 }

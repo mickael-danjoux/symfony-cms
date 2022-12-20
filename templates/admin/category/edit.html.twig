@@ -5,12 +5,6 @@
 {% block messages %}{% endblock %}
 
 {% block body %}
-
-    <ol class="breadcrumb main-breadcrumb px-4 py-2">
-        <li class="breadcrumb-item">
-            Catégories
-        </li>
-    </ol>
     <div class="container-fluid">
         {{ form_start(form) }}
         {{ form_errors(form) }}
@@ -42,7 +36,7 @@
                                 </div>
                             {% endif %}
                         </div>
-                        {% if catParent.slug == constant('App\\Entity\\Category\\Category::MENU_SLUG') %}
+                        {% if root.slug == constant('App\\Entity\\Category\\Category::MENU_SLUG') %}
                             <div class="row">
                                 <div class="col-12 col-md-6 col-lg-4">
                                     {{ form_row(form.type) }}

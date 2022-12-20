@@ -2,14 +2,6 @@
 
 
 {% block body %}
-    <ol class="breadcrumb main-breadcrumb px-4 py-2">
-        {% if root.slug == constant('App\\Entity\\Category\\Category::MENU_SLUG') %}
-            <li class="breadcrumb-item"><a
-                        href="{{ path('admin_category_list',{'slug':constant('App\\Entity\\Category\\Category::MENU_SLUG') }) }}">Arborescence
-                    du site</a></li>
-        {% endif %}
-    </ol>
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -34,6 +26,4 @@
             </div>
         </div>
     </div>
-
-
 {% endblock %}

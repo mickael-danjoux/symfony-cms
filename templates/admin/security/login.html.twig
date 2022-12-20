@@ -1,67 +1,56 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
 
-    {{ encore_entry_link_tags('style-admin-main') }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+          integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('style-admin-login') }}
+    {% endblock %}
     <title>Administration - Connexion</title>
-
 </head>
 <body>
-<main>
-    <div id="layoutSidenav">
-        <div id="layoutSidenav_content">
-            <div class="container ">
-                <div class="row">
-                    <div class="col-12 col-md-4 mt-5 m-auto">
-                        <form method="post">
-                            {% if error %}
-                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                            {% endif %}
-
-
-                            <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
-                            <label for="inputEmail">Email</label>
-                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-2"
-                                   autocomplete="email" required autofocus>
-                            <label for="inputPassword">Mot de passe</label>
-                            <input type="password" name="password" id="inputPassword" class="form-control mb-2" autocomplete="current-password"
-                                   required>
-
-                            <input type="hidden" name="_csrf_token"
-                                   value="{{ csrf_token('authenticate') }}"
-                            >
-
-                            <div class="checkbox mb-3">
-                                <label>
-                                    <input type="checkbox" name="_remember_me"> Se souvenir de moi
-                                </label>
-                            </div>
-
-
-                            <button class="btn btn-lg btn-primary my-2" type="submit">
-                                Connexion
-                            </button>
-                        </form>
-                        <a href="{{ path('app_forgot_password') }}">Mot de passe oublié ?</a>
-                    </div>
-                </div>
-
-
-            </div>
-
-            <footer class="py-4 mt-auto">
-                <div class="text-muted">Copyright &copy;  <span id="cDate"></span></div>
-            </footer>
+<div class="container">
+    <div class="wrapper">
+        <div class="title">
+            <span>Administration</span>
         </div>
 
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <form method="post">
+            <div class="row">
+                <i class="fas fa-user"></i>
+                <input type="email" id="username" name="_username" value="{{ last_username }}" placeholder="Email"
+                       autocomplete="email" required autofocus>
+            </div>
+            <div class="row">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" name="_password" placeholder="Mot de passe"
+                       autocomplete="current-password" required>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            </div>
+            <div class="pass">
+                <label>
+                    <input type="checkbox" name="_remember_me">
+                    Se souvenir de moi
+                </label>
+            </div>
+            <div class="pass">
+                <a href="{{ path('app_forgot_password') }}">Mot de passe oublié ?</a>
+            </div>
+            <div class="row button">
+                <button type="submit">Connexion</button>
+            </div>
+        </form>
     </div>
-</main>
+</div>
 </body>
-
-{{ encore_entry_script_tags('js-admin-main') }}
-
+</html>

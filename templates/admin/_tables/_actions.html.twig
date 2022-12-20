@@ -5,7 +5,7 @@
         </a>
     {% endif %}
     {% if value.remove is defined %}
-        <a class="btn btn-delete" data-href="{{ value.remove }}" href="#">
+        <a class="btn btn-delete" href="{{ value.remove }}" data-message="Veuillez confirmer la suppression">
             <i class="fas fa-trash"></i>
         </a>
     {% endif %}

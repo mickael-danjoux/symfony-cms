@@ -42,11 +42,11 @@ class PageController extends AbstractController
         }
         $actions = (new ActionBar())
             ->addAddAction($this->generateUrl('admin_page_add'));
+
         return $this->render('admin/page/list.html.twig', [
             'datatable' => $datatable,
             'actions' => $actions->getAll(),
             'currentPage' => $this->getCurrentPage()
-
         ]);
     }
 
@@ -62,6 +62,7 @@ class PageController extends AbstractController
         } elseif ($request->attributes->get("_route") === 'admin_page_add') {
             try{
                 $page = $pageFactory->createForForm();
+                $routerCacheService->removeCache();
                 return $this->redirectToRoute('admin_page_edit', ['id' => $page->getId()]);
             }catch (\Exception $e){
                 $this->logger->critical('Impossible de créer une page : ' . $e->getMessage());
@@ -102,12 +103,14 @@ class PageController extends AbstractController
             ->addPreviewAction('#')
         ;
 
+        $currentPage =  $this->getCurrentPage();
+        $currentPage['breadcrumb'][] = ['label' => $page->getTitle()];
 
         return $this->render('admin/page/edit.html.twig', [
             'form' => $form->createView(),
             'page' => $page,
             'actions' => $actions->getAll(),
-            'currentPage' => $this->getCurrentPage()
+            'currentPage' => $currentPage
         ]);
     }
 
@@ -133,6 +136,12 @@ class PageController extends AbstractController
             'menu' => [
                 'id' => 'pages_content',
                 'action' => 'pages'
+            ],
+            'breadcrumb' => [
+                [
+                    'label' => 'Pages',
+                    'link' => $this->generateUrl('admin_page_list')
+                ]
             ]
         ];
     }

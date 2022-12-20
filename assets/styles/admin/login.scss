@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+$login-form-color-primary: #000;
+$login-form-color-primary-hover: #363636;
+$login-form-color-secondary: #fff;
+$login-form-color-shadow: rgba(159, 163, 162, 0.3);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html{
+  height: 100%;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  background-color: #f5f5f1;
+  background-image: linear-gradient(135deg, #f5f5f1 0%, #cfcada 100%);
+}
+
+::selection {
+  background: $login-form-color-shadow;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 440px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.1);
+  margin-top: 10%;
+}
+
+.wrapper .title {
+  height: 90px;
+  background: $login-form-color-primary;
+  border-radius: 5px 5px 0 0;
+  color: $login-form-color-secondary;
+  font-size: 30px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper form {
+  padding: 30px 25px 25px 25px;
+}
+
+.wrapper form .row {
+  height: 45px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.wrapper form .row button,
+.wrapper form .row input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding-left: 60px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+form .row button:focus,
+form .row input:focus {
+  border-color: $login-form-color-primary;
+  box-shadow: inset 0px 0px 2px 2px $login-form-color-shadow;
+}
+
+form .row input::placeholder {
+  color: #999;
+}
+
+.wrapper form .row i {
+  position: absolute;
+  width: 47px;
+  height: 100%;
+  color: $login-form-color-secondary;
+  font-size: 18px;
+  background: $login-form-color-primary;
+  border: 1px solid $login-form-color-primary;
+  border-radius: 5px 0 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper form .pass {
+  margin: -8px 0 20px 0;
+}
+
+.wrapper form .pass a {
+  color: $login-form-color-primary;
+  font-size: 17px;
+  text-decoration: none;
+}
+
+.wrapper form .pass a:hover {
+  text-decoration: underline;
+}
+
+.wrapper form .button button {
+  color: $login-form-color-secondary;
+  font-size: 20px;
+  font-weight: 500;
+  padding-left: 0px;
+  background: $login-form-color-primary;
+  border: 1px solid $login-form-color-primary;
+  cursor: pointer;
+}
+
+form .button button:hover {
+  background: $login-form-color-primary-hover;
+}
+
+.alert {
+  position: relative;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: inherit;
+  background-color: transparent;
+  border: 1px solid transparent;
+  text-align: center;
+}
+
+.alert-danger {
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+}

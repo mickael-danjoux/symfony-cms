@@ -1,16 +1,10 @@
-@import "../variables";
+@import "./variables";
 @import "~bootstrap/scss/bootstrap";
 @import "@fortawesome/fontawesome-free/scss/solid";
 @import "partials/buttons";
-@import url('./partials/layout.css');
-@import url('./partials/scrollbar.css');
-
-
-:root {
-  --bs-primary-rgb: 0, 157, 99;
-  --bs-secondary-rgb: 187, 190, 197;
-  --admin-secondary-bg-rgb: 193, 239, 222;
-}
+@import 'partials/layout.scss';
+@import 'partials/scrollbar';
+@import "partials/swal";
 
 
 label.required:after {

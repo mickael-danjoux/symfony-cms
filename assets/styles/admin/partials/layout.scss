@@ -157,12 +157,19 @@ main#wrapper {
             }
 
             &.has-dropdown {
+
               > .nav-link span:first-child::after {
                 @extend .fs-icon;
                 position: absolute;
                 right: 10px;
                 top: 20%;
-                content: "\f13a";
+                content: "\f138";
+                transition:transform .3s;
+              }
+              &.open{
+                > .nav-link span:first-child::after {
+                  transform: rotate(90deg);
+                }
               }
 
               :not(.open) .sub-nav-items {

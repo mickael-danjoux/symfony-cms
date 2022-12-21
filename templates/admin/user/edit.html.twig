@@ -2,35 +2,38 @@
 
 {% block title %}Utilisateurs{% endblock %}
 
-{% block body %}
-    <ol class="breadcrumb main-breadcrumb px-3 py-2">
-        <li class="breadcrumb-item"><a href="{{ path('admin_user_list') }}">Utilisateurs</a></li>
-        <li class="breadcrumb-item">Editer un utilisateur</li>
-    </ol>
 
+{% block body %}
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header d-flex justify-content-between">
+                    <div class="card-header">
                         <span class="h3 mb-0">Editer un utilisateur</span>
-                        <a href="{{ path('admin_user_list') }}" class="btn-back">Retour</a>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
                                 {{ form_start(form) }}
                                 {{ form_errors(form) }}
-                                {{ form_rest(form) }}
                                 <div class="row">
-                                    <div class="col-12">
-                                        <button class="btn btn-save">Enregistrer</button>
+                                    <div class="col-12 col-md-6">
+                                        {{form_row(form.displayName)}}
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        {{form_row(form.email)}}
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        {{form_row(form.plain_password)}}
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        {{form_row(form.roles)}}
                                     </div>
                                 </div>
+                                {{ form_rest(form) }}
                                 {{ form_end(form) }}
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

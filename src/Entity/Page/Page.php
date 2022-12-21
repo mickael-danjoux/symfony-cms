@@ -32,9 +32,6 @@ class Page
 	#[ORM\Column(length: 255)]
 	private ?string $title = null;
 
-	#[ORM\Column(type: Types::TEXT, nullable: true)]
-	private ?string $content = "[]";
-
 	#[ORM\Column(length: 255)]
 	private ?string $path = null;
 
@@ -91,19 +88,6 @@ class Page
 	public function setTitle(string $title): self
 	{
 		$this->title = $title;
-
-		return $this;
-	}
-
-
-	public function getContent(): ?string
-	{
-		return $this->content;
-	}
-
-	public function setContent(?string $content): self
-	{
-		$this->content = $content;
 
 		return $this;
 	}

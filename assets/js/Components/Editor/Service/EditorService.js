@@ -21,6 +21,7 @@ export const initEditor = (entrypointPath, isSuperAdmin = false) => {
     const pageId = window.location.pathname.split('/')[4]
 
     const editor = grapesjs.init({
+        cssIcons: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css',
         canvas: {
             styles: [{href: entrypointPath}]
         },
@@ -198,12 +199,21 @@ export const initEditor = (entrypointPath, isSuperAdmin = false) => {
 
     if (!isSuperAdmin) editor.BlockManager.remove('custom-code')
 
+    const blocksToRestrict = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+    editor.on('component:selected', (model) => {
+        if (blocksToRestrict.includes(model.attributes.tagName)) model.attributes.stylable = []
+    })
 
     editor.on('storage:error:store', error => Toast.error(Messages.storage.store.error))
     editor.on('storage:error:load', error => Toast.error(Messages.storage.load.error))
 
     editor.on('asset:open', () => handleAssetRemove())
-    editor.on('asset:upload:end', () => handleAssetRemove())
+    editor.on('asset:upload:end', async () => {
+        handleAssetRemove()
+        // upload une image ne déclenche pas la sauvegarde des données de l'éditeur
+        // donc on force la sauvegarde
+        await editor.store();
+    })
     editor.on('asset:upload:error', error => Toast.error(Messages.asset.upload.error))
 
     editor.on('asset:remove', async (asset) => {

@@ -1,4 +1,4 @@
-import {ConfirmDeleteComponent} from "../ConfirmDeleteComponent";
+import {ConfirmComponent} from "../ConfirmComponent";
 
 const options = {
     searching: true,
@@ -28,9 +28,9 @@ function addOnDeleteEvent() {
     document.querySelectorAll('.dataTable td .btn-delete').forEach((el) => {
         el.addEventListener('click', (e) => {
             e.preventDefault()
-            ConfirmDeleteComponent.fire({}).then((result) => {
+            ConfirmComponent(el.getAttribute('data-message')).fire({}).then((result) => {
                 if (result.isConfirmed) {
-                    location.href = el.getAttribute('data-href')
+                    location.href = el.getAttribute('href')
                 }
             })
         })

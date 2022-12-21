@@ -1,0 +1,25 @@
+$scrollbar-color-primary: #fc0d1b;
+$scrollbar-color-secondary: #a5aaad;
+$scrollbar-color-track: #a5aaad;
+$scrollbar-width: 5px;
+$scrollbar-height: 6px;
+
+
+::-webkit-scrollbar {
+    width: $scrollbar-width;
+    height: $scrollbar-height;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px $scrollbar-color-track;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $scrollbar-color-primary;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $scrollbar-color-secondary;
+}

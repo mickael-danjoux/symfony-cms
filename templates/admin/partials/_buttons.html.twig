@@ -1,0 +1,55 @@
+{% if actions is defined and actions is not null %}
+    {% for action in actions %}
+        {% if action.id is defined and action.id is not null %}
+            {% if action.id == 'back' and action.options.link is defined and action.options.link is not null %}
+                {{ _self.back(action.options.link, action.options.label) }}
+            {% endif %}
+
+            {% if action.id == 'add' and action.options.link is defined and action.options.link is not null %}
+                {{ _self.add(action.options.link, action.options.label) }}
+            {% endif %}
+
+            {% if action.id == 'delete' and action.options.link is defined and action.options.link is not null %}
+                {{ _self.delete(action.options.link, action.options.label) }}
+            {% endif %}
+
+            {% if action.id == 'save' and action.options.formName is defined and action.options.formName is not null %}
+                {{ _self.save(action.options.formName, action.options.label) }}
+            {% endif %}
+
+            {% if action.id == 'preview' and action.options.link is defined and action.options.link is not null %}
+                {{ _self.preview(action.options.link, action.options.label) }}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% macro back(link, label) %}
+    <a href="{{ link }}" class="btn-back btn-sm ms-1">
+        {{ label }}
+    </a>
+{% endmacro %}
+
+{% macro add(link, label) %}
+    <a href="{{ link }}" class="btn-add btn-sm ms-1">
+        {{ label }}
+    </a>
+{% endmacro %}
+
+{% macro delete(link, label) %}
+    <a href="{{ link }}" class="btn-remove btn-sm ms-1">
+        {{ label }}
+    </a>
+{% endmacro %}
+
+{% macro save(formName, label) %}
+    <button @click="storeEditorContent" type="button" class="btn-save btn-sm ms-1 js-validate-form" data-form-name="{{ formName }}">
+        {{ label }}
+    </button>
+{% endmacro %}
+
+{% macro preview(link, label) %}
+    <a href="{{ link }}" class="btn-preview btn-sm ms-1 js-disabled-on-change" @click="preview">
+        Prévisualiser
+    </a>
+{% endmacro %}

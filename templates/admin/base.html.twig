@@ -14,47 +14,30 @@
 
 </head>
 <body>
-<main class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand pe-3">
-        <button class="btn btn-info btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i>
-        </button>
-        <div class="navbar-date mx-auto  d-lg-block">
-            Bonjour {{app.user.displayName}}
-        </div>
-        <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0">
-            <li class="nav-item dropdown user-dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-bs-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false"><i
-                            class="fas fa-user fa-fw"></i></a>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ path('admin_logout') }}"><i class="fas fa-sign-out-alt"></i><span
-                                class="ms-2">Déconnexion</span></a>
+<main id="wrapper" class="nav-close">
+    {% include "admin/partials/_sidebar.html.twig" %}
+
+    <div class="content-wrapper">
+        <div id="top-bar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12" id="top-bar-content">
+                        <div class="breadcrumb-bar">
+                            {% include "admin/partials/_breadcrumb.html.twig" with {'breadcrumb': currentPage.breadcrumb|default([])} only %}
+                        </div>
+                        <div class="actions">
+                            {{ actionBar() }}
+                        </div>
+                    </div>
                 </div>
-            </li>
-        </ul>
-    </nav>
-    <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion " id="sidenavAccordion">
-                {% include 'admin/partials/sidebar-menu.html.twig' %}
-            </nav>
+            </div>
         </div>
-        <div id="layoutSidenav_content">
-            <main class="flex-grow-1 flex-shrink-0">
 
-                {% block messages %}
-                    {% include 'admin/partials/_messages.html.twig' %}
-                {% endblock %}
-
-                {% block body %}
-                {% endblock %}
-
-            </main>
-            <footer class="py-4 mt-auto">
-                <div class="text-muted">Copyright &copy; {{ date() | date('Y') }}</div>
-            </footer>
+        <div id="main-content">
+            {% block messages %}
+                {% include "admin/partials/_messages.html.twig" %}
+            {% endblock %}
+            {% block body %}{% endblock %}
         </div>
     </div>
 </main>
@@ -65,6 +48,7 @@
 
     {{ encore_entry_script_tags('js-admin-main') }}
 {% endblock %}
+
 
 </body>
 </html>

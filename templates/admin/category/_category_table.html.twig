@@ -22,11 +22,12 @@
                 {{ category.sort }}
             </td>
             <td class="d-flex justify-content-around">
-                <a href="{{ path('admin_category_edit',{'parent': root.slug, 'slugChild' : category.slug}) }}"
+                <a href="{{ path('admin_category_edit',{'root': root.slug, 'idChild' : category.id}) }}"
                    class="mr-2"> <i class="fas fa-pencil-alt"></i></a>
-                <a class="btn-delete js-btn-delete"
-                   data-href="{{ path('admin_category_delete',{'id': category.id}) }}"
-                   href="#">
+                <a class="btn-delete js-btn-confirm"
+                   href="{{ path('admin_category_delete',{'id': category.id}) }}"
+                   data-message="Veuillez confirmer la suppression"
+                   >
                     <i class="fas fa-trash"></i>
                 </a>
             </td>

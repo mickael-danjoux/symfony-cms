@@ -1,32 +1,66 @@
-.btn-add{
-  @extend .btn;
-  @extend .btn-primary;
-  &:before{
-    content: "\f067";
-    font-family: "Font Awesome 5 Free";
-    margin-right: 10px;
-    font-weight: 900
-  }
+.fs-icon-before {
+  @extend .fs-icon;
 }
 
-.btn-save{
-  @extend .btn;
-  @extend .btn-success;
-  &:before{
-    content: "\f0c7";
-    font-family: "Font Awesome 5 Free";
-    margin-right: 10px;
-    font-weight: 900
-  }
-}
-
-.btn-back{
+.btn-back {
   @extend .btn;
   @extend .btn-dark;
-  &:before{
-    content: "\f053";
-    font-family: "Font Awesome 5 Free";
-    margin-right: 15px;
-    font-weight: 900;
+
+  &::before {
+    @extend .fs-icon-before;
+    content: "\f060";
   }
 }
+
+.btn-add {
+  @extend .btn;
+  @extend .btn-primary;
+
+  &::before {
+    @extend .fs-icon-before;
+    content: "\2b";
+  }
+}
+
+.btn-save {
+  @extend .btn;
+  @extend .btn-success;
+
+  &::before {
+    @extend .fs-icon-before;
+    content: "\f0c7";
+  }
+}
+
+.btn-back {
+  @extend .btn;
+  @extend .btn-dark;
+
+  &::before {
+    @extend .fs-icon-before;
+    content: "\f060";
+  }
+}
+
+.btn-preview {
+  @extend .btn;
+  @extend .btn-primary;
+
+  &::before {
+    @extend .fs-icon-before;
+    content: "\f06e";
+  }
+}
+
+.btn-remove {
+  @extend .btn;
+  @extend .btn-danger;
+
+  &::before {
+    @extend .fs-icon-before;
+    content: "\f2ed";
+  }
+}
+
+
+

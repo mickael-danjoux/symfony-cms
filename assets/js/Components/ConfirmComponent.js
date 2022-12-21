@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 
-export const ConfirmDeleteComponent = Swal.mixin({
-    title: 'Veuillez confirmer la suppression',
+export const ConfirmComponent = (message) => Swal.mixin({
+    title: message?? 'Veuillez confirmer votre action',
     customClass: {
         confirmButton: 'btn btn-success me-2',
         denyButton: 'btn btn-danger ms-2'
@@ -13,14 +13,14 @@ export const ConfirmDeleteComponent = Swal.mixin({
     denyButtonText: `Annuler`,
 })
 
-export const initConfirmDeleteButtons = () => {
-    document.querySelectorAll('.js-btn-delete').forEach((item) => {
+export const initConfirmButtons = () => {
+    document.querySelectorAll('.js-btn-confirm').forEach((item) => {
         item.addEventListener('click', (e) => {
             e.preventDefault()
-            ConfirmDeleteComponent.fire({
+            ConfirmComponent(item.getAttribute('data-message')).fire({
             }).then((result) => {
                 if (result.isConfirmed) {
-                    location.href = item.getAttribute('data-href')
+                    location.href = item.getAttribute('href')
                 }
             })
         })

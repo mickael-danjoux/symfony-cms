@@ -2,15 +2,14 @@
 
 {% block title %}Administration{% endblock %}
 
+{% set currentPage = {'menu': {'id': 'dashboard'}} %}
+
+
 {% block stylesheets %}
     {{ encore_entry_link_tags('style-admin-dashboard') }}
 {% endblock %}
 
 {% block body %}
-    <ol class="breadcrumb main-breadcrumb px-4 py-2">
-        <li class="breadcrumb-item"><a href="{{ path('admin_dashboard') }}">Tableau de bord</a></li>
-    </ol>
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">

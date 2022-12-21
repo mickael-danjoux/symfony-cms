@@ -4,6 +4,7 @@ namespace App\Repository\Page;
 
 use App\Entity\Page\Page;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -22,14 +23,24 @@ class PageRepository extends ServiceEntityRepository
         parent::__construct($registry, Page::class);
     }
 
+    /**
+     * @throws Exception
+     */
     public function findAllForRouting()
     {
         return $this->getEntityManager()
             ->getConnection()
             ->prepare('SELECT id, controller, path, route_name FROM page')
             ->executeQuery([])
-            ->fetchAllAssociative()
-            ;
+            ->fetchAllAssociative();
+    }
+
+    public function findNextId()
+    {
+        return $this->createQueryBuilder('p')
+                ->select('COALESCE(MAX(p.id), 0)')
+                ->getQuery()
+                ->getSingleScalarResult() + 1;
     }
 
 

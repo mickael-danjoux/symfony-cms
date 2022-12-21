@@ -1,10 +1,14 @@
 {% if app.session.flashBag.peekAll is not empty %}
     {% for label, messages in app.flashes %}
-        <div class="container  my-2">
-            <div class="alert alert-{{ label }} pb-0">
-                {% for message in messages %}
-                    <p>{{ message | raw }}</p>
-                {% endfor %}
+        <div class="container-fluid  my-2">
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-{{ label }} pb-0">
+                        {% for message in messages %}
+                            <p>{{ message | raw }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     {% endfor %}

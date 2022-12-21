@@ -2,10 +2,9 @@
 
 {% block title %}Configuration{% endblock %}
 
+
+
 {% block body %}
-    <ol class="breadcrumb main-breadcrumb px-4 py-2">
-        <li class="breadcrumb-item"><a href="{{ path('app_admin_channel_index') }}">Configuration</a></li>
-    </ol>
 
     <div class="container-fluid">
         <div class="row">
@@ -40,11 +39,7 @@
                             </div>
                         </div>
                         {{ form_rest(parametersForm) }}
-                        <div class="row">
-                            <div class="rol-12 d-flex justify-content-center">
-                                <button class="btn-save">Enregistrer</button>
-                            </div>
-                        </div>
+
                         {{ form_end(parametersForm) }}
                     </div>
                 </div>

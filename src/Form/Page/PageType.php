@@ -65,9 +65,6 @@ class PageType extends AbstractType
                 'html5' => true,
                 'input' => 'datetime',
             ])
-            ->add('content', TextType::class, [
-                'label' => false
-            ])
             ->add('seo', SeoType::class, [
                 'label' => false,
             ])

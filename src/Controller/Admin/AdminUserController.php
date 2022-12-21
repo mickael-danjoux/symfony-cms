@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\DataTable\User\UserTableType;
 use App\Entity\User\User;
 use App\Form\User\AdminUserType;
+use App\Utils\ActionBar;
 use Doctrine\ORM\EntityManagerInterface;
 use Omines\DataTablesBundle\DataTableFactory;
 use Psr\Log\LoggerInterface;
@@ -22,7 +23,7 @@ class AdminUserController extends AbstractController
 
     public function __construct(
         private readonly EntityManagerInterface $em,
-        private readonly LoggerInterface        $logger
+        private readonly LoggerInterface $logger
     )
     {
     }
@@ -31,15 +32,20 @@ class AdminUserController extends AbstractController
     public function index(DataTableFactory $dataTableFactory, Request $request): Response
     {
         $datatable = $dataTableFactory
-            ->createFromType(UserTableType::class,['admin' => true])
+            ->createFromType(UserTableType::class, ['admin' => true])
             ->handleRequest($request);
 
         if ($datatable->isCallback()) {
             return $datatable->getResponse();
         }
+        $actions = (new ActionBar())
+            ->addAddAction($this->generateUrl('admin_user_add'));
+        $currentPage = $this->getCurrentPage();
 
         return $this->render('admin/user/list.html.twig', [
             'datatable' => $datatable,
+            'currentPage' => $currentPage,
+            'actions' => $actions->getAll()
         ]);
     }
 
@@ -47,11 +53,15 @@ class AdminUserController extends AbstractController
     #[Route('/editer/{id}', name: 'edit')]
     public function edit(?User $user, Request $request, UserPasswordHasherInterface $hasher): Response
     {
+        $currentPage = $this->getCurrentPage();
         if ($request->attributes->get("_route") === 'admin_user_edit' && !$user instanceof User) {
             $this->addFlash('danger', "Page introuvable");
             return $this->redirectToRoute('admin_user_list');
         } elseif ($request->attributes->get("_route") === 'admin_user_add') {
             $user = new User();
+            $currentPage['breadcrumb'][] = ['label' => 'Nouvel Admin'];
+        }else{
+            $currentPage['breadcrumb'][] = ['label' => $user->getDisplayName()];
         }
 
         $form = $this->createForm(AdminUserType::class, $user);
@@ -105,10 +115,16 @@ class AdminUserController extends AbstractController
                 ]);
                 $this->addFlash('danger', 'Une erreur est survenue.');
             }
-
         }
+        $actions = (new ActionBar())
+            ->addBackAction($this->generateUrl('admin_user_list'))
+            ->addSaveAction('admin_user')
+        ;
+
         return $this->render('admin/user/edit.html.twig', [
             'form' => $form->createView(),
+            'currentPage' => $currentPage,
+            'actions' => $actions->getAll()
         ]);
     }
 
@@ -126,5 +142,17 @@ class AdminUserController extends AbstractController
             ]);
         }
         return $this->redirectToRoute('admin_user_list');
+    }
+
+    private function getCurrentPage(): array
+    {
+        return [
+            'menu' => [
+                'id' => 'user_admin_list',
+            ],
+            'breadcrumb' => [
+                ['label' => 'Administrateurs', 'link' => $this->generateUrl('admin_user_list')]
+            ]
+        ];
     }
 }

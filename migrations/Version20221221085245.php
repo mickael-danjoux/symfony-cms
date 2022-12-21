@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221209113937 extends AbstractMigration
+final class Version20221221085245 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -26,7 +26,7 @@ final class Version20221209113937 extends AbstractMigration
         $this->addSql('ALTER TABLE media_image ADD CONSTRAINT FK_DA24C0EEBF396750 FOREIGN KEY (id) REFERENCES media (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE media_image_page ADD CONSTRAINT FK_EC15922AC4663E4 FOREIGN KEY (page_id) REFERENCES page (id)');
         $this->addSql('ALTER TABLE media_image_page ADD CONSTRAINT FK_EC15922ABF396750 FOREIGN KEY (id) REFERENCES media (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE page ADD editor_content JSON DEFAULT NULL, ADD html_css JSON DEFAULT NULL');
+        $this->addSql('ALTER TABLE page ADD editor_content JSON DEFAULT NULL, ADD html_css JSON DEFAULT NULL, DROP content');
     }
 
     public function down(Schema $schema): void
@@ -38,6 +38,6 @@ final class Version20221209113937 extends AbstractMigration
         $this->addSql('DROP TABLE media');
         $this->addSql('DROP TABLE media_image');
         $this->addSql('DROP TABLE media_image_page');
-        $this->addSql('ALTER TABLE page DROP editor_content, DROP html_css');
+        $this->addSql('ALTER TABLE page ADD content LONGTEXT DEFAULT NULL, DROP editor_content, DROP html_css');
     }
 }

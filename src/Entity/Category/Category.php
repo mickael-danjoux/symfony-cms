@@ -16,7 +16,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-#[UniqueEntity(fields: ['slug'], message: "L’URL de cette catégorie existe déjà: {{ value }}" )]
 #[Gedmo\Tree(type: 'nested')]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\InheritanceType("JOINED")]

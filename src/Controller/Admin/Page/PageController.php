@@ -7,7 +7,9 @@ use App\Entity\Page\Page;
 use App\Enum\PageTypeEnum;
 use App\Form\Page\PageType;
 use App\Services\RouterCacheService;
+use App\Utils\ActionBar;
 use Doctrine\ORM\EntityManagerInterface;
+use JetBrains\PhpStorm\ArrayShape;
 use Omines\DataTablesBundle\DataTableFactory;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,8 +40,13 @@ class PageController extends AbstractController
         if ($datatable->isCallback()) {
             return $datatable->getResponse();
         }
+        $actions = (new ActionBar())
+            ->addAddAction($this->generateUrl('admin_page_add'));
+
         return $this->render('admin/page/list.html.twig', [
             'datatable' => $datatable,
+            'actions' => $actions->getAll(),
+            'currentPage' => $this->getCurrentPage()
         ]);
     }
 
@@ -68,9 +75,8 @@ class PageController extends AbstractController
             try {
                 if ($page->getType() === PageTypeEnum::CUSTOM_PAGE && $page->getController() === null) {
                     $page->setController(Page::PAGE_CONTROLLER_PATH);
-                } elseif ($page->getType() === PageTypeEnum::INTERNAL_PAGE) {
-                    $page->setContent('[]');
                 }
+
                 $this->em->persist($page);
                 $this->em->flush();
 
@@ -86,9 +92,24 @@ class PageController extends AbstractController
                 ]);
             }
         }
+
+        $actions = (new ActionBar())
+            ->addBackAction($this->generateUrl('admin_page_list'))
+            ->addDeleteAction($this->generateUrl('admin_page_remove',[
+                'id' => $page->getId()
+            ]))
+            ->addSaveAction('page')
+            ->addPreviewAction('#')
+        ;
+
+        $currentPage =  $this->getCurrentPage();
+        $currentPage['breadcrumb'][] = ['label' => $page->getTitle()];
+
         return $this->render('admin/page/edit.html.twig', [
             'form' => $form->createView(),
             'page' => $page,
+            'actions' => $actions->getAll(),
+            'currentPage' => $currentPage
         ]);
     }
 
@@ -106,5 +127,21 @@ class PageController extends AbstractController
             ]);
         }
         return $this->redirectToRoute('admin_page_list');
+    }
+
+    private function getCurrentPage(): array
+    {
+        return [
+            'menu' => [
+                'id' => 'pages_content',
+                'action' => 'pages'
+            ],
+            'breadcrumb' => [
+                [
+                    'label' => 'Pages',
+                    'link' => $this->generateUrl('admin_page_list')
+                ]
+            ]
+        ];
     }
 }

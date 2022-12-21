@@ -4,6 +4,7 @@ main{
     font-weight: 500;
     min-width: 250px;
     padding: .5rem 0;
+    border-radius: 3px;
 
     &.btn-add:after {
       @extend .icon-after;

@@ -98,7 +98,7 @@ class PageController extends AbstractController
             ->addDeleteAction($this->generateUrl('admin_page_remove',[
                 'id' => $page->getId()
             ]))
-            ->addSaveAction('page', 'saveEditor')
+            ->addSaveAction('page','Enregistrer','saveEditor')
             ->addPreviewAction('#')
         ;
 

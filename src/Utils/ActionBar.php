@@ -74,7 +74,7 @@ class ActionBar
      * @param string|null $label
      * @return self
      */
-    public function addSaveAction(string $formName, string $actionId = 'save', ?string $label = 'Enregistrer'): self
+    public function addSaveAction(string $formName, ?string $label = 'Enregistrer', string $actionId = 'save'): self
     {
         return $this->addAction($actionId, ['formName' => $formName, 'label' => $label]);
     }

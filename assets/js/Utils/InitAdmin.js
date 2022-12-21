@@ -6,11 +6,10 @@ import { initConfirmButtons } from "../Components/ConfirmComponent";
 
 export default () => {
 
-// Initialisation des boutons de confirmation de suppression standard (avec data-url PHP)
     initSidebar()
     initValidateFormButtons()
     initDropFile()
 
-// Initialisation des boutons de confirmation standard (avec data-url PHP)
+// Initialisation des boutons de confirmation standard (avec href)
     initConfirmButtons()
 }

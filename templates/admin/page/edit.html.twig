@@ -4,6 +4,11 @@
 
 {% block messages %}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('js-admin-page-edit') }}
+{% endblock %}
+
 {% block body %}
     <input type="hidden" id="pageId" value="{{ page.id }}">
     <div class="container-fluid">
@@ -124,13 +129,13 @@
             </div>
         </div>
 
-        <div class="row">
-        </div>
         <hr>
-        <div class="d-none">
-            {{form_row(form.content)}}
-        </div>
         {{ form_rest(form) }}
+        <editor
+            v-if="showEditor"
+            :is-super-admin="{{ is_granted('ROLE_SUPER_ADMIN') | json_encode }}"
+        ></editor>
+
         {{ form_end(form) }}
     </div>
 {% endblock %}

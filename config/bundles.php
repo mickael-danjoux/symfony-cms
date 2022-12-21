@@ -17,4 +17,5 @@ return [
     Omines\DataTablesBundle\DataTablesBundle::class => ['all' => true],
     Sentry\SentryBundle\SentryBundle::class => ['prod' => true],
     Sherlockode\ConfigurationBundle\SherlockodeConfigurationBundle::class => ['all' => true],
+    Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
 ];

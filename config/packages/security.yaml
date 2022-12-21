@@ -47,4 +47,5 @@ security:
     access_control:
          - { path: ^/admin/connexion, roles: PUBLIC_ACCESS }
          - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/api/editor, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

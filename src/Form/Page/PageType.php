@@ -10,6 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -64,9 +65,6 @@ class PageType extends AbstractType
                 'html5' => true,
                 'input' => 'datetime',
             ])
-            ->add('content', TextType::class, [
-                'label' => false
-            ])
             ->add('seo', SeoType::class, [
                 'label' => false,
             ])
@@ -91,11 +89,13 @@ class PageType extends AbstractType
 
         if ($isSuperAdmin) {
 
-            $form->add('type', ChoiceType::class, [
+            $form->add('type', EnumType::class, [
                 'label' => 'Type de page',
-                'choices' => PageTypeEnum::choicesForForm(),
-                'multiple' => false
-            ]);
+				'class' => PageTypeEnum::class,
+				'choice_label' => function (PageTypeEnum $enum) {
+					return $enum->getLabel();
+				}
+			]);
 
             $form->add('controller', TextType::class, [
                 'label' => 'Fonction du contrôleur',

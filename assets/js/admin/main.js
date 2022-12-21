@@ -1,15 +1,7 @@
 import 'bootstrap';
-import "@fortawesome/fontawesome-free/js/all.js";
+import "@fortawesome/fontawesome-free/js/all.min"
 import '../Components/Datatable/datatable'
-import { initConfirmButtons } from '../Components/ConfirmComponent'
-import initSidebar from '../Utils/InitSidebar'
-import initValidateFormButtons from '../Utils/InitValidateFormButtons'
-import initDropFile from '../Utils/InitDropFiles'
+import initAdmin from "../Utils/InitAdmin";
 
-initSidebar()
-initValidateFormButtons()
-initDropFile()
-
-// Initialisation des boutons de confirmation standard (avec data-url PHP)
-initConfirmButtons()
-
+// Execute les fonctions d'init de la page
+initAdmin()

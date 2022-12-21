@@ -62,7 +62,7 @@ class PageController extends AbstractController
         } elseif ($request->attributes->get("_route") === 'admin_page_add') {
             try{
                 $page = $pageFactory->createForForm();
-                $routerCacheService->removeCache();
+				$routerCacheService->removeCache();
                 return $this->redirectToRoute('admin_page_edit', ['id' => $page->getId()]);
             }catch (\Exception $e){
                 $this->logger->critical('Impossible de créer une page : ' . $e->getMessage());
@@ -75,9 +75,8 @@ class PageController extends AbstractController
             try {
                 if ($page->getType() === PageTypeEnum::CUSTOM_PAGE && $page->getController() === null) {
                     $page->setController(Page::PAGE_CONTROLLER_PATH);
-                } elseif ($page->getType() === PageTypeEnum::INTERNAL_PAGE) {
-                    $page->setContent('[]');
                 }
+
                 $this->em->persist($page);
                 $this->em->flush();
 
@@ -99,7 +98,7 @@ class PageController extends AbstractController
             ->addDeleteAction($this->generateUrl('admin_page_remove',[
                 'id' => $page->getId()
             ]))
-            ->addSaveAction('page')
+            ->addSaveAction('page','Enregistrer','saveEditor')
             ->addPreviewAction('#')
         ;
 

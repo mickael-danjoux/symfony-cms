@@ -17,6 +17,10 @@
                 {{ _self.save(action.options.formName, action.options.label) }}
             {% endif %}
 
+            {% if action.id == 'saveEditor' and action.options.formName is defined and action.options.formName is not null %}
+                {{ _self.saveEditor(action.options.formName, action.options.label) }}
+            {% endif %}
+
             {% if action.id == 'preview' and action.options.link is defined and action.options.link is not null %}
                 {{ _self.preview(action.options.link, action.options.label) }}
             {% endif %}
@@ -44,6 +48,12 @@
 
 {% macro save(formName, label) %}
     <button type="button" class="btn-save btn-sm ms-1 js-validate-form" data-form-name="{{ formName }}">
+        {{ label }}
+    </button>
+{% endmacro %}
+
+{% macro saveEditor(formName, label) %}
+    <button @click="storeEditorContent" type="button" class="btn-save btn-sm ms-1 js-validate-form" data-form-name="{{ formName }}">
         {{ label }}
     </button>
 {% endmacro %}

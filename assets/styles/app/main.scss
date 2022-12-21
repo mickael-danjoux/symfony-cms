@@ -6,104 +6,113 @@
 @import "./partials/header.scss";
 
 body {
-    //background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
-    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    .container{
-        label.required:after {
-            content: " * ";
-            color: #D42124;
-        }
+	//background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+	background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+	.container{
+		label.required:after {
+			content: " * ";
+			color: #D42124;
+		}
 
-        .alert{
-            p{margin-bottom: 0}
-        }
-    }
+		.alert{
+			p{margin-bottom: 0}
+		}
+	}
 
-    .icon{
-        font-weight: 900;
-        font-family: "Font Awesome 5 Free";
-    }
-    .icon-after{
-        @extend .icon;
-        margin-right: 5px;
-        padding-left: .5rem;
-    }
-    .icon-before{
-        @extend .icon;
-        margin-right: 5px;
-        padding-right: .5rem;
-    }
+	.icon{
+		font-weight: 900;
+		font-family: "Font Awesome 5 Free";
+	}
+	.icon-after{
+		@extend .icon;
+		margin-right: 5px;
+		padding-left: .5rem;
+	}
+	.icon-before{
+		@extend .icon;
+		margin-right: 5px;
+		padding-right: .5rem;
+	}
 
-    main{
-        h1, h1 a{
-            font-size: 2.188rem;
-            line-height: 2.938rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: $color_2;
-            text-decoration: none;
-            &:hover, &:focus{
-                color: $color_2;
-            }
-        }
+	h1, h1 a{
+		font-size: 2.188rem;
+		line-height: 2.938rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		color: $color_2;
+		text-decoration: none;
+		&:hover, &:focus{
+			color: $color_2;
+		}
+	}
 
-        h2, h2 a{
-            font-size: 1.563rem;
-            line-height: 2.125rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: $color_1;
-            text-decoration: none;
-            &:hover, &:focus{
-                color: $color_1;
-            }
-        }
+	h2, h2 a{
+		font-size: 1.563rem;
+		line-height: 2.125rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		color: $color_2;
+		text-decoration: none;
+		&:hover, &:focus{
+			color: $color_2;
+		}
+	}
 
-        h3, h3 a,{
-            font-size: 1.563rem;
-            line-height: 2.125rem;
-            font-weight: 700;
-            text-transform: none;
-            color: $color_2;
-            text-decoration: none;
-            &:hover, &:focus{
-                color: $color_2;
-            }
-        }
+	h3, h3 a,{
+		font-size: 1.563rem;
+		line-height: 2.125rem;
+		font-weight: 700;
+		text-transform: none;
+		color: $color_2;
+		text-decoration: none;
+		&:hover, &:focus{
+			color: $color_2;
+		}
+	}
 
-        h4, h4 a{
-            font-size: 1.25rem;
-            line-height: 1.688rem;
-            font-weight: 700;
-            text-transform: none;
-            color: $color_2;
-            text-decoration: none;
-            &:hover, &:focus{
-                color: $color_2;
-            }
-        }
-        h5, h5 a{
-            font-size: 1.25rem;
-            line-height: 1.688rem;
-            font-weight: 600;
-            text-transform: none;
-            color: $color_2;
-            text-decoration: none;
-            &:hover, &:focus{
-                color: $color_2;
-            }
-        }
+	h4, h4 a{
+		font-size: 1.25rem;
+		line-height: 1.688rem;
+		font-weight: 700;
+		text-transform: none;
+		color: $color_2;
+		text-decoration: none;
+		&:hover, &:focus{
+			color: $color_2;
+		}
+	}
+	h5, h5 a{
+		font-size: 1.25rem;
+		line-height: 1.688rem;
+		font-weight: 600;
+		text-transform: none;
+		color: $color_2;
+		text-decoration: none;
+		&:hover, &:focus{
+			color: $color_2;
+		}
+	}
 
-        p{
-            line-height: 1.563rem;
-            font-weight: 400;
-            color: $color_2;
-        }
+	p{
+		line-height: 1.563rem;
+		font-weight: 400;
+		color: $color_2;
+	}
 
-        strong, b{
-            font-weight: 700;
-        }
-    }
+	strong, b{
+		font-weight: 700;
+	}
 }
 
 
+/** CSS uniquement pour l'éditeur de page
+ * ajout de bordure autour du block + hauteur min. pour les colones sinon height=0px
+ * le style ne sera pas appliqué en front
+ */
+*[data-gjs-highlightable] {
+	outline: 1px dashed rgba(170,170,170,0.7);
+	outline-offset: -2px;
+	&[class*="col-"], &[class*="container"] {
+		min-height: 75px;
+	}
+}

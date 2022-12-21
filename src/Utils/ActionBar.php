@@ -70,12 +70,13 @@ class ActionBar
      * Ajoute un lien "Valider" qui validera le formulaire dont le name est passé en paramètre
      *
      * @param string $formName
+     * @param string $actionId
      * @param string|null $label
      * @return self
      */
-    public function addSaveAction(string $formName, ?string $label = 'Enregistrer'): self
+    public function addSaveAction(string $formName, string $actionId = 'save', ?string $label = 'Enregistrer'): self
     {
-        return $this->addAction('save', ['formName' => $formName, 'label' => $label]);
+        return $this->addAction($actionId, ['formName' => $formName, 'label' => $label]);
     }
 
     /**

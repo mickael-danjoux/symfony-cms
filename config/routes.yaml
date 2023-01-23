@@ -11,3 +11,5 @@ api_editor:
 cms:
   resource: .
   type: cms
+  defaults:
+    schemes: [ https ]

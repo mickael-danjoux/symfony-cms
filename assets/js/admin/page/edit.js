@@ -145,4 +145,4 @@ createApp({
         }
 
     }
-}).mount('main')
+}).mount('#wrapper')

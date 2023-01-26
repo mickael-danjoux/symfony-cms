@@ -3,17 +3,17 @@ export default () => {
     const toggleButton = document.querySelector('.burger')
 
     toggleButton.onclick = function () {
-        el.classList.toggle('nav-open')
-        el.classList.toggle('nav-close')
+        el.classList.toggle('sidebar-open')
+        el.classList.toggle('sidebar-close')
     }
-    const navItems = document.querySelectorAll('.nav-items')
-    navItems.forEach(function (nav) {
-        nav.querySelectorAll('.has-dropdown').forEach(function (item) {
+    const menuItems = document.querySelectorAll('.menu-items')
+    menuItems.forEach(function (menu) {
+        menu.querySelectorAll('.has-dropdown').forEach(function (item) {
             item.addEventListener('click', () => {
-                const subNav = item.querySelector('.sub-nav-items')
+                const subMenu = item.querySelector('.sub-menu-items')
                 if (item.classList.contains("open")) {
                     // Masquer le contenu en réduisant la hauteur à 0
-                    subNav.style.height = "0"
+                    subMenu.style.height = "0"
 
                     // Timeout égale à la durée de l'animation
                     setTimeout(function () {
@@ -21,12 +21,11 @@ export default () => {
                     }, 350)
                 } else {
                     // Afficher le contenu en réglant la hauteur sur la hauteur totale du contenu
-                    subNav.style.height = "0"
+                    subMenu.style.height = "0"
                     item.classList.add("open")
-                    subNav.style.height = subNav.scrollHeight + "px"
+                    subMenu.style.height = subMenu.scrollHeight + "px"
                 }
             })
         })
     })
-
 }

@@ -98,16 +98,16 @@ Encore
             __VUE_PROD_DEVTOOLS__: false
         })
     )
-    .addPlugin(new PurgeCSSPlugin({
-        paths: glob.sync([
-            path.join(__dirname, 'templates/**/*.html.twig'),
-            path.join(__dirname, 'assets/js/**/*.vue'),
-        ]),
-        content: ["**/*.twig", "**/*.vue"],
-        defaultExtractor: (content) => {
-            return content.match(/[\w-/:]+(?<!:)/g) || [];
-        }
-    }))
+    // .addPlugin(new PurgeCSSPlugin({
+    //     paths: glob.sync([
+    //         path.join(__dirname, 'templates/**/*.html.twig'),
+    //         path.join(__dirname, 'assets/js/**/*.vue'),
+    //     ]),
+    //     content: ["**/*.twig", "**/*.vue"],
+    //     defaultExtractor: (content) => {
+    //         return content.match(/[\w-/:]+(?<!:)/g) || [];
+    //     }
+    // }))
 ;
 
 module.exports = Encore.getWebpackConfig();

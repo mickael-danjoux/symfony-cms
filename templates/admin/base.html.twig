@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
-    <link rel="stylesheet" type="text/css"
-          href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
-    <title>{% block title %}Administration {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
+    <title>{% block title %}Administration{% endblock %}</title>
 
     {% block stylesheets %}
         {{ encore_entry_link_tags('style-admin-main') }}
     {% endblock %}
-
 </head>
 <body>
-<main id="wrapper" class="nav-close">
+<div id="wrapper" class="sidebar-close">
     {% include "admin/partials/_sidebar.html.twig" %}
 
     <div class="content-wrapper">
@@ -33,14 +31,14 @@
             </div>
         </div>
 
-        <div id="main-content">
+        <main>
             {% block messages %}
                 {% include "admin/partials/_messages.html.twig" %}
             {% endblock %}
             {% block body %}{% endblock %}
-        </div>
+        </main>
     </div>
-</main>
+</div>
 
 {% block javascripts %}
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
@@ -48,7 +46,6 @@
 
     {{ encore_entry_script_tags('js-admin-main') }}
 {% endblock %}
-
 
 </body>
 </html>

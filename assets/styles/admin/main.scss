@@ -6,12 +6,10 @@
 @import 'partials/scrollbar';
 @import "partials/swal";
 
-
 label.required:after {
   content: " * ";
   color: #D42124;
 }
-
 
 form {
   .block-url {
@@ -45,7 +43,3 @@ form {
     }
   }
 }
-
-
-
-

@@ -1,15 +1,14 @@
-$nav-width: 250px;
-$nav-width-small: 50px;
-$nav-hidden-width: $nav-width - $nav-width-small;
-$nav-header-height: 50px;
-$nav-header-bg-color: #fff;
-$nav-body-bg-color: #000;
-$nav-marker-width: 5px;
-$nav-marker-color: #fc0d1b;
+$menu-width: 250px;
+$menu-width-small: 50px;
+$menu-hidden-width: $menu-width - $menu-width-small;
+$menu-header-height: 50px;
+$menu-header-bg-color: #fff;
+$menu-body-bg-color: #000;
+$menu-marker-width: 5px;
+$menu-marker-color: #fc0d1b;
 
 $toggler-width: 50%;
 $toggler-span-height: 3px;
-
 
 .fs-icon {
   display: inline-block;
@@ -19,7 +18,7 @@ $toggler-span-height: 3px;
   font-weight: 900;
 }
 
-main#wrapper {
+#wrapper {
   .sidebar {
     position: fixed;
     z-index: 999;
@@ -30,9 +29,9 @@ main#wrapper {
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      background-color: $nav-header-bg-color;
-      width: $nav-width-small;
-      height: $nav-header-height;
+      background-color: $menu-header-bg-color;
+      width: $menu-width-small;
+      height: $menu-header-height;
       z-index: 1000;
       cursor: pointer;
       border: none;
@@ -52,7 +51,7 @@ main#wrapper {
           box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
           border-radius: 3px;
           height: $toggler-span-height;
-          background: $nav-body-bg-color;
+          background: $menu-body-bg-color;
           transition: all .3s;
           position: relative;
 
@@ -63,32 +62,32 @@ main#wrapper {
       }
     }
 
-    nav {
+    .menu {
       position: absolute;
       display: flex;
       flex-direction: column;
       gap: 0;
       top: 0;
-      left: -1 * $nav-hidden-width;
-      width: $nav-width;
+      left: -1 * $menu-hidden-width;
+      width: $menu-width;
       height: 100vh;
       transition: all 0.45s cubic-bezier(0.77, 0, 0.175, 1);
-      background-color: $nav-body-bg-color;
+      background-color: $menu-body-bg-color;
       z-index: 999;
 
-      .nav-header {
+      .menu-header {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
         flex-shrink: 0;
         width: 100%;
-        padding-left: $nav-width-small;
-        height: $nav-header-height;
-        background-color: $nav-header-bg-color;
+        padding-left: $menu-width-small;
+        height: $menu-header-height;
+        background-color: $menu-header-bg-color;
 
         a {
-          color: $nav-body-bg-color;
+          color: $menu-body-bg-color;
           font-size: 21px;
           padding: 10px;
 
@@ -98,7 +97,7 @@ main#wrapper {
         }
       }
 
-      .nav-body {
+      .menu-body {
         position: relative;
         overflow-y: auto;
         z-index: -1;
@@ -106,7 +105,7 @@ main#wrapper {
         flex-grow: 1;
       }
 
-      .nav-footer {
+      .menu-footer {
         flex-shrink: 0;
         width: 100%;
       }
@@ -120,8 +119,8 @@ main#wrapper {
         li {
           position: relative;
 
-          &.nav-item {
-            .nav-link {
+          &.menu-item {
+            .menu-link {
               display: flex;
               flex-direction: row;
               justify-content: space-between;
@@ -137,28 +136,28 @@ main#wrapper {
               .icon {
                 display: flex;
                 justify-content: center;
-                width: $nav-width-small;
-                padding-left: $nav-marker-width;
+                width: $menu-width-small;
+                padding-left: $menu-marker-width;
               }
             }
 
-            &.active .nav-link,
-            .nav-link:hover {
-              color: $nav-header-bg-color;
+            &.active .menu-link,
+            .menu-link:hover {
+              color: $menu-header-bg-color;
             }
 
             .icon {
               color: #777;
             }
 
-            &.active > .nav-link > .icon,
-            &:hover > .nav-link > .icon {
-              color: $nav-header-bg-color;
+            &.active > .menu-link > .icon,
+            &:hover > .menu-link > .icon {
+              color: $menu-header-bg-color;
             }
 
             &.has-dropdown {
 
-              > .nav-link span:first-child::after {
+              > .menu-link span:first-child::after {
                 @extend .fs-icon;
                 position: absolute;
                 right: 10px;
@@ -167,16 +166,16 @@ main#wrapper {
                 transition:transform .3s;
               }
               &.open{
-                > .nav-link span:first-child::after {
+                > .menu-link span:first-child::after {
                   transform: rotate(90deg);
                 }
               }
 
-              :not(.open) .sub-nav-items {
+              &:not(.open) .sub-menu-items {
                 display: none;
               }
 
-              .sub-nav-items {
+              .sub-menu-items {
                 overflow: hidden !important;
                 background-color: #333;
                 transition: height 0.35s ease;
@@ -186,7 +185,7 @@ main#wrapper {
         }
       }
 
-      .nav-link,
+      .menu-link,
       a,
       a:visited {
         display: block;
@@ -208,15 +207,15 @@ main#wrapper {
 
   .content-wrapper {
     position: absolute;
-    left: $nav-width-small;
-    width: calc(100% - #{$nav-width-small});
+    left: $menu-width-small;
+    width: calc(100% - #{$menu-width-small});
     transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
 
     #top-bar {
       position: sticky;
       top: 0;
       z-index: 998;
-      min-height: $nav-header-height;
+      min-height: $menu-header-height;
       height: auto;
       box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
       -webkit-box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
@@ -255,13 +254,13 @@ main#wrapper {
       }
     }
 
-    #main-content{
+    main{
       padding: 1.5em;
       margin: 0 auto;
     }
   }
 
-  &.nav-open {
+  &.sidebar-open {
     #toggler {
       span {
         &:nth-child(1) {
@@ -274,30 +273,30 @@ main#wrapper {
 
         &:nth-child(3) {
           animation: ease .7s bottom forwards;
-          background: $nav-body-bg-color;
+          background: $menu-body-bg-color;
         }
       }
     }
 
     .content-wrapper {
       position: absolute;
-      transform: translate3d($nav-hidden-width, 0, 0);
-      width: calc(100% - #{$nav-width});
+      transform: translate3d($menu-hidden-width, 0, 0);
+      width: calc(100% - #{$menu-width});
       transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
     }
 
-    .nav {
-      transform: translate3d($nav-hidden-width, 0, 0);
+    .menu {
+      transform: translate3d($menu-hidden-width, 0, 0);
       transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
 
       &:hover {
         position: absolute;
-        left: -1 * $nav-hidden-width;
+        left: -1 * $menu-hidden-width;
       }
     }
   }
 
-  &.nav-close {
+  &.sidebar-close {
     #toggler {
       span {
         &:nth-child(1) {
@@ -306,7 +305,7 @@ main#wrapper {
 
         &:nth-child(2) {
           animation: ease .7s scaled-2 forwards;
-          background: $nav-body-bg-color;
+          background: $menu-body-bg-color;
         }
 
         &:nth-child(3) {
@@ -316,7 +315,6 @@ main#wrapper {
     }
   }
 }
-
 
 /** Toggler - Keyframes **/
 @keyframes top {
@@ -410,5 +408,3 @@ main#wrapper {
     transform: scale(1);
   }
 }
-
-

@@ -2,9 +2,16 @@ export default () => {
     const el = document.getElementById('wrapper')
     const toggleButton = document.querySelector('.burger')
 
+    if(localStorage.getItem('sidebarState')){
+        el.classList.remove('sidebar-close')
+        el.classList.remove('sidebar-open')
+        el.classList.add(localStorage.getItem('sidebarState'))
+    }
+
     toggleButton.onclick = function () {
         el.classList.toggle('sidebar-open')
         el.classList.toggle('sidebar-close')
+        localStorage.setItem('sidebarState',el.classList[0])
     }
     const menuItems = document.querySelectorAll('.menu-items')
     menuItems.forEach(function (menu) {

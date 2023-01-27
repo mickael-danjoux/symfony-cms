@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\Repository\Page\PageRepository;
+use App\Routing\CmsRouteLoader;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -12,6 +14,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 
 #[Route(name: 'admin_')]
 class DefaultController extends AbstractController
@@ -19,10 +22,10 @@ class DefaultController extends AbstractController
 
     #[Route('', name: 'index')]
     #[Route('/dashboard', name: 'dashboard')]
-    public function dashboard(): Response
+    public function dashboard(PageRepository $pageRepository): Response
     {
         return $this->render('admin/dashboard/dashboard.html.twig', [
-            'controller_name' => 'DefaultController',
+            'pageNumber' => count($pageRepository->findAllForRouting()),
         ]);
     }
 

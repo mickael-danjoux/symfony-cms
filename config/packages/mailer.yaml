@@ -4,5 +4,5 @@ framework:
 
         headers:
             from: '%env(MAILER_FROM_NO_REPLY)%'
-            to: '%env(MAILER_TO)%'
+            #to: '%env(MAILER_TO)%'
 

@@ -4,14 +4,15 @@ namespace App\Command\Main;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(name: 'app:sentry:test')]
 class SentryTestCommand extends Command
 {
-    protected static $defaultName = 'app:sentry:test';
     private LoggerInterface $logger;
 
     function __construct(LoggerInterface $logger)

@@ -23,8 +23,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 )]
 class UserInitCommand extends Command
 {
-    protected static $defaultName = 'app:user:create';
-    protected static $defaultDescription = "Creation d'un utilisateur";
     private UserDTO $user;
     private UserRepository $userRepo;
     private ValidatorInterface $validator;

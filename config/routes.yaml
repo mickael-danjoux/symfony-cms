@@ -1,12 +1,16 @@
 admin:
   resource: '../src/Controller/Admin'
-  type: annotation
+  type: attribute
   prefix: '/admin'
 
 api_editor:
   resource: '../src/Controller/API'
   type: attribute
   prefix: '/api'
+
+app:
+  resource: '../src/Controller/App'
+  type: attribute
 
 cms:
   resource: .

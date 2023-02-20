@@ -1,6 +1,6 @@
 admin:
   resource: '../src/Controller/Admin'
-  type: annotation
+  type: attribute
   prefix: '/admin'
 
 api_editor:

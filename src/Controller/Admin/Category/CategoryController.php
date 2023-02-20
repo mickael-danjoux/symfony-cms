@@ -10,7 +10,7 @@ use App\Repository\Category\CategoryRepository;
 use App\Services\Menu\MenuService;
 use App\Utils\ActionBar;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -106,8 +106,13 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{root}/{idChild}', name: 'edit')]
-    #[ParamConverter('root', options: ['mapping' => ['root' => 'slug']])]
-    public function edit(Category $root, int $idChild, Request $request, CategoryRepository $repo, EntityManagerInterface $em): RedirectResponse|Response
+    public function edit(
+	    #[MapEntity(mapping: ['root' => 'slug'])] Category $root,
+		int $idChild,
+		Request $request,
+		CategoryRepository $repo,
+		EntityManagerInterface $em
+    ): RedirectResponse|Response
     {
 
         $category = $repo->findOneBy(['root' => $root, 'id' => $idChild]);

@@ -8,6 +8,10 @@ api_editor:
   type: attribute
   prefix: '/api'
 
+app:
+  resource: '../src/Controller/App'
+  type: attribute
+
 cms:
   resource: .
   type: cms

@@ -29,5 +29,8 @@ Le module de gestion des logs est installé par défaut.
 Il faut changer la clé ```SENTRY_DSN``` dans le fichier .env
 Il est possible de tester la commande :
 ```symfony app:sentry:test```  
-Le log apparait dans la console et dans l'interface de Sentry (https://sentry.ab6net.net)
+Le log apparait dans la console et dans l'interface de Sentry 
 
+### License
+Copyright © 2023, [SWARE](https://sware.fr). Toute utilisation de ce projet en production est soumis à approbation.
+[Demande d’autorisation](mailto:mickael@sware.fr)

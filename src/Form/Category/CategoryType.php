@@ -83,7 +83,7 @@ class CategoryType extends AbstractType
             $form->add('url', TextType::class, [
                 'label' => 'URL complète de la page',
                 'required' => false,
-                'attr' => ['placeholder' => 'Ex: https://ab6net.net']
+                'attr' => ['placeholder' => 'Ex: https://sware.fr']
             ]);
 
             $form->add('newTab', CheckboxType::class, [

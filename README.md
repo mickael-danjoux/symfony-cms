@@ -1,11 +1,11 @@
 # Projet de base
 
 ## Projet
-Le projet est une base Symfony 5 utilisant des librairies js et webpack  
+Le projet est une base Symfony 6.3 utilisant des librairies js et webpack  
 
 ### Prérequis
 Symfony: https://symfony.com/download  
-Node/Npm (LTS): https://nodejs.org/fr/
+Node/Npm (16): https://nodejs.org/fr/
 
 ### Installation:
 * Installer les dépendances PHP: ```symfony composer install ```

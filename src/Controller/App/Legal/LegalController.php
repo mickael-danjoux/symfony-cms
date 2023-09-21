@@ -2,15 +2,12 @@
 
 namespace App\Controller\App\Legal;
 
-use App\Controller\App\Router\RouterControllerTrait;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Controller\App\Router\AbstractRouterController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class LegalController extends AbstractController
+class LegalController extends AbstractRouterController
 {
-    use RouterControllerTrait;
-
     public function mentions(Request $request): Response
     {
         $page = $this->getPageOrNotFound($request);

@@ -4,39 +4,18 @@ namespace App\Controller\App\Router;
 
 use App\Entity\Page\Page;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Contracts\Service\Attribute\Required;
 
-trait RouterControllerTrait
+Abstract class AbstractRouterController extends AbstractController
 {
-    private EntityManagerInterface $em;
 
+    protected EntityManagerInterface $em;
+    protected LoggerInterface $logger;
 
-    /**
-     * @return EntityManagerInterface
-     */
-    public function getEm(): EntityManagerInterface
-    {
-        return $this->em;
-    }
-
-
-    /**
-     * @param EntityManagerInterface $em
-     * @return void
-     * @required
-     */
-    public function setEm(EntityManagerInterface $em): void
-    {
-        $this->em = $em;
-    }
-
-
-    public function __construct(EntityManagerInterface $em)
-    {
-
-    }
 
     protected function getPageOrNotFound(Request $request)
     {
@@ -47,11 +26,24 @@ trait RouterControllerTrait
         if (!$preview) {
             $now = new \DateTime();
             if ((!$page->isPublished()) || ($now < $page->getStartPublishingAt()) || ($page->getEndPublishingAt() != null && $now > $page->getEndPublishingAt())) {
-               throw new NotFoundHttpException();
+                throw new NotFoundHttpException();
             }
         }
 
         return $page;
     }
+
+    #[Required]
+    public function setEntityManager(EntityManagerInterface $em): void
+    {
+        $this->em = $em;
+    }
+
+    #[Required]
+    public function setLogger(LoggerInterface $logger): void
+    {
+        $this->logger = $logger;
+    }
+
 
 }

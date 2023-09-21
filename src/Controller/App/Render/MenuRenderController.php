@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Controller\App;
+namespace App\Controller\App\Render;
 
+use App\Controller\App\Router\AbstractRouterController;
 use App\Repository\Category\MenuCategoryRepository;
-use Psr\Log\LoggerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class MenuController extends AbstractController
+class MenuRenderController extends AbstractRouterController
 {
-    public function __construct(private readonly MenuCategoryRepository $menuCategoryRepository, private readonly LoggerInterface $logger)
-    {}
+    public function __construct(private readonly MenuCategoryRepository $menuCategoryRepository)
+    {
+    }
 
     public function show(): Response
     {

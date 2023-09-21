@@ -2,15 +2,12 @@
 
 namespace App\Controller\App;
 
-use App\Controller\App\Router\RouterControllerTrait;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Controller\App\Router\AbstractRouterController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
-class StoryBookController extends AbstractController
+class StoryBookController extends AbstractRouterController
 {
-    use RouterControllerTrait;
 
     public function index(Request $request): Response
     {

@@ -2,16 +2,11 @@
 
 namespace App\Controller\App\Router;
 
-use App\Entity\Page\Page;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PageController extends AbstractController
+class PageController extends AbstractRouterController
 {
-    use RouterControllerTrait;
-
     public function display(Request $request): Response
     {
         $page = $this->getPageOrNotFound($request);

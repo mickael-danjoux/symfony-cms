@@ -2,24 +2,18 @@
 
 namespace App\Controller\App;
 
+use App\Controller\App\Router\AbstractRouterController;
 use App\DTO\Contact;
-use App\Controller\App\Router\RouterControllerTrait;
-use App\Entity\Page\Page;
 use App\Form\ContactType;
 use App\Services\MailerService;
 use Psr\Log\LoggerInterface;
-use Sherlockode\ConfigurationBundle\Manager\ParameterManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Loader\Configurator\Traits\RouteTrait;
 
-class ContactController extends AbstractController
+class ContactController extends AbstractRouterController
 {
-    use RouterControllerTrait;
 
     public function form(Request $request, MailerInterface $mailer, LoggerInterface $logger, MailerService $mailerService ): Response
     {

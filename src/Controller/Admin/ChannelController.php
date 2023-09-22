@@ -50,7 +50,7 @@ class ChannelController extends AbstractController
 
         return $this->render('admin/channel/index.html.twig', [
             'parametersForm' => $parametersForm->createView(),
-            'actions' => $actions,
+            'actions' => $actions->getAll(),
             'currentPage' => $currentPage
         ]);
     }

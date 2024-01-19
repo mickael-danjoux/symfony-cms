@@ -39,8 +39,6 @@ Encore
     .addStyleEntry('style-admin-dashboard', './assets/styles/admin/dashboard.scss')
     .addStyleEntry('style-admin-login', './assets/styles/admin/login.scss')
 
-    // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
-    // .enableStimulusBridge('./assets/controllers.json')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -76,7 +74,6 @@ Encore
     // enables Sass/SCSS support
     .enableSassLoader()
 
-    .enableVueLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -86,26 +83,8 @@ Encore
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher
-    //.enableIntegrityHashes(Encore.isProduction())
+    .enableIntegrityHashes(Encore.isProduction())
 
-    // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
-    .addPlugin(
-        new webpack.DefinePlugin({
-            __VUE_OPTIONS_API__: true,
-            __VUE_PROD_DEVTOOLS__: false
-        })
-    )
-    // .addPlugin(new PurgeCSSPlugin({
-    //     paths: glob.sync([
-    //         path.join(__dirname, 'templates/**/*.html.twig'),
-    //         path.join(__dirname, 'assets/js/**/*.vue'),
-    //     ]),
-    //     content: ["**/*.twig", "**/*.vue"],
-    //     defaultExtractor: (content) => {
-    //         return content.match(/[\w-/:]+(?<!:)/g) || [];
-    //     }
-    // }))
 ;
 
 module.exports = Encore.getWebpackConfig();

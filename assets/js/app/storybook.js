@@ -1,22 +1,14 @@
-import './main'
-import {createApp, onMounted} from "vue";
+import "./main";
 
-createApp({
-    compilerOptions: {
-        delimiters: ["${", "}"]
-    },
-    setup(){
-        const copyContent = (id) => {
-           const el = document.getElementById(id)
-            navigator.clipboard.writeText(el.innerText)
-           const button = document.querySelector(`#${id} button.copy`)
-            button.classList.add('copied')
-            setTimeout(function() {
-                button.classList.remove('copied')
-            }, 1000);
-        }
-        return {
-            copyContent
-        }
-    }
-}).mount('main')
+document.querySelectorAll(".js-copy-html").forEach((button) => {
+  button.addEventListener("click", () => {
+    const target = button.getAttribute("data-target");
+    const code = document.getElementById(target).innerText;
+    navigator.clipboard.writeText(code);
+    button.classList.add('copied')
+    setTimeout(function() {
+      button.classList.remove('copied')
+    }, 1000);
+  });
+});
+

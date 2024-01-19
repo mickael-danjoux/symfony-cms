@@ -13,7 +13,9 @@
                     </div>
                     <div class="col-12 col-md-6 d-flex">
                         <code id="font-{{loop.index}}">&lt;{{key}}&gt;{{value | capitalize}}&lt;/{{key}}&gt;
-                            <button class="bg-transparent border-0 copy" @click="copyContent('font-{{loop.index}}')">
+                            <button class="bg-transparent border-0 copy js-copy-html"
+                                    data-target="btn-{{loop.index}}"
+                            >
                             </button>
                         </code>
                     </div>

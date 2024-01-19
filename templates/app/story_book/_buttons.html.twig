@@ -13,7 +13,8 @@
                 </div>
                 <div class="col-12 col-md-6 d-flex">
                     <code id="btn-{{loop.index}}">&lt;button class="{{buttonClass.class}}"&gt;{{buttonClass.name | capitalize}}&lt;/button&gt;
-                        <button class=" bg-transparent border-0 copy" @click="copyContent('btn-{{loop.index}}')">
+                        <button class=" bg-transparent border-0 copy js-copy-html"
+                                data-target="btn-{{loop.index}}">
                         </button>
                     </code>
                 </div>

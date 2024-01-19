@@ -16,7 +16,7 @@
         {{ form_errors(form) }}
 
         <div class="button-bar mb-3">
-            <div class="col-12 d-flex justify-content-end mt-3" v-if="formHasChanged">
+            <div class="col-12 d-flex justify-content-end mt-3 d-none js-save-warning">
                 <span class="badge bg-warning">Veuillez enregistrer</span>
             </div>
         </div>
@@ -131,10 +131,11 @@
 
         <hr>
         {{ form_rest(form) }}
-        <editor
-            v-if="showEditor"
-            :is-super-admin="{{ is_granted('ROLE_SUPER_ADMIN') | json_encode }}"
-        ></editor>
+{#        <editor#}
+{#            v-if="showEditor"#}
+{#            :is-super-admin="{{ is_granted('ROLE_SUPER_ADMIN') | json_encode }}"#}
+{#        ></editor>#}
+        <custom-editor-element/>
 
         {{ form_end(form) }}
     </div>
